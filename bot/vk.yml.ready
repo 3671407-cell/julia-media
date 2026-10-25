@@ -1,0 +1,33 @@
+name: ВК — помощник и посты группы
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+concurrency:
+  group: vk
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  vk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Помощник в сообщениях
+        env:
+          VK_GROUP_TOKEN: ${{ secrets.VK_GROUP_TOKEN }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          FACTS_B64: ${{ secrets.FACTS_B64 }}
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: python3 bot/vk_assistant.py
+      - name: Посты группы по расписанию
+        env:
+          VK_GROUP_TOKEN: ${{ secrets.VK_GROUP_TOKEN }}
+        run: python3 bot/vk_post.py
+      - name: Сохранить, что опубликовано
+        run: |
+          git config user.name "julia-bot"; git config user.email "bot@users.noreply.github.com"
+          git add bot/vk-опубликовано.json 2>/dev/null || true
+          git diff --cached --quiet || (git commit -qm "ВК: опубликовано" && git push -q)
