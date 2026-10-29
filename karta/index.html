@@ -58,11 +58,11 @@ var STEPS=[
  {k:"Шаг сегодня",q:"Какой один шаг ты сделаешь до конца дня?",p:"Пять минут: открыть календарь, написать подруге, проверить паспорт.",t:"line",ph:"Сегодня я…"}
 ];
 var MOODS={
-"Море и тепло":["Турция","ОАЭ, Дубай","Египет","Таиланд, Пхукет","Вьетнам, Нячанг","Бали","Мальдивы","Шри-Ланка","Сейшелы","Куба","Абхазия","Сочи"],
-"Горы и воздух":["Алтай","Красная Поляна","Архыз","Грузия, Казбеги","Армения","Киргизия, Иссык-Куль","Непал","Приэльбрусье"],
-"Города и культура":["Стамбул","Тбилиси","Ереван","Баку","Самарканд","Ташкент","Дубай","Шанхай","Санкт-Петербург","Казань"],
-"Тишина и отдых":["Мальдивы","Шри-Ланка","Бали, Убуд","Сейшелы","Карелия","Байкал","Абхазия","Грузия, вино и горы"],
-"Вкус жизни":["Стамбул","Тбилиси","Ташкент","Бангкок","Ханой","Баку","Дубай","Ереван"]};
+"Море и тепло":["Мальдивы","Бали","Таиланд, Пхукет","Сейшелы","Греция, острова","Испания, Ибица","Италия, Сардиния","Франция, Ницца","Португалия, Алгарве","ОАЭ, Дубай","Турция","Египет","Вьетнам, Нячанг","Куба"],
+"Горы и воздух":["Швейцария","Австрия, Альпы","Италия, Доломиты","Франция, Шамони","Норвегия, фьорды","Грузия, Казбеги","Алтай","Красная Поляна","Непал"],
+"Города и культура":["Рим","Париж","Барселона","Прага","Вена","Лиссабон","Амстердам","Стамбул","Тбилиси","Самарканд"],
+"Тишина и отдых":["Мальдивы","Тоскана, Италия","Греция, Крит","Мальта","Сейшелы","Бали, Убуд","Шри-Ланка","Карелия","Байкал"],
+"Вкус жизни":["Италия, Сицилия","Франция, Прованс","Испания, Сан-Себастьян","Греция","Португалия","Стамбул","Тбилиси","Бангкок","Токио"]};
 var A={},i=-1,app=document.getElementById("app");
 try{A=JSON.parse(localStorage.getItem("karta")||"{}")}catch(e){}
 function save(){try{localStorage.setItem("karta",JSON.stringify(A))}catch(e){}}
@@ -86,7 +86,7 @@ function step(){
  if(S.t=="date"){document.getElementById("m").onchange=chk;document.getElementById("y").onchange=chk}
  if(S.t=="chips")Array.prototype.forEach.call(document.querySelectorAll(".chip"),function(c){c.onclick=function(){A[i]=c.getAttribute("data-o");Array.prototype.forEach.call(document.querySelectorAll(".chip"),function(x){x.classList.remove("sel")});c.classList.add("sel");chk()}});
  var dk=document.getElementById("dk");
- if(dk)dk.onclick=function(){var s='<div class="chips">';Object.keys(MOODS).forEach(function(k){s+='<button class="chip" data-k="'+k+'">'+k+'</button>'});s+='</div><div class="mood" id="mt">Выбери настроение, и я покажу места, куда россиянам можно поехать.</div><div class="chips" id="pl"></div>';document.getElementById("md").innerHTML=s;Array.prototype.forEach.call(document.querySelectorAll("#md > .chips .chip"),function(c){c.onclick=function(){Array.prototype.forEach.call(document.querySelectorAll("#md > .chips .chip"),function(x){x.classList.remove("sel")});c.classList.add("sel");var k=c.getAttribute("data-k"),h2="";MOODS[k].forEach(function(n){h2+='<button class="chip" data-p="'+esc(n)+'">'+n+'</button>'});document.getElementById("mt").textContent="«"+k+"»: нажми на место, которое откликнулось. Правила въезда проверь перед поездкой.";var pl=document.getElementById("pl");pl.innerHTML=h2;Array.prototype.forEach.call(pl.querySelectorAll(".chip"),function(pc){pc.onclick=function(){f.value=pc.getAttribute("data-p");f.oninput();Array.prototype.forEach.call(pl.querySelectorAll(".chip"),function(x){x.classList.remove("sel")});pc.classList.add("sel")}})}})};
+ if(dk)dk.onclick=function(){var s='<div class="chips">';Object.keys(MOODS).forEach(function(k){s+='<button class="chip" data-k="'+k+'">'+k+'</button>'});s+='</div><div class="mood" id="mt">Выбери настроение, и я покажу места. Мечтай без ограничений: Европа тоже в игре.</div><div class="chips" id="pl"></div>';document.getElementById("md").innerHTML=s;Array.prototype.forEach.call(document.querySelectorAll("#md > .chips .chip"),function(c){c.onclick=function(){Array.prototype.forEach.call(document.querySelectorAll("#md > .chips .chip"),function(x){x.classList.remove("sel")});c.classList.add("sel");var k=c.getAttribute("data-k"),h2="";MOODS[k].forEach(function(n){h2+='<button class="chip" data-p="'+esc(n)+'">'+n+'</button>'});document.getElementById("mt").textContent="«"+k+"»: нажми на место, которое откликнулось. Европа тоже в списке: по условиям клуба он помогает с рекомендательным письмом для визы на время поездки, решение о визе принимает консульство.";var pl=document.getElementById("pl");pl.innerHTML=h2;Array.prototype.forEach.call(pl.querySelectorAll(".chip"),function(pc){pc.onclick=function(){f.value=pc.getAttribute("data-p");f.oninput();Array.prototype.forEach.call(pl.querySelectorAll(".chip"),function(x){x.classList.remove("sel")});pc.classList.add("sel")}})}})};
  var bk=document.getElementById("bk");if(bk)bk.onclick=function(){A[i]=get()||A[i];i--;step()};
  nx.onclick=function(){A[i]=get();save();spark();if(i<6){i++;setTimeout(step,450)}else{setTimeout(reveal,600)}}
 }
