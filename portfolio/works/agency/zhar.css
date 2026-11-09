@@ -292,3 +292,15 @@
     .ba-row .arrow { transform: rotate(90deg); width: max-content; }
     .fit-grid { grid-template-columns: 1fr; }
   }
+
+  /* галерея всех работ */
+  .gal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; }
+  .gcard { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .gcard img { width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: top; display: block; border-bottom: 1px solid var(--line); }
+  .gcard .gi { padding: 18px 20px 22px; }
+  .gcard .meta { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .gcard h3 { margin-top: 8px; font-size: 20px; font-weight: 300; }
+  .gcard p { margin-top: 8px; font-size: 14.5px; color: var(--muted); }
+  .gcard .go { display: inline-block; margin-top: 14px; font-size: 14.5px; color: var(--acc); }
+  @media (max-width: 1000px) { .gal { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .gal { grid-template-columns: 1fr; } }
