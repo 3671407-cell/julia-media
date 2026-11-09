@@ -294,13 +294,24 @@
   }
 
   /* галерея всех работ */
-  .gal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; }
-  .gcard { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
-  .gcard img { width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: top; display: block; border-bottom: 1px solid var(--line); }
-  .gcard .gi { padding: 18px 20px 22px; }
-  .gcard .meta { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-  .gcard h3 { margin-top: 8px; font-size: 20px; font-weight: 300; }
-  .gcard p { margin-top: 8px; font-size: 14.5px; color: var(--muted); }
-  .gcard .go { display: inline-block; margin-top: 14px; font-size: 14.5px; color: var(--acc); }
-  @media (max-width: 1000px) { .gal { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 640px) { .gal { grid-template-columns: 1fr; } }
+  .nums4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 36px; }
+  .nums4 > div { display: flex; flex-direction: column; gap: 10px; padding: 26px 24px; border: 1px solid var(--line); border-radius: 22px; background: var(--card); min-height: 150px; }
+  .nums4 b { font-family: var(--display); font-weight: 300; font-size: 34px; line-height: 1.1; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .nums4 span { font-size: 14.5px; color: var(--muted); line-height: 1.5; }
+  .gal { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; align-items: stretch; }
+  .gcard { padding: 0; overflow: hidden; display: flex; flex-direction: column; height: 100%; }
+  .gcard .gimg { display: block; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--line); background: #0c0a16; }
+  .gcard .gimg img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .gcard .gi { padding: 18px 20px 22px; display: flex; flex-direction: column; flex: 1; }
+  .gcard .meta { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .gcard h3 { margin-top: 10px; font-size: 20px; font-weight: 300; line-height: 1.3; min-height: 2.6em; }
+  .gcard p { margin-top: 8px; font-size: 14.5px; line-height: 1.55; color: var(--muted); flex: 1; }
+  .gcard .go { display: inline-block; margin-top: 16px; font-size: 14.5px; color: var(--acc); }
+  .gnote { margin-top: 26px; font-size: 15px; line-height: 1.8; color: var(--muted); }
+  .gnote .link { margin: 0 2px; }
+  @media (max-width: 1000px) { .gal { grid-template-columns: repeat(2, 1fr); } .nums4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .gal, .nums4 { grid-template-columns: 1fr; } .gcard h3 { min-height: 0; } .nums4 > div { min-height: 0; } }
+
+  /* боковые поля у блоков: раньше section.block обнуляла их, и на узких экранах текст упирался в край */
+  section.block.wrap { padding-left: 24px; padding-right: 24px; }
+  @media (max-width: 640px) { section.block.wrap { padding-left: 16px; padding-right: 16px; } }
