@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head>
+<meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customer path</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&family=Unbounded:wght@300&display=swap">
+<style>
+:root { --bg:#07060d; --fg:#ece9f4; --muted:#a29fb5; --line:#26233a; --pink:#e879c6; --violet:#9b7bff; --blue:#5cc8ff; --ok:#6fd6a4; --warn:#f2b35e; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background:var(--bg); color:var(--fg); font-family:"Manrope","Segoe UI",sans-serif; font-weight:300; font-size:24px; line-height:1.55; margin:0; padding:48px 24px 96px; }
+main { max-width: 1000px; margin: 0 auto; }
+h1 { font-family:"Unbounded","Segoe UI",sans-serif; font-weight:300; font-size:clamp(34px,5vw,54px); line-height:1.15; margin:0 0 8px;
+  background:linear-gradient(90deg,var(--pink),var(--violet),var(--blue)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.lead { color:var(--muted); margin:0 0 36px; }
+h2 { font-family:"Unbounded","Segoe UI",sans-serif; font-weight:300; font-size:28px; margin:48px 0 14px; }
+section { border-top:1px solid var(--line); }
+ul, ol { margin:0; padding-left:34px; } li { margin:12px 0; padding-left:4px; }
+.post { border-top:1px solid var(--line); padding:22px 0; }
+.when { font-family:"Unbounded","Segoe UI",sans-serif; font-size:20px; color:var(--blue); margin:0 0 8px; }
+.text { font-size:27px; color:var(--fg); margin:0 0 10px; font-weight:400; }
+.score { color:var(--ok); font-family:"Unbounded","Segoe UI",sans-serif; font-size:22px; margin:0 0 6px; }
+.why { color:var(--muted); font-size:21px; margin:0; }
+.box { background:#0f0d19; border-left:3px solid var(--violet); padding:14px 22px; }
+.warn { border-left:3px solid var(--warn); padding:8px 0 8px 20px; }
+.who { color:var(--violet); font-size:20px; }
+.done::marker { color:var(--ok); }
+table { border-collapse:collapse; width:100%; font-size:22px; }
+th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { color:var(--muted); font-weight:400; font-size:18px; letter-spacing:.08em; text-transform:uppercase; }
+@font-face{font-family:Manrope;src:url(../../../fonts/Manrope.woff2) format('woff2');font-weight:200 800}@font-face{font-family:Unbounded;src:url(../../../fonts/Unbounded.ttf) format('truetype');font-weight:200 900}.lg{position:fixed;right:14px;top:14px;display:flex;gap:6px}.lg a{padding:5px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.4);color:#fff;text-decoration:none;font-size:13px}</style></head><body><div class="lg"><a href="https://3671407-cell.github.io/julia-media/portfolio/works/funnel/">RU</a><a href="https://3671407-cell.github.io/julia-media/portfolio/en/works/funnel/">EN</a><a href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/funnel/">TR</a></div><main>
+<h1>The customer path in the bot</h1><p class="lead">Two paths from the first block meet at video 2.</p>
+<section><h2>Diagram in Senler (screenshot)</h2><a href="../../../img/senler-voronka.png" target="_blank" rel="noopener"><img src="../../../img/senler-voronka.png" alt="Senler funnel diagram: messages, timers and buttons" style="width:100%;border-radius:14px;border:1px solid rgba(190,160,255,.35)"></a><p style="opacity:.7;font-size:15px">This is the finished funnel in the Senler builder: messages, 10-second timers and buttons. Click the picture to open it full size.</p></section><section><h2>Diagram</h2>
+<div style="border:1px solid var(--pink);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Block 1.</b> Text + video note (video 1)<br>Buttons: <b>[Get the gift]</b> and <b>[I want to travel]</b></div>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="flex:1;min-width:300px"><p class="when">Path A: the gift</p><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Block 2.</b> A link to the «Trip Map» + a request to write a place</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px">The person plays and writes a place → «Noted: {place}. I will read it personally» (immediately)<br>Did not open and did not reply for 10 minutes → «The map is waiting for you. Meanwhile, let's start with a dream»</div></div>
+<div style="flex:1;min-width:300px"><p class="when">Path B: I want to travel</p><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Straight to block 3.</b> No waiting, no gift on the way</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px">The gift stays: a button under video 2 and in the bot menu</div></div></div>
+<div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--blue);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Block 3.</b> Video 2 «wish list» (both paths meet here)</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Block 4.</b> Video 3: registration on the platform</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Block 5.</b> Video 4: the platform and Life Experience</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Block 6.</b> Numbers: five hotel cards (after the company and travel presentation)</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--ok);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Block 7.</b> Finale: [Message Julia, a 20-minute call] or [Go to the marathon]</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Block 8.</b> Follow-ups no more than once a day: a day of no activity, day 3 (doubts), day 6, every 2 weeks</div></section>
+<section><h2>How a person returns to the flow after the gift</h2><ul>
+<li><b>Right after the reply:</b> «Noted: {place}. I will read it personally» and video 2 arrives by itself. The person does not look for what is next.</li>
+<li><b>If the map was not opened:</b> after 10 minutes one soft reminder and the same video 2.</li>
+<li><b>If they played but did not reply:</b> video 2 still arrives 10 minutes after the map is given.</li>
+<li><b>If they left completely:</b> a day later «We stopped at the video. Shall we continue?» [Continue].</li>
+<li><b>The gift is not lost:</b> the button is in the bot menu and under video 2.</li></ul></section>
+<section><h2>What changes for you</h2><ul><li>You get answers about places only from those who played: these are warm people to talk to.</li><li>Those who pressed «I want to travel» go into the funnel without the gift and do not have to wait.</li><li>There is no stream of «Message Julia» buttons in these blocks; it appears later, from block 4.</li></ul></section>
+</main></body></html>

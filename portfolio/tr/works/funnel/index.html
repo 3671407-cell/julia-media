@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="tr"><head>
+<meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Müşteri yolu</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&family=Unbounded:wght@300&display=swap">
+<style>
+:root { --bg:#07060d; --fg:#ece9f4; --muted:#a29fb5; --line:#26233a; --pink:#e879c6; --violet:#9b7bff; --blue:#5cc8ff; --ok:#6fd6a4; --warn:#f2b35e; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background:var(--bg); color:var(--fg); font-family:"Manrope","Segoe UI",sans-serif; font-weight:300; font-size:24px; line-height:1.55; margin:0; padding:48px 24px 96px; }
+main { max-width: 1000px; margin: 0 auto; }
+h1 { font-family:"Unbounded","Segoe UI",sans-serif; font-weight:300; font-size:clamp(34px,5vw,54px); line-height:1.15; margin:0 0 8px;
+  background:linear-gradient(90deg,var(--pink),var(--violet),var(--blue)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.lead { color:var(--muted); margin:0 0 36px; }
+h2 { font-family:"Unbounded","Segoe UI",sans-serif; font-weight:300; font-size:28px; margin:48px 0 14px; }
+section { border-top:1px solid var(--line); }
+ul, ol { margin:0; padding-left:34px; } li { margin:12px 0; padding-left:4px; }
+.post { border-top:1px solid var(--line); padding:22px 0; }
+.when { font-family:"Unbounded","Segoe UI",sans-serif; font-size:20px; color:var(--blue); margin:0 0 8px; }
+.text { font-size:27px; color:var(--fg); margin:0 0 10px; font-weight:400; }
+.score { color:var(--ok); font-family:"Unbounded","Segoe UI",sans-serif; font-size:22px; margin:0 0 6px; }
+.why { color:var(--muted); font-size:21px; margin:0; }
+.box { background:#0f0d19; border-left:3px solid var(--violet); padding:14px 22px; }
+.warn { border-left:3px solid var(--warn); padding:8px 0 8px 20px; }
+.who { color:var(--violet); font-size:20px; }
+.done::marker { color:var(--ok); }
+table { border-collapse:collapse; width:100%; font-size:22px; }
+th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { color:var(--muted); font-weight:400; font-size:18px; letter-spacing:.08em; text-transform:uppercase; }
+@font-face{font-family:Manrope;src:url(../../../fonts/Manrope.woff2) format('woff2');font-weight:200 800}@font-face{font-family:Unbounded;src:url(../../../fonts/Unbounded.ttf) format('truetype');font-weight:200 900}.lg{position:fixed;right:14px;top:14px;display:flex;gap:6px}.lg a{padding:5px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.4);color:#fff;text-decoration:none;font-size:13px}</style></head><body><div class="lg"><a href="https://3671407-cell.github.io/julia-media/portfolio/works/funnel/">RU</a><a href="https://3671407-cell.github.io/julia-media/portfolio/en/works/funnel/">EN</a><a href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/funnel/">TR</a></div><main>
+<h1>Botta müşteri yolu</h1><p class="lead">İlk bloktan iki yol 2. videoda birleşir.</p>
+<section><h2>Senler'de şema (ekran görüntüsü)</h2><a href="../../../img/senler-voronka.png" target="_blank" rel="noopener"><img src="../../../img/senler-voronka.png" alt="Senler huni şeması: mesajlar, zamanlayıcılar ve düğmeler" style="width:100%;border-radius:14px;border:1px solid rgba(190,160,255,.35)"></a><p style="opacity:.7;font-size:15px">Senler oluşturucusunda hazır huni böyle görünür: mesajlar, 10 saniyelik zamanlayıcılar ve düğmeler. Tam boyutta açmak için resme tıklayın.</p></section><section><h2>Şema</h2>
+<div style="border:1px solid var(--pink);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Blok 1.</b> Metin + video mesaj (video 1)<br>Düğmeler: <b>[Hediyeyi al]</b> ve <b>[Seyahat etmek istiyorum]</b></div>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="flex:1;min-width:300px"><p class="when">Yol A: hediye</p><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Blok 2.</b> «Gezi haritası» bağlantısı + bir yer yazma isteği</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px">Kişi oynar ve bir yer yazar → «Kaydettim: {yer}. Kişisel olarak okuyacağım» (hemen)<br>Açmadı ve 10 dakika yanıt vermedi → «Harita seni bekliyor. Bu arada hayalle başlayalım»</div></div>
+<div style="flex:1;min-width:300px"><p class="when">Yol B: seyahat etmek istiyorum</p><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Doğrudan blok 3.</b> Beklemeden, yolda hediye olmadan</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px">Hediye kalır: video 2 altındaki düğme ve bot menüsü</div></div></div>
+<div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--blue);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Blok 3.</b> Video 2 «dilek listesi» (iki yol burada birleşir)</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Blok 4.</b> Video 3: platforma kayıt</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Blok 5.</b> Video 4: platform ve Life Experience</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Blok 6.</b> Rakamlar: beş otel kartı (şirket ve seyahat sunumundan sonra)</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--ok);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Blok 7.</b> Final: [Julia'ya yaz, 20 dakikalık görüşme] veya [Maratona geç]</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Blok 8.</b> Hatırlatma günde en fazla bir kez: bir gün hareketsizlik, 3. gün (şüpheler), 6. gün, 2 haftada bir</div></section>
+<section><h2>Kişi hediyeden sonra akışa nasıl döner</h2><ul>
+<li><b>Yanıttan hemen sonra:</b> «Kaydettim: {yer}. Kişisel olarak okuyacağım» ve video 2 kendiliğinden gelir. Kişi sonrasını aramaz.</li>
+<li><b>Harita açılmadıysa:</b> 10 dakika sonra tek bir nazik hatırlatma ve aynı video 2.</li>
+<li><b>Oynadı ama yanıt vermediyse:</b> video 2 yine de haritanın verilmesinden 10 dakika sonra gelir.</li>
+<li><b>Tamamen çıktıysa:</b> bir gün sonra «Videoda kalmıştık. Devam edelim mi?» [Devam et].</li>
+<li><b>Hediye kaybolmaz:</b> düğme bot menüsünde ve video 2 altında vardır.</li></ul></section>
+<section><h2>Senin için ne değişir</h2><ul><li>Yerlerle ilgili yanıtları yalnızca oynayanlardan alırsın: bunlar konuşmak için sıcak insanlardır.</li><li>«Seyahat etmek istiyorum» diyen hediyesiz huniye girer, beklemesi gerekmez.</li><li>Bu bloklarda «Julia'ya yaz» düğme akışı yoktur; blok 4'ten itibaren görünür.</li></ul></section>
+</main></body></html>

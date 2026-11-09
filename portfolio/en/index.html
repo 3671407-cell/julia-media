@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Julia Zharkova's works</title>
+<meta name="description" content="Портфолио: сайты, страницы продуктов, визитки. Вариант 1 — тёмный, с переливом.">
+<meta name="theme-color" content="#07060d">
+<style>
+:root{
+  --bg:#07060d; --text:#ece9f5; --muted:#9a95ad; --line:rgba(255,255,255,.09);
+  --pink:#ff4fd8; --violet:#8b5cf6; --sky:#38bdf8;
+  --grad:linear-gradient(110deg,var(--pink),var(--violet) 55%,var(--sky));
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:300 17px/1.6 Manrope,system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+canvas#dust{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.blob{position:fixed;border-radius:50%;filter:blur(110px);opacity:.45;z-index:0;pointer-events:none}
+.b1{width:520px;height:520px;background:#5b2fb8;top:-160px;left:-120px}
+.b2{width:460px;height:460px;background:#a0306f;top:35%;right:-180px}
+.b3{width:520px;height:520px;background:#176a85;bottom:-200px;left:20%}
+header,main,footer{position:relative;z-index:1}
+header{padding:22px 0}
+header .wrap{display:flex;justify-content:space-between;align-items:center}
+nav{display:flex;gap:34px}
+nav a{font-size:15px;color:var(--muted);position:relative;padding:4px 0;transition:color .3s}
+nav a::after{content:"";position:absolute;left:0;bottom:-2px;height:1px;width:100%;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+nav a:hover{color:var(--text)}
+nav a:hover::after{transform:scaleX(1)}
+.logo{font:400 15px Unbounded,sans-serif;letter-spacing:.3em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;background:var(--grad);color:#fff;font-weight:500;overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,filter .35s}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);transform:translateX(-120%)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 40px -8px var(--violet);filter:hue-rotate(-25deg) brightness(1.08)}
+.btn:hover::after{transform:translateX(120%);transition:transform .7s}
+.btn-sm{padding:10px 20px;font-size:15px}
+.hero{padding:clamp(56px,10vw,120px) 0 clamp(40px,6vw,72px)}
+h1{font:300 clamp(34px,6.4vw,76px)/1.08 Unbounded,sans-serif;letter-spacing:-.01em;max-width:15ch}
+h1 span{background:linear-gradient(100deg,var(--pink),var(--violet),var(--sky),var(--violet),var(--pink));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 9s linear infinite}
+@keyframes flow{to{background-position:-300% 0}}
+.lead{margin-top:26px;max-width:46ch;color:var(--muted);font-size:19px}
+.works{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;padding-bottom:clamp(60px,9vw,110px);perspective:1200px}
+.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:26px;background:rgba(255,255,255,.035);backdrop-filter:blur(8px);overflow:hidden;transition:transform .35s ease,border-color .35s,box-shadow .35s,opacity .9s ease,translate .9s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d;will-change:transform}
+.card:hover{border-color:rgba(255,79,216,.45);box-shadow:0 30px 70px -25px rgba(139,92,246,.55),0 0 0 1px rgba(255,79,216,.12)}
+.shot{display:block;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line);background:#0c0a16}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.card:hover .shot img{transform:scale(1.04)}
+.info{padding:26px 28px 30px;display:flex;flex-direction:column;gap:10px;flex:1}
+h2{font:300 clamp(20px,2.2vw,26px)/1.25 Unbounded,sans-serif}
+.info p{color:var(--muted);font-size:16px}
+.tags{margin-top:auto;padding-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font-size:13px;padding:5px 13px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.open{margin-top:14px;font-weight:500;color:var(--text);display:inline-flex;gap:8px;align-items:center}
+.open:hover{color:var(--pink)}
+.cta{padding:clamp(48px,8vw,96px) 0 clamp(72px,10vw,130px);border-top:1px solid var(--line)}
+.cta h2{font-size:clamp(26px,4vw,46px)}
+footer{padding:0 0 36px;text-align:center;color:var(--muted);font-size:14px}
+
+/* бургер и мобильное меню */
+header{z-index:5}
+.burger{display:none;width:46px;height:46px;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.05);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:0}
+.burger span{display:block;width:18px;height:1.5px;background:var(--text);transition:transform .35s,opacity .25s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.only-m{display:none}
+/* счётчики */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding:clamp(40px,6vw,72px) 0;border-top:1px solid var(--line)}
+.stats div{display:flex;flex-direction:column;gap:6px}
+.stats b{font:300 clamp(40px,6vw,72px)/1 Unbounded,sans-serif;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.stats span{color:var(--muted);font-size:16px}
+/* форма */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);text-align:left;align-items:start}
+.contact h2{margin-bottom:14px}
+.contact .sub{color:var(--muted);max-width:32ch;margin-bottom:26px}
+.form{position:relative;display:grid;gap:16px;padding:28px;border:1px solid var(--line);border-radius:26px;background:rgba(255,255,255,.035);backdrop-filter:blur(8px)}
+.form label{display:grid;gap:7px;font-size:14px;color:var(--muted)}
+.form input,.form textarea{font:300 16px Manrope,sans-serif;color:var(--text);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:13px 16px;transition:border-color .3s,box-shadow .3s;width:100%}
+.form textarea{min-height:120px;resize:vertical}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba(139,92,246,.25)}
+.form button{border:0;cursor:pointer;font:500 16px Manrope,sans-serif;justify-content:center}
+.form.sending button{pointer-events:none;opacity:.7}
+.done{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;border-radius:26px;background:rgba(10,8,20,.96);opacity:0;pointer-events:none;transition:opacity .5s}
+.form.ok .done{opacity:1;pointer-events:auto}
+.done svg{width:92px;height:92px}
+.done circle{fill:none;stroke:url(#okg);stroke-width:3;stroke-dasharray:252;stroke-dashoffset:252}
+.done path{fill:none;stroke:#fff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60}
+.form.ok .done circle{animation:draw .8s ease forwards}
+.form.ok .done path{animation:draw .5s .7s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.done h3{font:300 22px Unbounded,sans-serif}
+.done p{color:var(--muted)}
+.done button{background:none;border:1px solid var(--line);color:var(--text);padding:10px 22px;border-radius:999px;cursor:pointer;font:400 15px Manrope,sans-serif;transition:border-color .3s}
+.done button:hover{border-color:var(--pink)}
+/* наверх */
+.up{position:fixed;right:20px;bottom:20px;z-index:6;width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;opacity:0;translate:0 16px;pointer-events:none;transition:opacity .4s,translate .4s,box-shadow .3s,filter .3s;box-shadow:0 10px 30px -8px var(--violet)}
+.up.show{opacity:1;translate:0 0;pointer-events:auto}
+.up:hover{filter:hue-rotate(-25deg) brightness(1.1);box-shadow:0 14px 36px -6px var(--pink)}
+.up svg{width:22px;height:22px}
+.reveal{opacity:0;translate:0 44px;transition:opacity .9s ease,translate .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;translate:0 0}
+.card.reveal{transition:transform .35s ease,border-color .35s,box-shadow .35s,opacity .9s ease,translate .9s cubic-bezier(.2,.7,.2,1)}
+.blob{will-change:transform}
+a:focus-visible,.btn:focus-visible{outline:2px solid var(--sky);outline-offset:4px;border-radius:12px}
+@media (max-width:760px){
+  .burger{display:flex}
+  nav{display:none;position:absolute;top:100%;left:16px;right:16px;flex-direction:column;gap:6px;padding:14px;background:rgba(12,10,22,.97);border:1px solid var(--line);border-radius:22px;backdrop-filter:blur(12px)}
+  nav.open{display:flex}
+  nav a{font-size:18px;color:var(--text);padding:12px 10px}
+  .only-m{display:block}
+  .stats{grid-template-columns:1fr;gap:22px}
+  .contact{grid-template-columns:1fr}
+  .up{right:14px;bottom:14px}
+  .works{grid-template-columns:1fr}.hero h1{max-width:none}.btn-sm{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}.reveal{opacity:1;translate:none}}
+.soon{display:inline-block;margin-top:12px;font-size:14px;opacity:.65}.more{margin:18px 0 0;padding-left:20px;line-height:1.9;opacity:.9}.more li{margin:2px 0}@font-face{font-family:Manrope;src:url(../fonts/Manrope.woff2) format('woff2');font-weight:200 800}@font-face{font-family:Unbounded;src:url(../fonts/Unbounded.ttf) format('truetype');font-weight:200 900}.langs{display:flex;gap:6px;align-items:center;margin-left:auto;margin-right:14px}.langs a{padding:4px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.35);color:#fff;text-decoration:none;font-size:13px}.langs a.on{background:#fff;color:#07060d}</style>
+</head>
+<body>
+<canvas id="dust" aria-hidden="true"></canvas>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">ZHAR</a>
+    <nav id="menu" aria-label="Sections"><a href="#works">Works</a><a href="#contact">Contact</a><a class="only-m" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Message on Telegram</a></nav>
+    <div class="langs"><a href="https://3671407-cell.github.io/julia-media/portfolio/">RU</a><a href="https://3671407-cell.github.io/julia-media/portfolio/en/">EN</a><a href="https://3671407-cell.github.io/julia-media/portfolio/tr/">TR</a></div><a class="btn btn-sm" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Message on Telegram</a>
+    <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap reveal">
+    <h1>Websites and bots that <span>bring in leads</span></h1>
+    <p class="lead">Websites, bots and AI assistants we have built. Click any of them to open it and walk through it yourself.</p>
+  </section>
+
+  <section class="works wrap" id="works" aria-label="Works">
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/portfolio/works/vizitka/" target="_blank" rel="noopener" aria-label="Open: Julia&#x27;s business card"><img src="../img/vizitka.png" alt="Julia Zharkova&#x27;s business-card website: photo, name and a «Message me» button" loading="lazy"></a>
+      <div class="info">
+        <h2>Julia's business card</h2>
+        <p>One page, one step: a person sees what I do and writes on Telegram right away.</p>
+        <div class="tags"><span>business card</span><span>design</span><span>animation</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/portfolio/works/vizitka/" target="_blank" rel="noopener">Open site →</a>
+        
+      </div>
+    </article>
+
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/" target="_blank" rel="noopener" aria-label="Open: ZHAR agency website"><img src="../img/agency.png" alt="ZHAR agency website: headline «Bots, funnels and websites that turn subscribers into leads»" loading="lazy"></a>
+      <div class="info">
+        <h2>ZHAR agency website</h2>
+        <p>Services, quiz, bot demo and FAQ. Everything leads to a free review.</p>
+        <div class="tags"><span>services site</span><span>quiz</span><span>bot demo</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/" target="_blank" rel="noopener">Open site →</a>
+        
+      </div>
+    </article>
+
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/nabor.html" target="_blank" rel="noopener" aria-label="Open: Content-maker kit page"><img src="../img/nabor.png" alt="Digital product page «Content-maker kit»: 100 headlines, 20 templates, 30 days" loading="lazy"></a>
+      <div class="info">
+        <h2>Content-maker kit page</h2>
+        <p>A digital product page: what is inside, who it is for and how much it costs.</p>
+        <div class="tags"><span>product page</span><span>sales</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/nabor.html" target="_blank" rel="noopener">Open site →</a>
+        
+      </div>
+    </article>
+
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/price.html" target="_blank" rel="noopener" aria-label="Open: ZHAR prices"><img src="../img/price.png" alt="ZHAR agency price page with service packages" loading="lazy"></a>
+      <div class="info">
+        <h2>ZHAR prices</h2>
+        <p>Three packages and a list of services. The client chooses where to start.</p>
+        <div class="tags"><span>price list</span><span>packages</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/price.html" target="_blank" rel="noopener">Open site →</a>
+        
+      </div>
+    </article>
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/amb-k7q2m9/" target="_blank" rel="noopener" aria-label="Open: Travel club ambassador page"><img src="../img/amb.png" alt="Travel club ambassador page: sea, headline and buttons" loading="lazy"></a>
+      <div class="info">
+        <h2>Travel club ambassador page</h2>
+        <p>A personal website in three languages: Russian, English and Turkish. Video blog, trip selection for a family, a trip map and a chat with an AI assistant.</p>
+        <div class="tags"><span>website</span><span>3 languages</span><span>video blog</span><span>AI chat</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/amb-k7q2m9/" target="_blank" rel="noopener">Open site →</a>
+        <span class="soon" style="display:block">Under review by the company</span>
+      </div>
+    </article>
+    <article class="card reveal">
+      <a class="shot" href="https://t.me/julia_travelclub_ai_bot" target="_blank" rel="noopener" aria-label="Open: AI assistant for website and Telegram"><img src="../img/ai-assistant.png" alt="AI assistant chat window on the website" loading="lazy"></a>
+      <div class="info">
+        <h2>AI assistant for website and Telegram</h2>
+        <p>Answers questions by approved rules, does not promise income, honestly says it is an AI and passes the request to the owner. The same assistant works on the website and in the bot.</p>
+        <div class="tags"><span>AI agent</span><span>website chat</span><span>Telegram</span></div>
+        
+        <a class="open" href="https://t.me/julia_travelclub_ai_bot" target="_blank" rel="noopener">Try it on Telegram →</a>
+        <span class="soon" style="display:block">Under Compliance review</span>
+      </div>
+    </article>
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/guzel/" target="_blank" rel="noopener" aria-label="Open: Website for Guzel"><img src="../img/guzel.png" alt="Website for Guzel: headline and a «three in one» diagram" loading="lazy"></a>
+      <div class="info">
+        <h2>Website for Guzel</h2>
+        <p>An independent partner's page: one clear product, a structure from the pain to the solution, an application form.</p>
+        <div class="tags"><span>landing page</span><span>requests</span><span>design</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/guzel/" target="_blank" rel="noopener">Open site →</a>
+        
+      </div>
+    </article>
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/portfolio/en/works/funnel/" target="_blank" rel="noopener" aria-label="Open: Senler bot funnel"><img src="../img/senler-voronka.png" alt="Customer path diagram in the bot: two paths meet at the second video" loading="lazy"></a>
+      <div class="info">
+        <h2>Senler bot funnel</h2>
+        <p>The path of a person: greeting, video note, gift, video, booking a call. Two paths, timers and short messages step by step.</p>
+        <div class="tags"><span>bot</span><span>funnel</span><span>Senler</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/portfolio/en/works/funnel/" target="_blank" rel="noopener">Open diagram →</a>
+        
+      </div>
+    </article>
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/karta/" target="_blank" rel="noopener" aria-label="Open: «Trip Map» gift game"><img src="../img/karta.png" alt="Interactive «Trip Map»: a game of seven questions" loading="lazy"></a>
+      <div class="info">
+        <h2>«Trip Map»: a gift game</h2>
+        <p>An interactive game of seven questions. A person picks a mood, gets a route poster and saves it as an image or PDF.</p>
+        <div class="tags"><span>game</span><span>lead magnet</span><span>design</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/karta/" target="_blank" rel="noopener">Open site →</a>
+        
+      </div>
+    </article>
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/portfolio/works/strategy/" target="_blank" rel="noopener" aria-label="Open: 90-day promotion plan"><img src="../img/strategiya.png" alt="A page with a 90-day strategy and content plan" loading="lazy"></a>
+      <div class="info">
+        <h2>90-day promotion plan</h2>
+        <p>Strategy and content plan for Telegram and VKontakte: rubrics, calendar, texts for the first two weeks and a critic's review.</p>
+        <div class="tags"><span>strategy</span><span>content plan</span><span>Telegram</span><span>VK</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/portfolio/works/strategy/" target="_blank" rel="noopener">Open document →</a>
+        
+      </div>
+    </article>
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/portfolio/works/predlozhenie.pdf" target="_blank" rel="noopener" aria-label="Open: Commercial offer and price list"><img src="../img/predlozhenie.png" alt="Commercial offer page: how much this costs on the market and with us" loading="lazy"></a>
+      <div class="info">
+        <h2>Commercial offer and price list</h2>
+        <p>An offer in PDF in two designs: what is included, market price versus ours, how support is calculated.</p>
+        <div class="tags"><span>price list</span><span>PDF</span><span>offer</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/portfolio/works/predlozhenie.pdf" target="_blank" rel="noopener">Open PDF →</a>
+        
+      </div>
+    </article>
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/portfolio/en/works/autoposting/" target="_blank" rel="noopener" aria-label="Open: Autoposting to all social networks"><img src="../img/avtoposting.png" alt="Autoposting diagram: schedule, auto-launch, social networks, morning report, system check" loading="lazy"></a>
+      <div class="info">
+        <h2>Autoposting to all social networks</h2>
+        <p>Posting to Threads, Telegram and VKontakte on schedule, a morning report with all numbers in Telegram, a check of keys and systems so that nothing stops.</p>
+        <div class="tags"><span>automation</span><span>Threads</span><span>Telegram</span><span>VK</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/portfolio/en/works/autoposting/" target="_blank" rel="noopener">Open diagram →</a>
+        
+      </div>
+    </article>
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/portfolio/en/works/fabrika/" target="_blank" rel="noopener" aria-label="Open: Content factory"><img src="../img/fabrika.png" alt="Content factory diagram: ideas, texts, carousels, videos, captions" loading="lazy"></a>
+      <div class="info">
+        <h2>Content factory</h2>
+        <p>One process: market and ideas, texts reviewed by a critic, carousels, videos in seven formats, captions for all platforms.</p>
+        <div class="tags"><span>content</span><span>carousels</span><span>videos</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/portfolio/en/works/fabrika/" target="_blank" rel="noopener">Open diagram →</a>
+        
+      </div>
+    </article>
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/portfolio/en/works/yukassa/" target="_blank" rel="noopener" aria-label="Open: Payment acceptance via YooKassa"><img src="../img/yukassa.png" alt="Payment diagram: button, product page, YooKassa, access, notification" loading="lazy"></a>
+      <div class="info">
+        <h2>Payment acceptance via YooKassa</h2>
+        <p>Payment in the bot: a product page with consent, payment in YooKassa, access right after payment, a receipt and a notification to the owner.</p>
+        <div class="tags"><span>payment</span><span>YooKassa</span><span>cloud</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/portfolio/en/works/yukassa/" target="_blank" rel="noopener">Open diagram →</a>
+        
+      </div>
+    </article>
+    <article class="card reveal">
+      <a class="shot" href="https://3671407-cell.github.io/julia-media/portfolio/works/german/" target="_blank" rel="noopener" aria-label="Open: German learning app"><img src="../img/german-app.png" alt="Start screen of the German learning game: missions, skills and levels" loading="lazy"></a>
+      <div class="info">
+        <h2>German learning app</h2>
+        <p>A game-style app from zero to the first exam: 4–5 minute missions, five skills, experience and levels, mistakes come back, a daily goal.</p>
+        <div class="tags"><span>app</span><span>learning</span><span>game</span></div>
+        
+        <a class="open" href="https://3671407-cell.github.io/julia-media/portfolio/works/german/" target="_blank" rel="noopener">Try it →</a>
+        <span class="soon" style="display:block">First version in testing</span>
+      </div>
+    </article>
+  </section>
+  <section class="wrap reveal" aria-label="Also in the portfolio" style="margin:48px auto 0">
+    <h2 style="font-weight:300">We have also built</h2>
+    <ul class="more">
+      <li>Copywriter bot for a personal channel: a team of 13 AI agents</li>
+      <li>Payment acceptance of 490 ₽: YooKassa and a cloud service</li>
+      <li>Autoposting to Threads, Telegram and VKontakte on schedule</li>
+      <li>A morning report across all platforms in Telegram</li>
+      <li>Checklists and gifts for the funnel</li>
+      <li>Videos for Reels, TikTok and Shorts, 70 scripts based on market analysis</li>
+      <li>Carousels for Threads and Telegram: our own image generator</li>
+      <li>AI assistant for a VKontakte group: answers messages and passes them to the owner</li>
+      <li>Lead tracking in the bot and booking a call</li>
+      <li>Video subtitles in Russian, English and Turkish</li>
+      <li>Legal pages: policy, consent, offer</li>
+      <li>Competitor and market analysis, financial model</li>
+      <li>A survey for colleagues with answer export</li>
+      <li>Video uniqualizer: automatic preparation of videos for different platforms</li>
+      <li>An AI agent with memory and a team of helpers for daily work</li>
+      <li>Automatic repost from a Telegram channel to a personal VKontakte page</li>
+      <li>Transcription and analysis of training videos: from 60+ videos to working notes</li>
+      <li>Design of channels and bots: names, descriptions, covers</li>
+      <li>Animated videos from a script with voice-over</li>
+      <li>Digital product pages: a gift and a kit, a course outline</li>
+    </ul>
+  </section>
+
+
+  <section class="stats wrap reveal" aria-label="In short">
+    <div><b data-to="15">0</b><span>works in the portfolio</span></div>
+    <div><b data-to="7" data-prefix="от ">0</b><span>days until a website launch</span></div>
+    <div><b data-to="24" data-suffix=" ч">0</b><span>for a free review</span></div>
+  </section>
+
+  <section class="cta wrap contact reveal" id="contact">
+    <div>
+      <h2>Need a website like this?</h2>
+      <p class="sub">Write what you need and I will reply within a day.</p>
+      <a class="btn" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Message on Telegram</a>
+    </div>
+    <!-- Форма пока только визуальная: данные никуда не отправляются. Подключить отправку (заявка в Telegram) — отдельным шагом. -->
+    <form class="form" id="form" novalidate>
+      <label>Name<input type="text" name="name" autocomplete="name" required></label>
+      <label>Email<input type="email" name="email" autocomplete="email" required></label>
+      <label>Message<textarea name="msg" required></textarea></label>
+      <button class="btn" type="submit">Send</button>
+      <div class="done" role="status" aria-live="polite">
+        <svg viewBox="0 0 92 92" aria-hidden="true"><defs><linearGradient id="okg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff4fd8"/><stop offset=".55" stop-color="#8b5cf6"/><stop offset="1" stop-color="#38bdf8"/></linearGradient></defs><circle cx="46" cy="46" r="40"/><path d="M28 47l12 12 24-26"/></svg>
+        <h3>Sent</h3>
+        <p id="doneText">Thank you! I will reply within a day.</p>
+        <button type="button" id="again">Write again</button>
+      </div>
+    </form>
+  </section>
+</main>
+<button class="up" id="up" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<footer><div class="wrap">Julia Zharkova · ZHAR</div></footer>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* наклон карточек */
+  if(!reduce && matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.card').forEach(function(c){
+      c.addEventListener('mousemove',function(e){
+        var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+        c.style.transform='rotateY('+(x*6)+'deg) rotateX('+(-y*6)+'deg) translateY(-4px)';
+      });
+      c.addEventListener('mouseleave',function(){c.style.transform=''});
+    });
+  }
+  /* появление при прокрутке */
+  var items=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+    },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.works .card').forEach(function(c,i){c.style.transitionDelay=(i%2)*.12+'s'});
+    items.forEach(function(el){io.observe(el)});
+  }else{items.forEach(function(el){el.classList.add('in')})}
+  /* плавный скролл по меню */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.querySelector(a.getAttribute('href'));
+      if(!t)return;e.preventDefault();
+      t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+    });
+  });
+  /* параллакс: фон движется медленнее страницы */
+  var blobs=document.querySelectorAll('.blob'),k=[.12,.2,.08],ticking=false;
+  function par(){
+    var y=scrollY;
+    blobs.forEach(function(b,i){b.style.transform='translate3d(0,'+(-y*k[i])+'px,0)'});
+    cv.style.transform='translate3d(0,'+(-y*.04)+'px,0)';
+    ticking=false;
+  }
+  if(!reduce){addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(par)}},{passive:true})}
+  /* кнопка наверх */
+  var up=document.getElementById('up');
+  function upState(){up.classList.toggle('show',scrollY>500)}
+  addEventListener('scroll',upState,{passive:true});upState();
+  up.addEventListener('click',function(){scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+  /* мобильное меню */
+  var burger=document.getElementById('burger'),menu=document.getElementById('menu');
+  function closeMenu(){menu.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.setAttribute('aria-label','Открыть меню')}
+  burger.addEventListener('click',function(){
+    var o=menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'Закрыть меню':'Открыть меню');
+  });
+  menu.addEventListener('click',function(e){if(e.target.tagName==='A')closeMenu()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu()});
+  /* счётчики */
+  function count(el){
+    var to=+el.dataset.to,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';
+    if(reduce){el.textContent=pre+to+suf;return}
+    var t0=null,d=1600;
+    function step(t){
+      if(!t0)t0=t;var k=Math.min((t-t0)/d,1),e=1-Math.pow(1-k,3);
+      el.textContent=pre+Math.round(to*e)+suf;
+      if(k<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var nums=document.querySelectorAll('[data-to]');
+  if('IntersectionObserver' in window){
+    var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){count(e.target);cio.unobserve(e.target)}})},{threshold:.6});
+    nums.forEach(function(n){cio.observe(n)});
+  }else{nums.forEach(function(n){n.textContent=(n.dataset.prefix||'')+n.dataset.to+(n.dataset.suffix||'')})}
+  /* форма (только визуал) */
+  var form=document.getElementById('form');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var ok=true;
+    form.querySelectorAll('input,textarea').forEach(function(f){
+      var bad=!f.value.trim()||(f.type==='email'&&!/^\S+@\S+\.\S+$/.test(f.value));
+      f.style.borderColor=bad?'#ff6b8a':'';if(bad&&ok){f.focus();ok=false}
+    });
+    if(!ok)return;
+    var name=form.elements.name.value.trim().split(' ')[0];
+    document.getElementById('doneText').textContent='Спасибо, '+name+'! Отвечу в течение дня.';
+    form.classList.add('sending');
+    setTimeout(function(){form.classList.remove('sending');form.classList.add('ok')},reduce?0:900);
+  });
+  document.getElementById('again').addEventListener('click',function(){form.reset();form.classList.remove('ok')});
+  /* частицы */
+  var cv=document.getElementById('dust'),ctx=cv.getContext('2d'),W,H,P=[];
+  function size(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+  size();addEventListener('resize',size);
+  var cols=['#ff4fd8','#8b5cf6','#38bdf8'];
+  for(var i=0;i<46;i++)P.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.4,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,c:cols[i%3]});
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    P.forEach(function(p){
+      p.x=(p.x+p.vx+W)%W;p.y=(p.y+p.vy+H)%H;
+      ctx.globalAlpha=.55;ctx.fillStyle=p.c;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.3);ctx.fill();
+    });
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
