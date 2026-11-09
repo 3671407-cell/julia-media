@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-t="3" data-z="90">
 <head>
 <meta name="robots" content="noindex,nofollow">
 <meta charset="utf-8">
@@ -411,14 +411,6 @@
   </div>
 </footer>
 
-<div class="vsw" id="vsw"><b>Цвет</b>
-  <button type="button" data-t="1"><i class="sw" style="background:linear-gradient(120deg,#e64fc4,#8a5cff,#5cc8ff)"></i>Фуксия-ночь</button>
-  <button type="button" data-t="2"><i class="sw" style="background:linear-gradient(120deg,#ff5c7c,#d6336c,#f4b8a4)"></i>Бордо и розовое золото</button>
-  <button type="button" data-t="3"><i class="sw" style="background:linear-gradient(120deg,#f1cf8e,#d9a85a,#fff1cf)"></i>Шампань</button>
-  <button type="button" data-t="4"><i class="sw" style="background:linear-gradient(120deg,#3ee0b0,#14a37f,#e8d28a)"></i>Изумруд</button>
-  <b style="margin-left:6px">Размер</b>
-  <button type="button" data-z="100">100%</button><button type="button" data-z="90">90%</button><button type="button" data-z="80">80%</button>
-</div>
 <a class="btn btn-lg float" href="#quiz" data-mag>Разбор за 24 часа</a>
 
 <script>
@@ -501,22 +493,12 @@
     try { navigator.clipboard.writeText(text); } catch (e) {}
     show(5); window.open(url, "_blank", "noopener");
   });
-  /* временный переключатель: цвет и размер страницы */
-  (() => {
-    const root = document.documentElement, q = new URLSearchParams(location.search);
-    let t = q.get("t"), z = q.get("z");
-    try { t = t || localStorage.getItem("zhar-t"); z = z || localStorage.getItem("zhar-z"); } catch (e) {}
-    function apply(nt, nz) {
-      t = nt || t || "1"; z = nz || z || "90";
-      root.dataset.t = t; root.dataset.z = z;
-      $$("#vsw [data-t]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.t === t)));
-      $$("#vsw [data-z]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.z === z)));
-      try { localStorage.setItem("zhar-t", t); localStorage.setItem("zhar-z", z); } catch (e) {}
-    }
-    $$("#vsw [data-t]").forEach(b => b.addEventListener("click", () => apply(b.dataset.t, null)));
-    $$("#vsw [data-z]").forEach(b => b.addEventListener("click", () => apply(null, b.dataset.z)));
-    apply();
-  })();
+  /* лёгкий параллакс первого экрана */
+  if (fine && !reduce) {
+    const hero = $(".hero");
+    hero.addEventListener("pointermove", e => { const r = hero.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; hero.style.setProperty("--px", (x * 22) + "px"); hero.style.setProperty("--py", (y * 16) + "px"); });
+    hero.addEventListener("pointerleave", () => { hero.style.setProperty("--px", "0px"); hero.style.setProperty("--py", "0px"); });
+  }
 })();
 </script>
 <a href="../../" style="position:fixed;right:14px;top:84px;z-index:999;padding:8px 14px;border-radius:999px;background:#fff;color:#0b3b52;font:600 13px system-ui,sans-serif;text-decoration:none;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)">← Портфолио</a></body>
