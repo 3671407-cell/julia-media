@@ -505,4 +505,4 @@ function cv(){vm.classList.remove('open');vp.pause();vp.removeAttribute('src');v
 function setTracks(v){vp.querySelectorAll('track').forEach(function(t){t.remove()});var L=document.documentElement.lang;[['en','English'],['tr','Türkçe']].forEach(function(x){var t=document.createElement('track');t.kind='subtitles';t.src=v.replace('video/','video/subs/').replace('.mp4','.'+x[0]+'.vtt');t.srclang=x[0];t.label=x[1];if(x[0]===L)t.default=true;vp.appendChild(t)})}
 document.querySelectorAll('.vc').forEach(b=>b.addEventListener('click',()=>{setTracks(b.dataset.v);vp.src=b.dataset.v;vm.classList.add('open');document.body.style.overflow='hidden';vp.play().catch(()=>{})}));
 document.getElementById('vclose').onclick=cv;vm.addEventListener('click',e=>{if(e.target===vm)cv()});
-</script></body></html>
+</script><script src="../chat.js"></script></body></html>
