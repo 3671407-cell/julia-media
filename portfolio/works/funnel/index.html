@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Путь клиента</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&family=Unbounded:wght@300&display=swap">
+<style>
+:root { --bg:#07060d; --fg:#ece9f4; --muted:#a29fb5; --line:#26233a; --pink:#e879c6; --violet:#9b7bff; --blue:#5cc8ff; --ok:#6fd6a4; --warn:#f2b35e; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background:var(--bg); color:var(--fg); font-family:"Manrope","Segoe UI",sans-serif; font-weight:300; font-size:24px; line-height:1.55; margin:0; padding:48px 24px 96px; }
+main { max-width: 1000px; margin: 0 auto; }
+h1 { font-family:"Unbounded","Segoe UI",sans-serif; font-weight:300; font-size:clamp(34px,5vw,54px); line-height:1.15; margin:0 0 8px;
+  background:linear-gradient(90deg,var(--pink),var(--violet),var(--blue)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.lead { color:var(--muted); margin:0 0 36px; }
+h2 { font-family:"Unbounded","Segoe UI",sans-serif; font-weight:300; font-size:28px; margin:48px 0 14px; }
+section { border-top:1px solid var(--line); }
+ul, ol { margin:0; padding-left:34px; } li { margin:12px 0; padding-left:4px; }
+.post { border-top:1px solid var(--line); padding:22px 0; }
+.when { font-family:"Unbounded","Segoe UI",sans-serif; font-size:20px; color:var(--blue); margin:0 0 8px; }
+.text { font-size:27px; color:var(--fg); margin:0 0 10px; font-weight:400; }
+.score { color:var(--ok); font-family:"Unbounded","Segoe UI",sans-serif; font-size:22px; margin:0 0 6px; }
+.why { color:var(--muted); font-size:21px; margin:0; }
+.box { background:#0f0d19; border-left:3px solid var(--violet); padding:14px 22px; }
+.warn { border-left:3px solid var(--warn); padding:8px 0 8px 20px; }
+.who { color:var(--violet); font-size:20px; }
+.done::marker { color:var(--ok); }
+table { border-collapse:collapse; width:100%; font-size:22px; }
+th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+th { color:var(--muted); font-weight:400; font-size:18px; letter-spacing:.08em; text-transform:uppercase; }
+@font-face{font-family:Manrope;src:url(../../fonts/Manrope.woff2) format('woff2');font-weight:200 800}@font-face{font-family:Unbounded;src:url(../../fonts/Unbounded.ttf) format('truetype');font-weight:200 900}</style></head><body><main>
+<h1>Путь клиента в боте</h1><p class="lead">Два пути из первого блока сходятся на видео 2.</p>
+<section><h2>Схема</h2>
+<div style="border:1px solid var(--pink);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Блок 1.</b> Текст + кружок (видео 1)<br>Кнопки: <b>[Забрать подарок]</b> и <b>[Хочу путешествовать]</b></div>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="flex:1;min-width:300px"><p class="when">Путь А: подарок</p><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Блок 2.</b> Ссылка на «Карту поездки» + просьба написать место</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px">Человек играет и пишет место → «Записала: {место}. Я прочитаю лично» (сразу)<br>Не открыл и не ответил 10 минут → «Карта ждёт тебя. А пока давай начнём с мечты»</div></div>
+<div style="flex:1;min-width:300px"><p class="when">Путь Б: хочу путешествовать</p><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Сразу блок 3.</b> Без ожидания, без подарка на пути</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px">Подарок остаётся: кнопка под видео 2 и в меню бота</div></div></div>
+<div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--blue);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Блок 3.</b> Видео 2 «лист желаний» (оба пути сходятся здесь)</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Блок 4.</b> Видео 3: регистрация на платформе</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Блок 5.</b> Видео 4: платформа и Life Experience</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Блок 6.</b> Цифры: пять карточек отелей (после презентации компании и путешествий)</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--ok);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Блок 7.</b> Финал: [Написать Юлии, созвон 20 минут] или [Перейти на марафон]</div><div style="text-align:center;color:var(--blue);font-size:30px;margin:2px 0">↓</div><div style="border:1px solid var(--violet);border-radius:14px;padding:14px 18px;margin:8px 0;font-size:22px"><b>Блок 8.</b> Дожим не чаще раза в день: сутки без движения, день 3 (сомнения), день 6, раз в 2 недели</div></section>
+<section><h2>Как человек возвращается в ленту после подарка</h2><ul>
+<li><b>Сразу после ответа:</b> «Записала: {место}. Я прочитаю лично» и видео 2 приходит само. Человек не ищет, что дальше.</li>
+<li><b>Если карту не открыл:</b> через 10 минут одно мягкое напоминание и то же видео 2.</li>
+<li><b>Если играл, но не ответил:</b> видео 2 всё равно приходит через 10 минут после выдачи карты.</li>
+<li><b>Если ушёл совсем:</b> через сутки «Мы остановились на видео. Продолжим?» [Продолжить].</li>
+<li><b>Подарок не теряется:</b> кнопка есть в меню бота и под видео 2.</li></ul></section>
+<section><h2>Что меняется для тебя</h2><ul><li>Ты получаешь ответы про места только от тех, кто сыграл: это тёплые люди для разговора.</li><li>Кто нажал «Хочу путешествовать», идёт в воронку без подарка, ему не нужно ждать.</li><li>Потока кнопок «Написать Юлии» в этих блоках нет, она появится позже, с блока 4.</li></ul></section>
+</main><a href="../../" style="position:fixed;left:14px;bottom:14px;z-index:999;padding:10px 16px;border-radius:999px;background:#fff;color:#0b3b52;font:600 14px system-ui,sans-serif;text-decoration:none;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)">← Все работы</a></body></html>

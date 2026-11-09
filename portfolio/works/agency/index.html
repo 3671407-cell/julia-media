@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="ru" data-theme="a">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Агентство ZHAR</title>
+<meta name="description" content="Боты, воронки и сайты, которые превращают подписчиков в заявки. Для экспертов и малого бизнеса. Запуск от 7 дней, бесплатный разбор и план за 24 часа.">
+<link rel="stylesheet" href="zhar.css">
+</head>
+<body>
+<!-- Версия 3 (21.10.2026): правки по research.md («Экспертная оценка» и раздел 6). Цвет — вариант A, один акцент. -->
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html"><span>ZHAR</span></a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#packs">Услуги</a>
+      <a href="#cases">Работы</a>
+      <a href="price.html">Цены</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="btn btn-sm" href="#quiz">Бесплатный разбор</a>
+  </div>
+</header>
+
+<main>
+  <!-- 1. Первый экран: результат + для кого + срок + снятие риска -->
+  <section class="hero wrap">
+    <div class="badge reveal"><i></i>Проверили на себе: 190 000 просмотров</div>
+    <h1 class="reveal">Боты, воронки и сайты, которые превращают подписчиков в&nbsp;<em>заявки</em></h1>
+    <p class="lead reveal">Для экспертов и малого бизнеса. Запуск от 7 дней, оплата по этапам. Первый шаг — бесплатный разбор и план за 24 часа.</p>
+    <div class="hero-ctas reveal">
+      <a class="btn btn-lg" href="#quiz">Получить разбор за 24 часа</a>
+      <a class="btn btn-ghost" href="https://t.me/Travel_threads_bot" target="_blank" rel="noopener">Попробовать бота</a>
+    </div>
+    <p class="cta-note reveal">Бесплатно и ни к чему не обязывает. Ответим в Telegram в течение дня.</p>
+    <div class="hero-chips reveal" aria-label="Что делаем">
+      <span>Чат-боты</span><span>Автоворонки</span><span>ИИ-агенты</span><span>Сайты</span><span>Контент для Threads</span><span>Мини-продукты</span>
+    </div>
+    <div class="facts reveal">
+      <div class="fact"><b>190 000</b><span>просмотров в Threads за 2 недели без рекламы — наш собственный кейс. <a href="https://www.threads.com/@zharkova_biz" target="_blank" rel="noopener">Профиль →</a></span></div>
+      <div class="fact"><b>от 7 дней</b><span>до запуска первого бота</span></div>
+      <div class="fact"><b>по этапам</b><span>платите за следующий шаг, когда приняли предыдущий</span></div>
+    </div>
+  </section>
+
+  <!-- 2. До → после -->
+  <section class="block wrap">
+    <span class="eyebrow reveal">Узнаёте себя?</span>
+    <h2 class="reveal">Что меняется, когда работает система</h2>
+    <div class="ba">
+      <div class="ba-row reveal"><span class="was">Отвечаете в личке руками, полдня на одни и те же вопросы</span><span class="arrow" aria-hidden="true">→</span><span class="now">Бот отвечает за секунды, 24/7</span></div>
+      <div class="ba-row reveal"><span class="was">Посты набирают просмотры, а подписчики не покупают</span><span class="arrow" aria-hidden="true">→</span><span class="now">Воронка ведёт от подписки до оплаты</span></div>
+      <div class="ba-row reveal"><span class="was">Клиент «подумает» и пропадает</span><span class="arrow" aria-hidden="true">→</span><span class="now">Бот сам напоминает и возвращает</span></div>
+      <div class="ba-row reveal"><span class="was">Продукт есть, а продаётся только когда вы рядом</span><span class="arrow" aria-hidden="true">→</span><span class="now">Продажи идут, пока вы заняты другим</span></div>
+    </div>
+  </section>
+
+  <!-- 3. Пакеты с ценой и сроком -->
+  <section class="block wrap" id="packs">
+    <span class="eyebrow reveal">Услуги</span>
+    <h2 class="reveal">Три пакета — от первого бота до системы под ключ</h2>
+    <div class="packs">
+      <article class="card pack reveal">
+        <span class="tag">Старт</span>
+        <h3>Первые заявки</h3>
+        <ul>
+          <li>Чат-бот с меню и приёмом заявок</li>
+          <li>Подарок за подписку</li>
+          <li>Подключение оплаты</li>
+          <li>Или сайт-визитка</li>
+        </ul>
+        <p class="time">Срок: <b>от 7 дней</b></p>
+        <p class="price">от 30 000 ₽</p>
+      </article>
+      <article class="card pack hot reveal">
+        <span class="tag">Популярный · Система</span>
+        <h3>Продажи на автомате</h3>
+        <ul>
+          <li>Всё из «Старта»</li>
+          <li>Автоворонка: прогрев от подписки до покупки</li>
+          <li>Мини-продукт для первой продажи</li>
+          <li>Контент-план и шаблоны постов</li>
+        </ul>
+        <p class="time">Срок: <b>2–3 недели</b></p>
+        <p class="price">от 90 000 ₽</p>
+      </article>
+      <article class="card pack reveal">
+        <span class="tag">Под ключ</span>
+        <h3>Вся система продаж</h3>
+        <ul>
+          <li>Всё из «Системы»</li>
+          <li>Продающий сайт</li>
+          <li>ИИ-агент, который отвечает клиентам</li>
+          <li>Автопостинг во все соцсети</li>
+        </ul>
+        <p class="time">Срок: <b>3–6 недель</b></p>
+        <p class="price">от 180 000 ₽</p>
+      </article>
+    </div>
+    <div class="row-link reveal">Каждую услугу можно заказать отдельно. Точную смету называем после разбора, до оплаты. <a class="link" href="price.html">Все цены →</a></div>
+  </section>
+
+  <!-- 4. Работы: единый формат -->
+  <section class="block wrap" id="cases">
+    <span class="eyebrow reveal">Наши работы</span>
+    <h2 class="reveal">Начали с себя: всё, что продаём, сначала сделали для своего проекта</h2>
+    <div class="cases">
+      <article class="card case reveal">
+        <div class="meta">01 · Контент · Threads</div>
+        <h3>Аккаунт в Threads с нуля без рекламы</h3>
+        <div class="nums"><div><b>190 000</b><span>просмотров за 2 недели</span></div><div><b>0 ₽</b><span>на рекламу</span></div></div>
+        <p class="fit"><b>Подойдёт, если</b> нужно, чтобы вас увидели без бюджета на рекламу.</p>
+        <a class="go" href="../../">Как это сделано →</a>
+      </article>
+      <article class="card case reveal">
+        <div class="meta">02 · Чат-бот · Автоворонка</div>
+        <h3>Бот с подарком и продажей мини-продукта</h3>
+        <div class="nums"><div><b>2 дня</b><span>от подписки до предложения</span></div><div><b>6</b><span>сообщений прогрева</span></div></div>
+        <p class="fit"><b>Подойдёт, если</b> подписчики приходят, но не покупают.</p>
+        <a class="go" href="https://t.me/Travel_threads_bot" target="_blank" rel="noopener">Попробовать бота →</a>
+      </article>
+      <article class="card case reveal">
+        <div class="meta">03 · Мини-продукт</div>
+        <h3>Набор контент-мейкера</h3>
+        <div class="nums"><div><b>100</b><span>заголовков</span></div><div><b>490 ₽</b><span>первый продукт</span></div></div>
+        <p class="fit"><b>Подойдёт, если</b> нужен недорогой продукт для первой продажи.</p>
+        <a class="go" href="nabor.html">Смотреть продукт →</a>
+      </article>
+      <article class="card case reveal">
+        <div class="meta">04 · Сайты</div>
+        <h3>Сайт-визитка и этот сайт</h3>
+        <div class="nums"><div><b>2</b><span>сайта в одном стиле</span></div><div><b>11</b><span>продающих блоков</span></div></div>
+        <p class="fit"><b>Подойдёт, если</b> нужен сайт, который объясняет и продаёт за вас.</p>
+        <a class="go" href="../../">Подробнее →</a>
+      </article>
+    </div>
+    <div class="row-link reveal"><a class="link" href="../../" target="_blank" rel="noopener">Все работы →</a></div>
+  </section>
+
+  <!-- 5. Живое демо -->
+  <section class="block wrap">
+    <div class="demo reveal">
+      <div>
+        <span class="eyebrow">Демо</span>
+        <h2>Попробуйте наш бот сами</h2>
+        <p class="sub">Это настоящий бот из нашей воронки: подарок, прогрев, продажа. Такой же соберём для вас — под ваш продукт.</p>
+        <div class="hero-ctas" style="justify-content:flex-start">
+          <a class="btn btn-lg" href="https://t.me/Travel_threads_bot" target="_blank" rel="noopener">Открыть бота в Telegram</a>
+        </div>
+      </div>
+      <div class="chat" id="chat" aria-label="Пример диалога с ботом">
+        <div class="msg bot">Привет! Я Юлия 👋 Держи подарок: «Первый вирусный пост за 15 минут» 🎁</div>
+        <div class="msg btns"><span>🎁 Забрать подарок</span></div>
+        <div class="msg me">Уже написала пост ✅</div>
+        <div class="msg bot">Вот это да, ты молодец! 🔥 Пришли ссылку — посмотрю.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Как работаем -->
+  <section class="block wrap">
+    <span class="eyebrow reveal">Как работаем</span>
+    <h2 class="reveal">Четыре шага до потока заявок</h2>
+    <div class="steps">
+      <div class="card step reveal"><h3>Разбор</h3><p>Бесплатно: смотрим продукт и соцсети, через 24 часа присылаем план</p></div>
+      <div class="card step reveal"><h3>Смета</h3><p>Схема, цена и сроки — фиксируем до оплаты</p></div>
+      <div class="card step reveal"><h3>Запуск</h3><p>Собираем, тестируем, показываем каждый этап</p></div>
+      <div class="card step reveal"><h3>Рост</h3><p>Смотрим цифры и усиливаем то, что приносит заявки</p></div>
+    </div>
+  </section>
+
+  <!-- 7. О нас -->
+  <section class="block wrap" id="about">
+    <div class="about">
+      <div class="photo reveal"><img src="img/yulia.jpg" alt="Юлия Жаркова, основатель ZHAR" width="508" height="1100" loading="lazy"></div>
+      <div class="reveal">
+        <span class="eyebrow">О нас</span>
+        <h2>Юлия Жаркова, основатель ZHAR</h2>
+        <p>Я сама прошла путь, который предлагаю клиентам: завела Threads с нуля, за 2 недели набрала <b>190 000 просмотров</b> без рекламы и собрала свою воронку — пост, бот, подарок, продажа.</p>
+        <p>Поэтому продаю не теорию, а то, что проверила на себе. Веду каждый проект лично, без цепочки менеджеров.</p>
+        <div class="about-links">
+          <a class="link" href="https://www.threads.com/@zharkova_biz" target="_blank" rel="noopener">Threads →</a>
+          <a class="link" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Telegram →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Условия и для кого -->
+  <section class="block wrap">
+    <span class="eyebrow reveal">Условия</span>
+    <h2 class="reveal">Работаем так, чтобы вам было спокойно</h2>
+    <div class="guar">
+      <div class="card reveal"><h3>Договор</h3><p>Официально, с ИП. Цена и сроки фиксируются до оплаты</p></div>
+      <div class="card reveal"><h3>Оплата по этапам</h3><p>Платите за следующий шаг, когда приняли предыдущий</p></div>
+      <div class="card reveal"><h3>Всё остаётся у вас</h3><p>Бот, доступы, тексты и сайт — ваша собственность</p></div>
+      <div class="card reveal"><h3>Поддержка</h3><p>2 недели после запуска исправляем бесплатно</p></div>
+    </div>
+    <div class="fit-grid reveal">
+      <div class="card yes"><h3>Подходим, если</h3><ul><li>у вас есть продукт или услуга и хоть немного аудитории</li><li>хотите, чтобы заявки и продажи шли без вас</li><li>готовы ответить на вопросы и дать доступы</li></ul></div>
+      <div class="card no"><h3>Не подходим, если</h3><ul><li>нужен «миллион за неделю» с гарантией</li><li>продукта пока нет совсем</li><li>нужна реклама в запрещённых в России соцсетях</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 9. Отзывы: честно -->
+  <section class="block wrap">
+    <span class="eyebrow reveal">Отзывы</span>
+    <h2 class="reveal">Мы только открылись — станьте нашим первым кейсом</h2>
+    <div class="first reveal">
+      <div>
+        <h3>Особые условия для первых клиентов</h3>
+        <p>Сделаем проект по специальной цене, а вы честно расскажете о результате. Ваш отзыв появится здесь первым.</p>
+      </div>
+      <a class="btn btn-lg" href="#quiz">Хочу быть первым</a>
+    </div>
+  </section>
+
+  <!-- 10. FAQ -->
+  <section class="block wrap" id="faq">
+    <span class="eyebrow reveal">Вопросы</span>
+    <h2 class="reveal">Частые вопросы</h2>
+    <div class="faq reveal">
+      <details><summary>Сколько это стоит?</summary><p>Старт — от 30 000 ₽, система продаж — от 90 000 ₽, под ключ — от 180 000 ₽. Подробно — в <a class="link" href="price.html">прайсе</a>. Точную смету называем после бесплатного разбора, до оплаты.</p></details>
+      <details><summary>Сколько времени займёт?</summary><p>Бот с приёмом заявок — от 7 дней. Воронка с прогревом — 2–3 недели. Система под ключ — 3–6 недель.</p></details>
+      <details><summary>Что такое ИИ-агент простыми словами?</summary><p>Это бот, который не просто нажимает кнопки, а понимает вопросы своими словами и отвечает по вашей базе знаний: ценам, услугам, правилам. Сложные вопросы он передаёт вам.</p></details>
+      <details><summary>Что будет, если Telegram заблокируют?</summary><p>Контакты клиентов хранятся у вас, а бота можно перенести во ВКонтакте или MAX. Мы заранее продумываем запасной канал.</p></details>
+      <details><summary>Нужно ли техническое задание?</summary><p>Нет. На разборе зададим вопросы и сами соберём задание. От вас — продукт, ответы и доступы.</p></details>
+      <details><summary>Что если бот сломается?</summary><p>2 недели после запуска исправляем бесплатно. Дальше — поддержка от 10 000 ₽ в месяц, по желанию.</p></details>
+      <details><summary>Кто будет делать мой проект?</summary><p>Юлия лично ведёт каждый проект от разбора до запуска.</p></details>
+    </div>
+  </section>
+
+  <!-- 11. Квиз-заявка -->
+  <section class="block wrap" id="quiz">
+    <span class="eyebrow reveal">Бесплатный разбор</span>
+    <h2 class="reveal">Ответьте на 3 вопроса — через 24 часа пришлём план и примерную стоимость</h2>
+    <div class="quiz reveal">
+      <div class="progress"><i id="qbar"></i></div>
+      <div class="q-step" data-step="1">
+        <div class="q-label">Шаг 1 из 4</div>
+        <div class="q-title">Чем вы занимаетесь?</div>
+        <div class="opts" data-key="Ниша">
+          <button class="opt" type="button">Эксперт / наставник</button><button class="opt" type="button">Онлайн-школа</button><button class="opt" type="button">Психолог / коуч</button><button class="opt" type="button">Бьюти / wellness</button><button class="opt" type="button">Услуги</button><button class="opt" type="button">Другое</button>
+        </div>
+      </div>
+      <div class="q-step" data-step="2" hidden>
+        <div class="q-label">Шаг 2 из 4</div>
+        <div class="q-title">Что нужно в первую очередь?</div>
+        <div class="opts" data-key="Задача">
+          <button class="opt" type="button">Больше заявок</button><button class="opt" type="button">Продажи без меня</button><button class="opt" type="button">Чат-бот</button><button class="opt" type="button">Сайт</button><button class="opt" type="button">ИИ-агент</button><button class="opt" type="button">Не знаю, нужен совет</button>
+        </div>
+      </div>
+      <div class="q-step" data-step="3" hidden>
+        <div class="q-label">Шаг 3 из 4</div>
+        <div class="q-title">Какой бюджет комфортен?</div>
+        <div class="opts" data-key="Бюджет">
+          <button class="opt" type="button">До 30 000 ₽</button><button class="opt" type="button">30–100 000 ₽</button><button class="opt" type="button">100–200 000 ₽</button><button class="opt" type="button">Больше 200 000 ₽</button><button class="opt" type="button">Пока не знаю</button>
+        </div>
+      </div>
+      <div class="q-step" data-step="4" hidden>
+        <div class="q-label">Шаг 4 из 4</div>
+        <div class="q-title">Куда прислать план?</div>
+        <input class="field" id="qcontact" type="text" placeholder="Ваш Telegram или телефон" autocomplete="tel">
+        <label class="consent"><input type="checkbox" id="qconsent"> <span>Даю <a class="link" href="consent.html" target="_blank">согласие на обработку персональных данных</a> и ознакомлен(а) с <a class="link" href="privacy.html" target="_blank">политикой конфиденциальности</a></span></label>
+        <button class="btn btn-lg" type="button" id="qsend">Получить план за 24 часа</button>
+      </div>
+      <div class="q-step q-done" data-step="5" hidden>
+        <div class="q-title">Почти готово!</div>
+        <p>Мы скопировали вашу заявку. Откройте Telegram и <b>вставьте её в чат</b> — ответим в течение дня.</p>
+        <div class="hero-ctas" style="justify-content:flex-start"><a class="btn btn-lg" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Открыть Telegram</a></div>
+      </div>
+      <div class="q-nav"><button class="link" type="button" id="qback" style="background:none;border:0;cursor:pointer" hidden>← Назад</button><span></span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div>© 2026 ZHAR · Системы продаж из соцсетей</div>
+      <div>ИП Журавлева Анжела Викторовна · ИНН 615109220341 · ОГРНИП 321774600807541</div>
+      <div>Связь: Telegram — <a class="link" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Юлия Жаркова</a></div>
+    </div>
+    <div class="f-links">
+      <a href="price.html">Цены</a>
+      <a href="../../" target="_blank" rel="noopener">Работы</a>
+      <a href="rekvizity.html">Реквизиты</a>
+      <a href="oferta.html">Оферта</a>
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="consent.html">Согласие на обработку данных</a>
+      <a href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Telegram: Юлия Жаркова</a>
+    </div>
+  </div>
+</footer>
+
+<a class="btn btn-lg float" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Написать</a>
+
+<script>
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  try { localStorage.setItem("zhar-theme", "a"); } catch (e) {}
+
+  /* Появление при скролле */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  setTimeout(() => document.querySelectorAll(".reveal").forEach(el => el.classList.add("in")), 2000);
+
+  /* Живая переписка в демо: сообщения по одному, «печатает…», по кругу */
+  (() => {
+    const chat = document.getElementById("chat");
+    const msgs = [...chat.querySelectorAll(".msg")];
+    if (reduceMotion) { msgs.forEach(m => m.classList.add("on")); return; }
+    const typing = document.createElement("div");
+    typing.className = "typing"; typing.innerHTML = "<i></i><i></i><i></i>"; typing.hidden = true;
+    chat.appendChild(typing);
+    let i = 0, started = false;
+    function next() {
+      if (i >= msgs.length) { setTimeout(() => { msgs.forEach(m => m.classList.remove("on")); i = 0; next(); }, 3500); return; }
+      const m = msgs[i], isBot = m.classList.contains("bot");
+      if (isBot) {
+        chat.insertBefore(typing, m); typing.hidden = false;
+        setTimeout(() => { typing.hidden = true; m.classList.add("on"); i++; setTimeout(next, 900); }, 1100);
+      } else { m.classList.add("on"); i++; setTimeout(next, 900); }
+    }
+    new IntersectionObserver((es, o) => { if (es[0].isIntersecting && !started) { started = true; o.disconnect(); next(); } }, { threshold: .4 }).observe(chat);
+  })();
+
+  /* Квиз */
+  const answers = {};
+  let step = 1;
+  const steps = [...document.querySelectorAll(".q-step")];
+  const bar = document.getElementById("qbar"), back = document.getElementById("qback");
+  function show(n) {
+    step = n;
+    steps.forEach(s => s.hidden = +s.dataset.step !== n);
+    bar.style.width = Math.min(n, 4) * 25 + "%";
+    back.hidden = n === 1 || n === 5;
+  }
+  document.querySelectorAll(".opts").forEach(group => {
+    group.querySelectorAll(".opt").forEach(o => o.addEventListener("click", () => {
+      group.querySelectorAll(".opt").forEach(x => x.setAttribute("aria-pressed", "false"));
+      o.setAttribute("aria-pressed", "true");
+      answers[group.dataset.key] = o.textContent;
+      setTimeout(() => show(step + 1), 220);
+    }));
+  });
+  back.addEventListener("click", () => show(Math.max(1, step - 1)));
+  document.getElementById("qsend").addEventListener("click", () => {
+    const contact = document.getElementById("qcontact"), consent = document.getElementById("qconsent");
+    if (!contact.value.trim()) { contact.focus(); contact.placeholder = "Оставьте Telegram или телефон"; return; }
+    if (!consent.checked) { consent.focus(); consent.parentElement.style.color = "var(--acc)"; return; }
+    const text = "Заявка на бесплатный разбор\n" + Object.entries(answers).map(([k, v]) => k + ": " + v).join("\n") + "\nКонтакт: " + contact.value.trim();
+    const done = () => show(5);
+    try { navigator.clipboard.writeText(text).then(done, done); } catch (e) { done(); }
+  });
+
+  /* Тихие частицы на фоне (медленнее и меньше, чем было) */
+  (() => {
+    if (reduceMotion) return;
+    const cvs = document.getElementById("particles"), ctx = cvs.getContext("2d");
+    const color = "230,79,196";
+    let w, h, pts = [];
+    function resize() {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      w = innerWidth; h = innerHeight; cvs.width = w * dpr; cvs.height = h * dpr;
+      cvs.style.width = w + "px"; cvs.style.height = h + "px"; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.round(Math.min(36, (w * h) / 36000));
+      pts = Array.from({ length: n }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .12, vy: (Math.random() - .5) * .12, r: Math.random() * 1.1 + .4 }));
+    }
+    function frame() {
+      ctx.clearRect(0, 0, w, h);
+      for (const p of pts) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 7); ctx.fillStyle = `rgba(${color},.45)`; ctx.fill();
+      }
+      for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+        const a = pts[i], b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < 110) { ctx.strokeStyle = `rgba(${color},${(1 - d / 110) * .1})`; ctx.lineWidth = .6; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+      }
+      requestAnimationFrame(frame);
+    }
+    addEventListener("resize", resize); resize(); frame();
+  })();
+</script>
+<a href="../../" style="position:fixed;left:14px;bottom:14px;z-index:999;padding:10px 16px;border-radius:999px;background:#fff;color:#0b3b52;font:600 14px system-ui,sans-serif;text-decoration:none;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)">← Все работы</a></body>
+</html>

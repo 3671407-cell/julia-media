@@ -1,0 +1,1303 @@
+<title>Wien-Linie</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Russo+One&display=swap">
+<style>
+/* Layout: one phone-width column, a game "base" screen; deliberately single dark look like a game lobby */
+:root {
+  --bg: #0D0F1E;
+  --surface: #181C35;
+  --surface2: #232847;
+  --ink: #F1F2FA;
+  --muted: #A0A6C8;
+  --line: #2F3559;
+  --accent: #4DA3FF;          /* the player's own colour, set from profile */
+  --on-accent: #0B0D1A;
+  --xp: #FFD24A;
+  --ok: #3DDC84;
+  --bad: #FF5A6E;
+  --der: #74ADFF; --die: #FF85AE; --das: #62E39E;
+  --display: "Russo One", "Arial Black", system-ui, sans-serif;
+  --body: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 var(--body); -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(circle at 50% -10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%); background-attachment: fixed; }
+.wrap { max-width: 640px; margin: 0 auto; padding-inline: 16px; padding-block: 16px 56px; display: flex; flex-direction: column; gap: 18px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; letter-spacing: .01em; }
+h1 { font-size: 1.5rem; } h2 { font-size: 1.1rem; } h3 { font-size: 1rem; }
+p { margin: 0; }
+.label { font-family: var(--display); font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.muted { color: var(--muted); }
+.small { font-size: .85rem; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.btn { border: 1px solid var(--line); background: var(--surface2); border-radius: 12px; padding: 12px 16px; font-weight: 600; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-family: var(--display); font-weight: 400; letter-spacing: .02em; }
+.btn.big { width: 100%; padding: 16px; font-size: 1.1rem; }
+.btn:disabled { opacity: .4; cursor: default; }
+.btn.ghost { background: transparent; border-color: transparent; color: var(--muted); padding: 8px 10px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.spread { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+
+/* player card */
+.player { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; }
+.av { width: 64px; height: 64px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; font-family: var(--display); font-size: 1.8rem; }
+.av.f-steel { box-shadow: 0 0 0 3px #AEB4CC; }
+.av.f-neon { box-shadow: 0 0 0 3px var(--accent), 0 0 18px 2px var(--accent); }
+.av.f-bolt { box-shadow: 0 0 0 3px var(--xp), 0 0 0 6px var(--bg), 0 0 0 8px var(--xp); }
+.av.f-storm { box-shadow: 0 0 0 3px #C07CFF, 0 0 24px 6px #7A4DFF; }
+.pname { min-width: 0; }
+.pname h1 { overflow-wrap: anywhere; }
+.ptitle { font-size: .85rem; color: var(--muted); }
+.lvl { width: 56px; height: 62px; display: grid; place-items: center; text-align: center; line-height: 1; background: var(--xp); color: #1B1400;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); font-family: var(--display); }
+.lvl small { display: block; font-size: .6rem; letter-spacing: .08em; }
+.lvl b { font-size: 1.4rem; font-weight: 400; }
+.xpbar { height: 12px; border-radius: 999px; background: var(--surface2); overflow: hidden; }
+.xpbar i { display: block; height: 100%; background: linear-gradient(90deg, #FFB800, var(--xp)); border-radius: 999px; transition: width .4s; }
+.rank { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; border: 2px solid var(--rc); color: var(--rc); font-family: var(--display); font-size: .8rem; }
+.stats3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat { background: var(--surface2); border-radius: 12px; padding: 10px; text-align: center; }
+.stat b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.stat span { font-size: .78rem; color: var(--muted); }
+
+/* play */
+.play { display: flex; flex-direction: column; gap: 8px; }
+.play .btn.big { font-size: 1.25rem; padding: 18px; box-shadow: 0 6px 0 color-mix(in srgb, var(--accent) 55%, #000); }
+.play .btn.big:active { transform: translateY(3px); box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 55%, #000); }
+
+/* daily */
+.task { display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; align-items: center; }
+.task .bar { grid-column: 1 / -1; height: 8px; background: var(--surface2); border-radius: 999px; overflow: hidden; }
+.task .bar i { display: block; height: 100%; background: var(--accent); }
+.task.done .bar i { background: var(--ok); }
+.chip { font-family: var(--display); font-size: .78rem; padding: 2px 8px; border-radius: 8px; background: color-mix(in srgb, var(--xp) 18%, transparent); color: var(--xp); white-space: nowrap; }
+.task.done .chip { background: color-mix(in srgb, var(--ok) 18%, transparent); color: var(--ok); }
+
+/* skills */
+.skill { display: grid; grid-template-columns: 8.5rem 1fr 2.2rem; gap: 10px; align-items: center; }
+.skill .nm { font-weight: 600; font-size: .92rem; }
+.skill .nm em { display: block; font-style: normal; font-weight: 500; font-size: .72rem; color: #8FC7FF; }
+.pips { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; }
+.pips i { height: 12px; border-radius: 3px; background: var(--surface2); }
+.pips i.on { background: var(--accent); }
+.skill b { font-family: var(--display); font-weight: 400; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* season path */
+.path { display: flex; flex-direction: column; }
+.node { position: relative; display: grid; grid-template-columns: 44px 1fr auto; gap: 12px; align-items: center; padding: 8px 0; background: none; border: 0; text-align: left; width: 100%; }
+.node::before { content: ""; position: absolute; left: 19px; top: 0; bottom: 0; width: 6px; background: var(--accent); opacity: .85; }
+.node:first-child::before { top: 50%; } .node:last-child::before { bottom: 50%; }
+.node.locked::before { background: var(--line); opacity: 1; }
+.node .dot { position: relative; z-index: 1; width: 44px; height: 44px; border-radius: 12px; background: var(--surface2); border: 3px solid var(--accent); display: grid; place-items: center; font-family: var(--display); }
+.node.done .dot { background: var(--accent); color: var(--on-accent); }
+.node.locked .dot { border-color: var(--line); color: var(--muted); }
+.node.current .dot { box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 30%, transparent); }
+.node.boss .dot { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 25%, var(--surface2)); }
+.node .info { min-width: 0; }
+.node .info b { display: block; }
+.mp { display: flex; gap: 4px; margin-top: 4px; }
+.mp i { width: 18px; height: 6px; border-radius: 3px; background: var(--line); }
+.mp i.on { background: var(--accent); }
+.node.locked { cursor: default; opacity: .55; }
+.tag { font-size: .75rem; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: var(--surface2); white-space: nowrap; }
+
+/* rewards */
+.track { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+.rw { flex: 0 0 132px; scroll-snap-align: start; border-radius: 14px; padding: 10px; background: color-mix(in srgb, var(--rc) 14%, var(--surface2)); border: 2px solid color-mix(in srgb, var(--rc) 60%, transparent); display: flex; flex-direction: column; gap: 4px; text-align: left; }
+.rw.lockedrw { filter: grayscale(.85); opacity: .5; }
+.rw .tier { font-family: var(--display); font-size: .75rem; color: var(--rc); }
+.rw b { font-size: .88rem; line-height: 1.25; }
+.rw span { font-size: .72rem; color: var(--muted); }
+.rw.on { outline: 2px solid var(--ink); }
+
+.foot { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; justify-content: space-between; font-size: .85rem; color: var(--muted); }
+.notice { background: color-mix(in srgb, var(--bad) 18%, var(--surface)); border-radius: 12px; padding: 12px 14px; font-size: .9rem; }
+
+/* session */
+.topbar { display: flex; align-items: center; gap: 10px; }
+.progress { flex: 1; height: 12px; background: var(--surface2); border-radius: 999px; overflow: hidden; }
+.progress i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 999px; transition: width .3s; }
+.timer { font-variant-numeric: tabular-nums; font-size: .85rem; color: var(--muted); white-space: nowrap; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 22px 18px; display: flex; flex-direction: column; gap: 16px; min-height: 300px; }
+.kind { font-family: var(--display); font-size: .8rem; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; }
+.word { font-family: var(--display); font-size: clamp(1.6rem, 6.4vw, 2.2rem); line-height: 1.2; text-wrap: balance; overflow-wrap: anywhere; }
+.word.mid { font-size: clamp(1.2rem, 4.8vw, 1.55rem); }
+.art-der { color: var(--der); } .art-die { color: var(--die); } .art-das { color: var(--das); }
+.ru { font-size: 1.15rem; }
+.rule { background: var(--surface2); border-radius: 12px; padding: 10px 12px; font-size: .95rem; }
+.speak { display: flex; gap: 8px; flex-wrap: wrap; }
+.speak .btn { display: inline-flex; align-items: center; gap: 8px; }
+.speak svg { width: 20px; height: 20px; }
+.bigspeak { align-self: center; width: 100px; height: 100px; border-radius: 50%; border: 0; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; box-shadow: 0 6px 0 color-mix(in srgb, var(--accent) 55%, #000); }
+.bigspeak svg { width: 46px; height: 46px; }
+.opts { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.opt { text-align: left; border: 2px solid var(--line); background: var(--surface2); border-radius: 14px; padding: 13px 14px; font-weight: 500; display: flex; gap: 10px; align-items: baseline; }
+.opt kbd { font: 600 .75rem var(--body); color: var(--muted); }
+.opt.right { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 18%, var(--surface2)); }
+.opt.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 18%, var(--surface2)); }
+.arts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.arts .opt { justify-content: center; font-family: var(--display); font-size: 1.15rem; }
+.arts .opt:nth-child(1) { color: var(--der); } .arts .opt:nth-child(2) { color: var(--die); } .arts .opt:nth-child(3) { color: var(--das); }
+input.answer, textarea, input.text { width: 100%; font: 500 1.15rem var(--body); padding: 14px; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); color: var(--ink); }
+textarea { font-size: 1rem; min-height: 110px; resize: vertical; }
+.keys { display: flex; gap: 8px; flex-wrap: wrap; }
+.keys button { min-width: 48px; padding: 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface2); font-weight: 600; font-size: 1.05rem; }
+.built { min-height: 56px; border-bottom: 2px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 8px; }
+.tiles { display: flex; flex-wrap: wrap; gap: 8px; }
+.tile { padding: 9px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface2); font-weight: 500; }
+.tile.used { visibility: hidden; }
+.feedback { border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; border: 2px solid; }
+.feedback.ok { background: color-mix(in srgb, var(--ok) 12%, var(--surface)); border-color: var(--ok); }
+.feedback.bad { background: color-mix(in srgb, var(--bad) 12%, var(--surface)); border-color: var(--bad); }
+.feedback b.t { font-family: var(--display); font-weight: 400; font-size: 1.1rem; }
+.feedback.ok b.t { color: var(--ok); } .feedback.bad b.t { color: var(--bad); }
+.plus { font-family: var(--display); color: var(--xp); animation: pop .5s ease-out; display: inline-block; }
+@keyframes pop { from { transform: translateY(8px) scale(.8); opacity: 0; } to { transform: none; opacity: 1; } }
+.tip { font-size: 1.02rem; line-height: 1.6; max-width: 62ch; display: flex; flex-direction: column; gap: 10px; }
+
+/* boss */
+.bossbar { display: flex; flex-direction: column; gap: 6px; }
+.hp { height: 14px; border-radius: 999px; background: var(--surface2); overflow: hidden; }
+.hp i { display: block; height: 100%; background: var(--bad); transition: width .3s; }
+.hearts { display: flex; gap: 4px; }
+.hearts svg { width: 22px; height: 22px; }
+
+/* summary */
+.summary { text-align: center; align-items: center; }
+.summary .big { font-family: var(--display); font-size: 2.8rem; color: var(--xp); line-height: 1; }
+.win { width: 100%; border-radius: 14px; padding: 12px; background: color-mix(in srgb, var(--rc, var(--accent)) 16%, var(--surface2)); border: 2px solid var(--rc, var(--accent)); display: flex; flex-direction: column; gap: 2px; }
+.win b { font-family: var(--display); font-weight: 400; font-size: 1.05rem; }
+.react { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.react button { padding: 12px 6px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface2); font-weight: 600; }
+.react button.on { border-color: var(--accent); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips button { padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface2); font-weight: 500; }
+.chips button.on { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+.swatches button { width: 44px; height: 44px; border-radius: 50%; border: 3px solid transparent; }
+.swatches button.on { border-color: var(--ink); }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--surface2); border: 1px solid var(--line); padding: 12px 18px; border-radius: 12px; z-index: 30; max-width: calc(100% - 32px); }
+.modal { position: fixed; inset: 0; background: color-mix(in srgb, var(--bg) 80%, transparent); z-index: 20; display: grid; place-items: end center; padding: 16px; padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+.modal .panel { width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; }
+.help { display: flex; flex-direction: column; gap: 12px; }
+.help .panel p + p { margin-top: 0; }
+.bars14 { display: grid; grid-template-columns: repeat(14, 1fr); gap: 3px; align-items: end; height: 70px; }
+.bars14 i { background: var(--accent); border-radius: 3px 3px 0 0; min-height: 2px; }
+.bars14 i.goal { background: var(--ok); }
+.fbitem { border-top: 1px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media (max-width: 420px) { .skill { grid-template-columns: 7rem 1fr 2rem; } .player { grid-template-columns: auto 1fr; } .player .lvl { grid-column: 1; grid-row: 1; justify-self: start; } }
+</style>
+
+<div class="wrap" id="app"></div>
+<div id="modal"></div>
+
+<script>
+// ================= Content =================
+const LESSONS = [
+  { title: "Звуки и буквы", de: "Laute", tip: [
+    "В немецком почти всё читается так, как пишется. Выучи несколько правил, и сможешь прочитать любое слово.",
+    "ä = э, ö = ё, ü = ю, ß = с, ei = ай, ie = долгое и, eu = ой, sch = ш, z = ц, w = в, v = ф, s перед гласной = з, sp и st в начале слова = шп и шт.",
+    "Каждый раз нажимай на динамик и повторяй слово вслух. Так произношение запоминается быстрее всего."],
+    items: [
+    ["das Haus", "дом", "хаус", "au читается как «ау»"],
+    ["der Käse", "сыр", "кэ́зэ", "ä читается как «э»"],
+    ["schön", "красиво", "шён", "ö: губы как для «о», а говоришь «ё»"],
+    ["müde", "усталый", "мю́дэ", "ü: губы как для «у», а говоришь «ю»"],
+    ["groß", "большой", "гроос", "ß читается как «с»"],
+    ["das Eis", "мороженое", "айс", "ei читается как «ай»"],
+    ["die Liebe", "любовь", "ли́бэ", "ie читается как долгое «и»"],
+    ["neu", "новый", "ной", "eu читается как «ой»"],
+    ["schnell", "быстро", "шнэль", "sch читается как «ш»"],
+    ["die Zeit", "время", "цайт", "z читается как «ц»"],
+    ["das Wasser", "вода", "ва́сэр", "w читается как «в»"],
+    ["der Vater", "отец", "фа́тэр", "v читается как «ф»"],
+    ["die Sonne", "солнце", "зо́нэ", "s перед гласной читается как «з»"],
+    ["sprechen", "говорить", "шпрэ́хен", "sp в начале слова читается как «шп»"],
+    ["ich", "я", "ихь", "ch после e и i читается мягко, как «хь»"],
+    ["ja", "да", "я", "j читается как «й»"]]},
+  { title: "Привет и знакомство", de: "Hallo!", tip: [
+    "В Австрии вместо «Guten Tag» часто говорят «Grüß Gott». «Servus» значит и «привет», и «пока».",
+    "Друзьям говорят du (ты). Взрослым и преподавателям говорят Sie (Вы), всегда с большой буквы."],
+    items: [
+    ["Hallo!", "Привет!", "ха́ло"],
+    ["Guten Morgen!", "Доброе утро!", "гу́тэн мо́рген"],
+    ["Guten Tag!", "Добрый день!", "гу́тэн таак"],
+    ["Guten Abend!", "Добрый вечер!", "гу́тэн а́бэнт"],
+    ["Grüß Gott!", "Здравствуйте! (так говорят в Австрии)", "грюс гот"],
+    ["Servus!", "Привет! / Пока! (в Австрии)", "зэ́рвус"],
+    ["Tschüss!", "Пока!", "чюс"],
+    ["Auf Wiedersehen!", "До свидания!", "ауф ви́дэрзээн"],
+    ["Wie heißt du?", "Как тебя зовут?", "ви хайст ду"],
+    ["Ich heiße Nikita.", "Меня зовут Игрок.", "ихь ха́йсэ ники́та"],
+    ["Wie geht's?", "Как дела?", "ви геетс"],
+    ["Gut, danke!", "Хорошо, спасибо!", "гут, да́нке"],
+    ["Bitte", "пожалуйста", "би́тэ"],
+    ["Nein", "нет", "найн"],
+    ["Entschuldigung!", "Извините!", "энтшу́льдигунг"]]},
+  { title: "Числа", de: "Zahlen", tip: [
+    "Числа 13–19 строятся как «три-десять»: dreizehn, vierzehn.",
+    "Числа после 20 читаются задом наперёд: 21 = einundzwanzig, то есть «один-и-двадцать». Это пригодится на экзамене, когда будешь слушать."],
+    items: [
+    ["null", "ноль (0)", "нуль"],
+    ["eins", "один (1)", "айнс"],
+    ["zwei", "два (2)", "цвай"],
+    ["drei", "три (3)", "драй"],
+    ["vier", "четыре (4)", "фир"],
+    ["fünf", "пять (5)", "фюнф"],
+    ["sechs", "шесть (6)", "зэкс"],
+    ["sieben", "семь (7)", "зи́бэн"],
+    ["acht", "восемь (8)", "ахт"],
+    ["neun", "девять (9)", "нойн"],
+    ["zehn", "десять (10)", "цеен"],
+    ["elf", "одиннадцать (11)", "эльф"],
+    ["zwölf", "двенадцать (12)", "цвёльф"],
+    ["zwanzig", "двадцать (20)", "цва́нцихь"],
+    ["hundert", "сто (100)", "ху́ндэрт"]]},
+  { title: "Я и моя семья", de: "Familie", tip: [
+    "У каждого существительного есть род: der (мужской), die (женский), das (средний). Род в немецком часто не совпадает с русским, поэтому учи слово сразу с артиклем.",
+    "Цвет подсказывает род: синий der, розовый die, зелёный das. Все существительные пишутся с большой буквы."],
+    items: [
+    ["die Familie", "семья", "фами́лиэ"],
+    ["die Mutter", "мама", "му́тэр"],
+    ["der Bruder", "брат", "бру́дэр"],
+    ["die Schwester", "сестра", "швэ́стэр"],
+    ["die Eltern", "родители", "э́льтэрн"],
+    ["der Sohn", "сын", "зоон"],
+    ["die Oma", "бабушка", "о́ма"],
+    ["der Opa", "дедушка", "о́па"],
+    ["das Kind", "ребёнок", "кинт"],
+    ["Das ist mein Bruder.", "Это мой брат.", "дас ист майн бру́дэр"],
+    ["Ich habe eine Schwester.", "У меня есть сестра.", "ихь ха́бэ а́йнэ швэ́стэр"],
+    ["Ich bin sechzehn Jahre alt.", "Мне шестнадцать лет.", "ихь бин зэ́хцеен я́рэ альт"],
+    ["Wo wohnst du?", "Где ты живёшь?", "во воонст ду"]]},
+  { title: "Быть и иметь", de: "sein & haben", tip: [
+    "Два главных глагола: sein (быть) и haben (иметь). По-русски «я есть» не говорят, а по-немецки без глагола нельзя: Ich bin müde = Я устал.",
+    "Глагол меняется по лицам: ich bin, du bist, er ist. Учи формы парами: местоимение + глагол."],
+    items: [
+    ["ich bin", "я есть (я …)", "ихь бин"],
+    ["du bist", "ты есть (ты …)", "ду бист"],
+    ["er ist", "он есть (он …)", "эр ист"],
+    ["wir sind", "мы есть (мы …)", "вир зинт"],
+    ["ihr seid", "вы есть (вы …, несколько друзей)", "ир зайт"],
+    ["ich habe", "у меня есть", "ихь ха́бэ"],
+    ["du hast", "у тебя есть", "ду хаст"],
+    ["er hat", "у него есть", "эр хат"],
+    ["wir haben", "у нас есть", "вир ха́бэн"],
+    ["Ich bin müde.", "Я устал.", "ихь бин мю́дэ"],
+    ["Hast du Zeit?", "У тебя есть время?", "хаст ду цайт"],
+    ["Wir sind in Wien.", "Мы в Вене.", "вир зинт ин виин"]]},
+  { title: "Школа и учёба", de: "Schule", tip: [
+    "lernen = учить, заниматься (в школе, дома). studieren = учиться в университете.",
+    "Ich möchte … = Я хотел бы … Второй глагол уходит в конец предложения: Ich möchte in Wien studieren."],
+    items: [
+    ["die Schule", "школа", "шу́лэ"],
+    ["der Lehrer", "учитель", "ле́эрэр"],
+    ["die Lehrerin", "учительница", "ле́эрэрин"],
+    ["das Buch", "книга", "буух"],
+    ["das Heft", "тетрадь", "хэфт"],
+    ["der Stift", "ручка", "штифт"],
+    ["die Klasse", "класс", "кла́сэ"],
+    ["die Hausaufgabe", "домашнее задание", "ха́усауфгаабэ"],
+    ["die Prüfung", "экзамен", "прю́фунг"],
+    ["die Universität", "университет", "унивэрзитэ́т"],
+    ["lernen", "учить, заниматься", "лэ́рнэн"],
+    ["studieren", "учиться в университете", "штуди́рэн"],
+    ["Ich lerne Deutsch.", "Я учу немецкий.", "ихь лэ́рнэ дойч"],
+    ["Ich möchte in Wien studieren.", "Я хочу учиться в Вене.", "ихь мё́хьтэ ин виин штуди́рэн"]]},
+  { title: "Еда по-венски", de: "Essen", tip: [
+    "В Вене свои слова: Semmel вместо Brötchen (булочка), Marille вместо Aprikose (абрикос), Erdapfel вместо Kartoffel (картофель).",
+    "На экзамене подойдут оба варианта, но в Вене ты будешь слышать австрийские."],
+    items: [
+    ["das Frühstück", "завтрак", "фрю́штюк"],
+    ["das Brot", "хлеб", "броот"],
+    ["die Semmel", "булочка (в Австрии)", "зэ́мэль"],
+    ["die Milch", "молоко", "мильхь"],
+    ["der Kaffee", "кофе", "ка́фэ"],
+    ["der Tee", "чай", "тээ"],
+    ["der Apfel", "яблоко", "а́пфэль"],
+    ["die Marille", "абрикос (в Австрии)", "мари́лэ"],
+    ["der Erdapfel", "картофель (в Австрии)", "э́рдапфэль"],
+    ["das Schnitzel", "шницель", "шни́цэль"],
+    ["Ich habe Hunger.", "Я голоден.", "ихь ха́бэ ху́нгэр"],
+    ["Die Rechnung, bitte!", "Счёт, пожалуйста!", "ди рэ́хьнунг, би́тэ"]]},
+  { title: "Город Вена", de: "In Wien", tip: [
+    "В вопросе с вопросительным словом глагол стоит на втором месте: Wo ist der Bahnhof?",
+    "Главный транспорт Вены: U-Bahn (метро), Straßenbahn (трамвай, венцы зовут его Bim) и автобус."],
+    items: [
+    ["die Stadt", "город", "штат"],
+    ["die Straße", "улица", "штра́сэ"],
+    ["der Bahnhof", "вокзал", "ба́анхоф"],
+    ["die U-Bahn", "метро", "у́-баан"],
+    ["die Straßenbahn", "трамвай", "штра́сэнбаан"],
+    ["die Wohnung", "квартира", "во́онунг"],
+    ["der Park", "парк", "парк"],
+    ["links", "налево", "линкс"],
+    ["rechts", "направо", "рэхьтс"],
+    ["geradeaus", "прямо", "гэраадэ́аус"],
+    ["Wo ist die U-Bahn?", "Где метро?", "во ист ди у́-баан"],
+    ["Wie komme ich zum Bahnhof?", "Как мне пройти к вокзалу?", "ви ко́мэ ихь цум ба́анхоф"]]},
+  { title: "Техника и игры", de: "Technik", tip: [
+    "Многие технические слова похожи на английские: Computer, Roboter, Motor. Учить их легко.",
+    "gern после глагола значит «люблю делать»: Ich spiele gern = Я люблю играть.",
+    "Немцы склеивают слова: Computer + Spiel = Computerspiel. Род всегда берётся от последнего слова: das Spiel → das Computerspiel."],
+    items: [
+    ["der Roboter", "робот", "ро́ботэр"],
+    ["der Computer", "компьютер", "компью́тэр"],
+    ["das Handy", "мобильный телефон", "хэ́нди"],
+    ["der Bildschirm", "экран", "би́льтширм"],
+    ["die Taste", "клавиша, кнопка", "та́стэ"],
+    ["das Spiel", "игра", "шпиль"],
+    ["spielen", "играть", "шпи́лэн"],
+    ["bauen", "строить", "ба́уэн"],
+    ["der Motor", "мотор", "мо́тор"],
+    ["der Sensor", "датчик", "зэ́нзор"],
+    ["programmieren", "программировать", "програми́рэн"],
+    ["Ich spiele gern Computerspiele.", "Я люблю играть в компьютерные игры.", "ихь шпи́лэ гэрн компью́тэршпилэ"],
+    ["Der Roboter kann sprechen.", "Робот умеет говорить.", "дэр ро́ботэр кан шпрэ́хен"]]},
+  { title: "Мой день", de: "Mein Tag", tip: [
+    "У большинства глаголов одинаковые окончания: ich mache, du machst, er macht. Запомни три окончания: -e, -st, -t.",
+    "Wie spät ist es? = Который час? Ответ: Es ist acht Uhr. = Сейчас восемь часов."],
+    items: [
+    ["der Tag", "день", "таак"],
+    ["die Woche", "неделя", "во́хэ"],
+    ["heute", "сегодня", "хо́йтэ"],
+    ["morgen", "завтра", "мо́рген"],
+    ["jetzt", "сейчас", "йецт"],
+    ["die Uhr", "часы", "уур"],
+    ["machen", "делать", "ма́хэн"],
+    ["gehen", "идти", "ге́эн"],
+    ["Wie spät ist es?", "Который час?", "ви шпээт ист эс"],
+    ["Es ist acht Uhr.", "Сейчас восемь часов.", "эс ист ахт уур"],
+    ["Was machst du?", "Что ты делаешь?", "вас махст ду"],
+    ["Ich mache Hausaufgaben.", "Я делаю домашние задания.", "ихь ма́хэ ха́усауфгаабэн"],
+    ["Ich gehe in die Schule.", "Я иду в школу.", "ихь ге́э ин ди шу́лэ"]]}
+];
+
+const ITEMS = {};
+LESSONS.forEach((L, li) => L.items.forEach((a, i) => {
+  const id = li + "-" + i;
+  const m = a[0].match(/^(der|die|das) (\S+)$/);
+  ITEMS[id] = { id, li, de: a[0], ru: a[1], say: a[2], rule: a[3] || "", art: m ? m[1] : null, noun: m ? m[2] : null, phrase: a[0].split(" ").length >= 3 };
+}));
+
+const GOAL_MIN = 30;
+const INTERVALS = [0, 1, 3, 7, 14, 30]; // days until next review, by box
+const SKILLS = [
+  { k: "words", n: "Слова" }, { k: "listen", n: "Аудирование" }, { k: "grammar", n: "Грамматика" },
+  { k: "write", n: "Письмо" }, { k: "speak", n: "Произношение" }];
+const SKILL_OF = { choose: "words", listen: "listen", article: "grammar", build: "grammar", type: "write", say: "speak" };
+const SKILL_T = [0, 20, 50, 90, 140, 200, 270, 350, 440, 540];
+const RANKS = [
+  { n: "Бронза", c: "#D08B5B", lvl: 1, acc: 0 },
+  { n: "Серебро", c: "#C3CBD8", lvl: 3, acc: 65 },
+  { n: "Золото", c: "#FFD24A", lvl: 5, acc: 70 },
+  { n: "Платина", c: "#6FE0D2", lvl: 8, acc: 75 },
+  { n: "Алмаз", c: "#7CB6FF", lvl: 11, acc: 80 },
+  { n: "Элита", c: "#C58BFF", lvl: 14, acc: 85 },
+  { n: "Чемпион", c: "#FF7A59", boss: true, acc: 85 }];
+const COLORS = [
+  { id: "blue", c: "#4DA3FF", n: "Синий" }, { id: "orange", c: "#FF9A3D", n: "Оранжевый" }, { id: "green", c: "#3DDC84", n: "Зелёный" },
+  { id: "purple", c: "#B07CFF", n: "Фиолетовый" }, { id: "pink", c: "#FF6FC8", n: "Розовый" }, { id: "gold", c: "#FFD24A", n: "Золотой" }];
+const RARITY = [
+  { n: "обычная", c: "#AEB4CC" }, { n: "необычная", c: "#5EE29A" }, { n: "редкая", c: "#5AA9FF" },
+  { n: "эпическая", c: "#C07CFF" }, { n: "легендарная", c: "#FFA23D" }];
+const TIER_XP = 300;
+const REWARDS = [
+  { t: 1, kind: "title", v: "Первые слова", r: 0 },
+  { t: 2, kind: "frame", v: "steel", n: "Рамка «Сталь»", r: 0 },
+  { t: 3, kind: "color", v: "purple", r: 1 },
+  { t: 4, kind: "title", v: "Знаток артиклей", r: 1 },
+  { t: 5, kind: "frame", v: "neon", n: "Рамка «Неон»", r: 2 },
+  { t: 6, kind: "color", v: "pink", r: 2 },
+  { t: 7, kind: "title", v: "Голос Вены", r: 2 },
+  { t: 8, kind: "frame", v: "bolt", n: "Рамка «Молния»", r: 3 },
+  { t: 9, kind: "color", v: "gold", r: 3 },
+  { t: 10, kind: "title", v: "Без страха и ошибок", r: 3 },
+  { t: 11, kind: "frame", v: "storm", n: "Рамка «Шторм»", r: 4 },
+  { t: 12, kind: "title", v: "Покоритель A1", r: 4 },
+  { t: "boss", kind: "title", v: "Победитель Стража", r: 4 }];
+const DAILY_POOL = [
+  { id: "m2", t: "Пройди 2 миссии", c: "missions", n: 2 },
+  { id: "run", t: "10 правильных ответов подряд", c: "runMax", n: 10 },
+  { id: "rev", t: "Повтори 10 старых слов", c: "reviews", n: 10 },
+  { id: "lis", t: "5 раз узнай слово на слух с первой попытки", c: "listenOk", n: 5 },
+  { id: "min", t: "Позанимайся 15 минут", c: "minutes", n: 15 },
+  { id: "spk", t: "Произнеси вслух 3 фразы", c: "speak", n: 3 },
+  { id: "cor", t: "Дай 30 правильных ответов", c: "correct", n: 30 }];
+const DAILY_XP = 50;
+const BOSS_Q = 30;
+
+// ================= State & storage =================
+const KEY = "wien-linie-v2";
+const DEF = () => ({ v: 2, name: "Игрок", color: "blue", onboarded: false, items: {}, lessons: {}, days: {}, xp: 0, seasonXp: 0,
+  skills: {}, hist: [], rankMax: 0, daily: null, streak: { count: 0, last: null, freezes: 2 }, eq: { title: null, frame: null },
+  boss: { won: false, tries: 0 }, slow: false, fbq: [], updatedAt: 0 });
+let S = DEF();
+try {
+  const raw = localStorage.getItem(KEY);
+  if (raw) S = Object.assign(DEF(), JSON.parse(raw));
+  else {
+    const old = localStorage.getItem("wien-linie-v1");
+    if (old) {
+      const o = JSON.parse(old);
+      S.items = o.items || {}; S.days = o.days || {}; S.slow = !!o.slow;
+      Object.keys(o.lessons || {}).forEach(li => { if (o.lessons[li].done) S.lessons[li] = { m: groups(+li).length }; });
+    }
+  }
+} catch (e) {}
+
+let db = null, uid = null, isOwner = false;
+function save(sync = true) {
+  S.updatedAt = Date.now();
+  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {}
+  if (sync) pushSoon();
+}
+let pushTimer = null, writing = false, again = false;
+function pushSoon() { if (!db || !uid) return; clearTimeout(pushTimer); pushTimer = setTimeout(pushNow, 3000); }
+async function pushNow() {
+  if (!db || !uid) return;
+  if (writing) { again = true; return; }
+  writing = true;
+  try {
+    const st = Object.assign({}, S); delete st.fbq;
+    await db.doc("players/" + uid).set({ name: S.name, updatedAt: S.updatedAt, state: JSON.parse(JSON.stringify(st)) });
+  } catch (e) {}
+  writing = false;
+  if (again) { again = false; pushNow(); }
+}
+let flushing = false;
+async function flushFeedback() {
+  if (!db || flushing) return;
+  flushing = true;
+  while (S.fbq.length) {
+    try { await db.collection("feedback").add(S.fbq[0]); S.fbq.shift(); save(false); }
+    catch (e) { break; }
+  }
+  flushing = false;
+}
+function saveFeedback(d) {
+  d.at = Date.now(); d.who = S.name; if (uid) d.uid = uid;
+  S.fbq.push(d); save(false); flushFeedback();
+}
+(async () => {
+  try {
+    if (!window.claude || !window.claude.use) return;
+    const user = await window.claude.use("user");
+    db = await window.claude.use("db");
+    if (user) { uid = await user.id(); isOwner = await user.isOwner(); }
+    if (!db || !uid) { db = db && uid ? db : null; if (screen === "home") render(); return; }
+    const snap = await db.doc("players/" + uid).get();
+    if (snap.exists) {
+      const r = snap.data();
+      if (r && r.state && (r.updatedAt || 0) > (S.updatedAt || 0)) {
+        const fbq = S.fbq;
+        S = Object.assign(DEF(), JSON.parse(JSON.stringify(r.state)), { fbq });
+        try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {}
+      } else pushSoon();
+    } else pushSoon();
+    flushFeedback();
+    if (screen === "home" || screen === "welcome") render();
+  } catch (e) {}
+})();
+
+// ================= Time helpers =================
+function dayNum(d = new Date()) { return Math.floor((d - d.getTimezoneOffset() * 60000) / 86400000); }
+const todaySec = () => S.days[dayNum()] || 0;
+const mmss = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+
+// ================= Progress logic =================
+function groups(li) {
+  const ids = LESSONS[li].items.map((_, i) => li + "-" + i);
+  const k = Math.ceil(ids.length / 4), out = [];
+  let start = 0;
+  for (let g = 0; g < k; g++) { const size = Math.floor(ids.length / k) + (g < ids.length % k ? 1 : 0); out.push(ids.slice(start, start + size)); start += size; }
+  return out;
+}
+const missionsDone = li => (S.lessons[li] && S.lessons[li].m) || 0;
+const lessonDone = li => missionsDone(li) >= groups(li).length;
+const unlocked = li => li === 0 || lessonDone(li - 1);
+const nextLesson = () => LESSONS.findIndex((_, li) => !lessonDone(li));
+const bossOpen = () => nextLesson() === -1;
+
+function dueIds() {
+  const t = dayNum();
+  return Object.keys(S.items).filter(id => ITEMS[id] && S.items[id].due <= t)
+    .sort((a, b) => S.items[a].due - S.items[b].due || (S.items[b].wrong || 0) - (S.items[a].wrong || 0));
+}
+function hardIds() {
+  return Object.keys(S.items).filter(id => ITEMS[id] && (S.items[id].wrong || 0) > 0)
+    .sort((a, b) => S.items[b].wrong - S.items[a].wrong).slice(0, 8);
+}
+
+function level(xp = S.xp) {
+  let L = 1, need = 100, rem = xp;
+  while (rem >= need) { rem -= need; L++; need = 100 + (L - 1) * 40; }
+  return { L, rem, need };
+}
+function skillPts(k) {
+  const s = S.skills[k]; if (!s) return 0;
+  const d = dayNum() - (s.last || dayNum());
+  return d > 2 ? Math.round(s.p * Math.max(0.6, 1 - 0.05 * (d - 2))) : s.p;
+}
+const skillCooling = k => { const s = S.skills[k]; return !!s && s.p > 0 && dayNum() - s.last > 2; };
+const skillLvl = k => SKILL_T.filter(t => skillPts(k) >= t).length;
+function train(k, delta) {
+  const p = Math.max(0, skillPts(k) + delta);
+  S.skills[k] = { p, last: dayNum() };
+}
+function accuracy() { return S.hist.length ? Math.round(S.hist.reduce((a, b) => a + b, 0) / S.hist.length * 100) : 0; }
+function updateRank() {
+  const acc = accuracy(), L = level().L, enough = S.hist.length >= 20;
+  let r = 0;
+  RANKS.forEach((R, i) => { if (i && enough && acc >= R.acc && (R.boss ? S.boss.won : L >= R.lvl)) r = i; });
+  S.rankMax = Math.max(S.rankMax || 0, r);
+}
+const tiersOpen = () => Math.min(12, Math.floor(S.seasonXp / TIER_XP));
+const rewardOpen = rw => rw.t === "boss" ? S.boss.won : rw.t <= tiersOpen();
+const colorOf = id => (COLORS.find(c => c.id === id) || COLORS[0]).c;
+function rewardName(rw) {
+  if (rw.kind === "title") return "Титул «" + rw.v + "»";
+  if (rw.kind === "frame") return rw.n;
+  return "Цвет «" + COLORS.find(c => c.id === rw.v).n + "»";
+}
+function addXp(n) { S.xp += n; S.seasonXp += n; if (ses) ses.gained += n; }
+
+function rng(seed) { return () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }; }
+function ensureDaily() {
+  const d = dayNum();
+  if (S.daily && S.daily.day === d) return;
+  const r = rng(d), pool = DAILY_POOL.filter(t => t.id !== "rev" || Object.keys(S.items).length >= 10);
+  const pick = [];
+  while (pick.length < 3 && pool.length) pick.push(pool.splice(Math.floor(r() * pool.length), 1)[0].id);
+  S.daily = { day: d, tasks: pick, done: [], c: { missions: 0, run: 0, runMax: 0, reviews: 0, listenOk: 0, speak: 0, correct: 0 } };
+}
+function dailyVal(t) { return t.c === "minutes" ? Math.floor(todaySec() / 60) : (S.daily.c[t.c] || 0); }
+function checkDaily() {
+  ensureDaily();
+  S.daily.tasks.forEach(id => {
+    const t = DAILY_POOL.find(x => x.id === id);
+    if (t && !S.daily.done.includes(id) && dailyVal(t) >= t.n) { S.daily.done.push(id); addXp(DAILY_XP); if (ses) ses.dailyNew.push(t.t); }
+  });
+}
+function markActive() {
+  const d = dayNum(), st = S.streak;
+  if (st.last === d) return;
+  if (st.last == null) st.count = 1;
+  else {
+    const gap = d - st.last - 1;
+    if (gap <= 0) st.count++;
+    else if (gap <= st.freezes) { st.freezes -= gap; st.count++; }
+    else st.count = 1;
+  }
+  st.last = d;
+  if (st.count % 7 === 0) st.freezes = Math.min(2, st.freezes + 1);
+}
+function streakNow() {
+  const st = S.streak;
+  if (st.last == null) return 0;
+  return dayNum() - st.last - 1 > st.freezes ? 0 : st.count;
+}
+
+// ================= Speech =================
+let voice = null, voicesChecked = false;
+function pickVoice() {
+  if (!("speechSynthesis" in window)) return;
+  const vs = speechSynthesis.getVoices();
+  if (vs.length) voicesChecked = true;
+  voice = vs.find(v => v.lang === "de-AT") || vs.find(v => v.lang === "de-DE" && /google|anna|premium|enhanced/i.test(v.name))
+       || vs.find(v => v.lang === "de-DE") || vs.find(v => v.lang && v.lang.startsWith("de")) || null;
+}
+if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = () => { pickVoice(); if (screen === "home") render(); }; }
+function speak(text, slow) {
+  if (!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = voice ? voice.lang : "de-DE";
+  if (voice) u.voice = voice;
+  u.rate = (slow || S.slow) ? 0.6 : 0.9;
+  speechSynthesis.speak(u);
+}
+const ICON_SPEAK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+const ICON_SLOW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13" r="7"/><path d="M12 13V9.5M9.5 2.5h5"/></svg>';
+const heart = on => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3 1.7-1.8 3.2-3 5.3-3 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z" fill="${on ? "var(--bad)" : "var(--surface2)"}"/></svg>`;
+
+// ================= Helpers =================
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const norm = s => s.toLowerCase().replace(/[.,!?…"'«»]/g, "").replace(/\s+/g, " ").trim();
+const loose = s => norm(s).replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss");
+const deHtml = it => it.art ? `<span class="art-${it.art}">${it.art}</span> ${esc(it.noun)}` : esc(it.de);
+const pick = a => a[Math.floor(Math.random() * a.length)];
+function typesFor(it) {
+  const t = ["choose", "listen"];
+  if (it.art) t.push("article");
+  t.push(it.phrase ? "build" : "type");
+  return t;
+}
+let toastT = null;
+function toast(msg) {
+  let el = document.getElementById("toast");
+  if (!el) { el = document.createElement("div"); el.id = "toast"; el.className = "toast"; el.setAttribute("role", "status"); document.body.appendChild(el); }
+  el.textContent = msg; el.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => el.hidden = true, 2600);
+}
+
+// ================= Sessions =================
+const app = document.getElementById("app");
+let screen = S.onboarded ? "home" : "welcome";
+let ses = null;
+let confirmReset = false;
+
+function startMission(li, g) {
+  const G = groups(li)[g], q = [];
+  if (g === 0) q.push({ type: "tip", li });
+  G.forEach(id => q.push({ type: "intro", id }));
+  shuffle(G).forEach(id => q.push({ type: "choose", id }));
+  shuffle(G).forEach(id => q.push({ type: "listen", id }));
+  shuffle(G).forEach(id => { if (ITEMS[id].art) q.push({ type: "article", id }); });
+  shuffle(G).forEach(id => q.push({ type: ITEMS[id].phrase ? "build" : "type", id }));
+  const ph = G.filter(id => ITEMS[id].phrase);
+  q.push({ type: "say", id: pick(ph.length ? ph : G) });
+  begin({ kind: "lesson", li, g, q, title: `Урок ${li + 1} · миссия ${g + 1} из ${groups(li).length}` });
+}
+function startReview() {
+  const ids = dueIds().slice(0, 12);
+  if (!ids.length) return;
+  const q = shuffle(ids.map(id => {
+    const ts = typesFor(ITEMS[id]), box = S.items[id].box || 0;
+    return { type: box <= 1 ? pick(ts) : pick(ts.slice(2).concat("listen")), id };
+  }));
+  q.push({ type: "say", id: pick(ids) });
+  begin({ kind: "review", q, title: "Повторение" });
+}
+function startHard() {
+  const q = [];
+  hardIds().forEach(id => { const ts = typesFor(ITEMS[id]); q.push({ type: "listen", id }, { type: ts[ts.length - 1], id }); });
+  if (!q.length) return;
+  begin({ kind: "hard", q: shuffle(q), title: "Работа над ошибками" });
+}
+function startBoss() {
+  const ids = shuffle(Object.keys(ITEMS)).slice(0, BOSS_Q);
+  const q = ids.map(id => ({ type: pick(typesFor(ITEMS[id])), id, boss: true }));
+  S.boss.tries++; save();
+  begin({ kind: "boss", q, title: "Финальная битва: Страж Вены", lives: 3, hp: BOSS_Q });
+}
+function begin(o) {
+  ensureDaily();
+  ses = Object.assign({ i: 0, mistakes: new Set(), promoted: new Set(), right: 0, wrongN: 0, answered: false, retries: {}, gained: 0,
+    lvl0: level().L, rank0: S.rankMax, tiers0: tiersOpen(), skills0: Object.fromEntries(SKILLS.map(s => [s.k, skillLvl(s.k)])), dailyNew: [], said: new Set() }, o);
+  ses.total = ses.q.length;
+  screen = "session";
+  render();
+}
+
+function grade(task, ok) {
+  const id = task.id, first = !task.retry;
+  const st = S.items[id] || (S.items[id] = { box: 0, due: dayNum(), wrong: 0 });
+  const k = SKILL_OF[task.type];
+  const c = S.daily.c;
+  if (first) { S.hist.push(ok ? 1 : 0); if (S.hist.length > 100) S.hist.shift(); }
+  if (ok) {
+    ses.right++;
+    addXp(first ? 10 : 5);
+    train(k, first ? 3 : 1);
+    c.correct++; c.run++; c.runMax = Math.max(c.runMax, c.run);
+    if (task.type === "listen" && first) c.listenOk++;
+    if (ses.kind === "review" && first) c.reviews++;
+    if (!ses.mistakes.has(id) && !ses.promoted.has(id)) {
+      st.box = Math.min((st.box || 0) + 1, 5);
+      st.due = dayNum() + INTERVALS[st.box];
+      ses.promoted.add(id);
+    }
+    if (ses.kind === "boss") ses.hp--;
+  } else {
+    ses.wrongN++;
+    train(k, -1);
+    c.run = 0;
+    ses.mistakes.add(id);
+    st.box = 1; st.due = dayNum() + 1; st.wrong = (st.wrong || 0) + 1;
+    if (ses.kind === "boss") ses.lives--;
+    else {
+      ses.retries[id] = (ses.retries[id] || 0) + 1;
+      if (ses.retries[id] <= 2) {
+        const ts = typesFor(ITEMS[id]);
+        let t = ses.retries[id] === 1 ? "choose" : ts[ts.length - 1];
+        if (t === task.type) t = "listen";
+        ses.q.push({ type: t, id, retry: true });
+        ses.total++;
+      }
+    }
+  }
+  checkDaily(); updateRank(); save();
+}
+
+function finishSession() {
+  const c = S.daily.c;
+  if (ses.kind === "boss") {
+    ses.won = ses.lives > 0;
+    if (ses.won && !S.boss.won) { S.boss.won = true; addXp(300); }
+  } else {
+    addXp(20);
+    if (ses.kind === "lesson") {
+      const before = lessonDone(ses.li);
+      S.lessons[ses.li] = { m: Math.max(missionsDone(ses.li), ses.g + 1) };
+      if (!before && lessonDone(ses.li)) { addXp(50); ses.lessonFinished = true; }
+    }
+  }
+  c.missions++;
+  markActive();
+  checkDaily(); updateRank(); save();
+  screen = "done";
+}
+function next() {
+  ses.i++;
+  ses.answered = false;
+  if (ses.i >= ses.q.length || (ses.kind === "boss" && ses.lives <= 0)) finishSession();
+  render();
+}
+
+// ================= Time tracking =================
+let lastAct = Date.now();
+["pointerdown", "keydown"].forEach(e => document.addEventListener(e, () => lastAct = Date.now()));
+let tick = 0;
+setInterval(() => {
+  if (screen !== "session" || document.visibilityState !== "visible" || Date.now() - lastAct > 90000) return;
+  const d = dayNum();
+  S.days[d] = (S.days[d] || 0) + 1;
+  tick++;
+  if (tick % 60 === 0) { checkDaily(); if (todaySec() >= 600) markActive(); save(true); }
+  else if (tick % 10 === 0) save(false);
+  const t = document.getElementById("timer");
+  if (t) t.textContent = mmss(todaySec()) + " / " + GOAL_MIN + ":00";
+}, 1000);
+
+// ================= Render =================
+function render() {
+  document.documentElement.style.setProperty("--accent", colorOf(S.color));
+  ({ welcome: renderWelcome, home: renderHome, session: renderTask, done: renderDone, help: renderHelp, parent: renderParent })[screen]();
+  window.scrollTo(0, 0);
+}
+const on = (id, f) => { const el = document.getElementById(id); if (el) el.onclick = f; };
+
+function renderWelcome() {
+  let col = S.color;
+  app.innerHTML = `
+  <div class="panel" style="gap:16px">
+    <div class="label">Сезон 1 · Старт</div>
+    <h1>Привет, ${esc(S.name)}!</h1>
+    <p>Это твоя игра для немецкого. Здесь ты с нуля дойдёшь до первого экзамена, а потом и до учёбы в Вене.</p>
+    <div class="help">
+      <p><b>Миссии по 4–5 минут.</b> За правильные ответы получаешь опыт и уровни.</p>
+      <p><b>5 навыков:</b> слова, аудирование, грамматика, письмо и произношение. Каждый прокачивается отдельно.</p>
+      <p><b>Ошибки возвращаются.</b> Что не получилось, придёт снова: в конце миссии и на следующий день.</p>
+      <p><b>Цель дня: 30 минут.</b> Плюс 3 задания дня за бонусный опыт.</p>
+      <p><b>Ты тестировщик.</b> Это первая версия. Всё, что непонятно, скучно или сломалось, пиши через кнопку «Отзыв». Мы всё доработаем.</p>
+    </div>
+    <label class="small muted" for="nm">Как тебя называть в игре</label>
+    <input class="text" id="nm" maxlength="20" value="${esc(S.name)}">
+    <div class="small muted">Твой цвет</div>
+    <div class="swatches">${COLORS.slice(0, 3).map(c => `<button data-c="${c.id}" class="${c.id === col ? "on" : ""}" style="background:${c.c}" aria-label="${c.n}"></button>`).join("")}</div>
+    <div class="small muted">Ещё три цвета откроются за награды сезона.</div>
+    <button class="btn primary big" id="go">Поехали!</button>
+  </div>`;
+  app.querySelectorAll(".swatches button").forEach(b => b.onclick = () => {
+    col = b.dataset.c; app.querySelectorAll(".swatches button").forEach(x => x.classList.toggle("on", x === b));
+    document.documentElement.style.setProperty("--accent", colorOf(col));
+  });
+  on("go", () => {
+    S.name = document.getElementById("nm").value.trim() || "Игрок";
+    S.color = col; S.onboarded = true; save();
+    screen = "home"; render();
+  });
+}
+
+function nextAction() {
+  const due = dueIds().length, nl = nextLesson();
+  if (due > 0) return { label: "Повторение", sub: `${Math.min(12, due)} слов ждут повторения`, fn: startReview };
+  if (nl !== -1) { const m = missionsDone(nl); return { label: `Урок ${nl + 1}: ${LESSONS[nl].title}`, sub: `Миссия ${m + 1} из ${groups(nl).length}`, fn: () => startMission(nl, m) }; }
+  if (!S.boss.won) return { label: "Финальная битва", sub: "Страж Вены ждёт", fn: startBoss };
+  if (hardIds().length) return { label: "Работа над ошибками", sub: "Трудные слова", fn: startHard };
+  return null;
+}
+
+function renderHome() {
+  ensureDaily();
+  const lv = level(), R = RANKS[S.rankMax || 0], acc = accuracy();
+  const min = Math.floor(todaySec() / 60);
+  const na = nextAction(), nl = nextLesson(), due = dueIds().length, hard = hardIds().length;
+  const noVoice = !("speechSynthesis" in window) || (voicesChecked && !voice);
+  const title = S.eq.title || "Новобранец";
+  app.innerHTML = `
+  ${noVoice ? `<div class="notice">В этом браузере нет немецкого голоса. Открой игру в Chrome или Safari, чтобы слышать произношение.</div>` : ""}
+  <section class="panel" aria-label="Профиль">
+    <div class="player">
+      <div class="av ${S.eq.frame ? "f-" + S.eq.frame : ""}" aria-hidden="true">${esc(S.name.charAt(0).toUpperCase())}</div>
+      <div class="pname"><h1>${esc(S.name)}</h1><div class="ptitle">${esc(title)}</div>
+        <div style="margin-top:6px"><span class="rank" style="--rc:${R.c}">${R.n}</span></div></div>
+      <div class="lvl" title="Уровень"><div><small>УР.</small><b>${lv.L}</b></div></div>
+    </div>
+    <div class="spread small"><span class="muted">Опыт до уровня ${lv.L + 1}</span><span style="font-variant-numeric:tabular-nums">${lv.rem} / ${lv.need}</span></div>
+    <div class="xpbar"><i style="width:${Math.round(lv.rem / lv.need * 100)}%"></i></div>
+    <div class="stats3">
+      <div class="stat"><b>${min}<span style="font-size:.8rem;color:var(--muted)">/${GOAL_MIN}</span></b><span>минут сегодня</span></div>
+      <div class="stat"><b>${streakNow()}</b><span>дней подряд · заморозок ${S.streak.freezes}</span></div>
+      <div class="stat"><b>${S.hist.length >= 20 ? acc + "%" : "—"}</b><span>точность</span></div>
+    </div>
+  </section>
+
+  <section class="play">
+    ${na ? `<button class="btn primary big" id="play">Играть: ${esc(na.label)}</button><div class="small muted" style="text-align:center">${esc(na.sub)}</div>`
+         : `<div class="panel"><b>Сезон пройден, ${esc(S.name)}!</b><p class="muted">Новые уроки скоро. Пока повторяй слова каждый день.</p></div>`}
+    ${due > 0 && nl !== -1 ? `<button class="btn" id="skiprev">Сразу к новому уроку ${nl + 1}</button>` : ""}
+  </section>
+
+  <section class="panel" aria-label="Задания дня">
+    <div class="spread"><h2>Задания дня</h2><span class="small muted">${S.daily.done.length} из 3</span></div>
+    ${S.daily.tasks.map(id => {
+      const t = DAILY_POOL.find(x => x.id === id), v = Math.min(dailyVal(t), t.n), done = S.daily.done.includes(id);
+      return `<div class="task ${done ? "done" : ""}"><span>${esc(t.t)}</span><span class="chip">${done ? "готово" : "+" + DAILY_XP}</span><div class="bar"><i style="width:${Math.round(v / t.n * 100)}%"></i></div></div>`;
+    }).join("")}
+  </section>
+
+  <section class="panel" aria-label="Навыки">
+    <div class="spread"><h2>Навыки</h2><span class="small muted">уровни 1–10</span></div>
+    ${SKILLS.map(s => { const l = skillLvl(s.k); return `<div class="skill"><span class="nm">${s.n}${skillCooling(s.k) ? "<em>остывает, потренируй</em>" : ""}</span>
+      <div class="pips">${Array.from({ length: 10 }, (_, i) => `<i class="${i < l ? "on" : ""}"></i>`).join("")}</div><b>${l}</b></div>`; }).join("")}
+    <p class="small muted">Навык растёт от правильных ответов и остывает, если его не тренировать 3 дня. Как и слова в голове.</p>
+  </section>
+
+  <section class="panel" aria-label="Сезон 1">
+    <div class="spread"><h2>Сезон 1 · Старт</h2><span class="small muted">${LESSONS.filter((_, i) => lessonDone(i)).length} из ${LESSONS.length} уроков</span></div>
+    <div class="path">
+      ${LESSONS.map((L, li) => {
+        const k = groups(li).length, m = missionsDone(li), done = m >= k, open = unlocked(li), cur = li === nl;
+        return `<button class="node ${done ? "done" : ""} ${cur ? "current" : ""} ${open ? "" : "locked"}" data-li="${li}" ${open ? "" : "disabled"}>
+          <span class="dot">${done ? "✓" : li + 1}</span>
+          <span class="info"><b>${esc(L.title)}</b><span class="small muted">${esc(L.de)} · ${L.items.length} слов</span>
+            <span class="mp">${Array.from({ length: k }, (_, i) => `<i class="${i < m ? "on" : ""}"></i>`).join("")}</span></span>
+          <span class="tag">${done ? "пройден" : cur ? "сейчас" : open ? "открыт" : "закрыт"}</span>
+        </button>`;
+      }).join("")}
+      <button class="node boss ${S.boss.won ? "done" : ""} ${bossOpen() ? "" : "locked"}" id="bossnode" ${bossOpen() ? "" : "disabled"}>
+        <span class="dot">${S.boss.won ? "✓" : "★"}</span>
+        <span class="info"><b>Финальная битва: Страж Вены</b><span class="small muted">${BOSS_Q} вопросов по всему сезону, 3 жизни</span></span>
+        <span class="tag">${S.boss.won ? "победа" : bossOpen() ? "открыта" : "закрыта"}</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Награды сезона">
+    <div class="spread"><h2>Награды сезона</h2><span class="small muted">новая каждые ${TIER_XP} опыта</span></div>
+    <div class="spread small"><span class="muted">Опыт сезона</span><span style="font-variant-numeric:tabular-nums">${S.seasonXp} / ${TIER_XP * 12}</span></div>
+    <div class="xpbar"><i style="width:${Math.min(100, Math.round(S.seasonXp / (TIER_XP * 12) * 100))}%"></i></div>
+    <div class="track">${REWARDS.map((rw, i) => {
+      const open = rewardOpen(rw), R2 = RARITY[rw.r];
+      const equipped = (rw.kind === "title" && S.eq.title === rw.v) || (rw.kind === "frame" && S.eq.frame === rw.v) || (rw.kind === "color" && S.color === rw.v);
+      return `<button class="rw ${open ? "" : "lockedrw"} ${equipped ? "on" : ""}" style="--rc:${R2.c}" data-rw="${i}" ${open ? "" : "disabled"}>
+        <span class="tier">${rw.t === "boss" ? "за победу" : "ур. сезона " + rw.t}</span><b>${esc(rewardName(rw))}</b><span>${R2.n}${equipped ? " · надето" : open ? " · нажми, чтобы надеть" : ""}</span></button>`;
+    }).join("")}</div>
+  </section>
+
+  <section class="panel" aria-label="Тренировки">
+    <h2>Тренировки</h2>
+    <div class="row">
+      <button class="btn" id="go-review" ${due ? "" : "disabled"}>Повторение${due ? " · " + due : ""}</button>
+      <button class="btn" id="go-hard" ${hard ? "" : "disabled"}>Работа над ошибками${hard ? " · " + hard : ""}</button>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <button class="btn" id="fbk">Оставить отзыв</button>
+    <button class="btn ghost" id="help">Как это работает</button>
+    ${isOwner ? `<button class="btn ghost" id="parent">Для родителя</button>` : ""}
+    <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="slow" ${S.slow ? "checked" : ""}> Медленная озвучка</label>
+    <span class="row">${confirmReset
+      ? `Удалить весь прогресс? <button class="btn" id="reset-yes">Да, удалить</button><button class="btn ghost" id="reset-no">Отмена</button>`
+      : `<button class="btn ghost" id="reset">Сбросить прогресс</button>`}</span>
+  </footer>`;
+
+  on("play", () => na && na.fn());
+  on("skiprev", () => startMission(nl, missionsDone(nl)));
+  on("go-review", startReview);
+  on("go-hard", startHard);
+  on("bossnode", () => bossOpen() && startBoss());
+  on("fbk", () => openFeedback("Главный экран"));
+  on("help", () => { screen = "help"; render(); });
+  on("parent", () => { screen = "parent"; render(); });
+  on("reset", () => { confirmReset = true; renderHome(); });
+  on("reset-no", () => { confirmReset = false; renderHome(); });
+  on("reset-yes", () => { const keep = { name: S.name, color: "blue", onboarded: true, slow: S.slow, fbq: S.fbq }; S = Object.assign(DEF(), keep); save(); confirmReset = false; render(); });
+  document.getElementById("slow").onchange = e => { S.slow = e.target.checked; save(); };
+  app.querySelectorAll(".node[data-li]").forEach(b => b.onclick = () => {
+    const li = +b.dataset.li; if (!unlocked(li)) return;
+    startMission(li, lessonDone(li) ? 0 : missionsDone(li));
+  });
+  app.querySelectorAll(".rw[data-rw]").forEach(b => b.onclick = () => {
+    const rw = REWARDS[+b.dataset.rw]; if (!rewardOpen(rw)) return;
+    if (rw.kind === "title") S.eq.title = S.eq.title === rw.v ? null : rw.v;
+    if (rw.kind === "frame") S.eq.frame = S.eq.frame === rw.v ? null : rw.v;
+    if (rw.kind === "color") S.color = S.color === rw.v ? "blue" : rw.v;
+    save(); render();
+  });
+}
+
+function renderHelp() {
+  app.innerHTML = `
+  <div class="topbar"><button class="btn ghost" id="back">← На базу</button></div>
+  <h1>Как это работает</h1>
+  <div class="help">
+    <div class="panel"><h3>Каждый день</h3><p>Нажми «Играть». Игра сама выберет, что делать: сначала повторение старых слов, потом новая миссия. Цель: 30 минут в день.</p></div>
+    <div class="panel"><h3>Миссия</h3><p>4 новых слова или фразы. Сначала слушаешь и повторяешь вслух, потом выбираешь перевод, узнаёшь на слух, угадываешь артикль и пишешь сам. В конце произносишь фразу вслух.</p></div>
+    <div class="panel"><h3>Опыт и уровни</h3><p>+10 опыта за верный ответ с первой попытки, +5 со второй. +20 за миссию, +50 за урок и за каждое задание дня.</p></div>
+    <div class="panel"><h3>Ошибки</h3><p>Ошибка не страшна. Слово вернётся в конце миссии и завтра. Если ответил правильно, слово вернётся через 1, 3, 7, 14 и 30 дней. Так оно попадает в долгую память.</p></div>
+    <div class="panel"><h3>Ранги</h3><p>Бронза, Серебро, Золото, Платина, Алмаз, Элита, Чемпион. Ранг зависит от уровня и от точности ответов за последние 100 заданий. Ранг не падает. Чемпиона дают только за победу над Стражем Вены.</p></div>
+    <div class="panel"><h3>Серия дней</h3><p>День засчитан, если пройдена хотя бы одна миссия или 10 минут занятий. Есть 2 заморозки: можно пропустить день и не потерять серию. За каждые 7 дней подряд заморозка возвращается.</p></div>
+    <div class="panel"><h3>Немецкие буквы</h3><p>ä, ö, ü, ß есть на кнопках под полем ответа. Если пишешь ae вместо ä, ответ засчитается, но лучше привыкать к настоящим буквам.</p></div>
+    <div class="panel"><h3>Цвета артиклей</h3><p><span class="art-der">der</span> мужской, <span class="art-die">die</span> женский, <span class="art-das">das</span> средний род. Учи слово сразу с артиклем.</p></div>
+    <div class="panel"><h3>Что-то непонятно?</h3><p>Нажми «Отзыв» в любой момент, даже посреди миссии. Напиши, что не так. Слово, на котором ты был, приложится само.</p></div>
+  </div>
+  <button class="btn primary big" id="back2">Понятно</button>`;
+  on("back", () => { screen = "home"; render(); });
+  on("back2", () => { screen = "home"; render(); });
+}
+
+// ---------- Session screens ----------
+function sessionShell(inner) {
+  const pct = Math.round(ses.i / ses.total * 100);
+  const boss = ses.kind === "boss";
+  app.innerHTML = `
+  <div class="topbar">
+    <button class="btn ghost" id="quit" aria-label="Выйти на базу">✕</button>
+    <div class="progress" aria-label="Прогресс миссии"><i style="width:${pct}%"></i></div>
+    <span class="timer" id="timer">${mmss(todaySec())} / ${GOAL_MIN}:00</span>
+    <button class="btn ghost" id="fbk" aria-label="Оставить отзыв">Отзыв</button>
+  </div>
+  ${boss ? `<div class="bossbar"><div class="spread"><b>Страж Вены</b><div class="hearts" aria-label="Жизни: ${ses.lives}">${[0, 1, 2].map(i => heart(i < ses.lives)).join("")}</div></div>
+    <div class="hp" aria-label="Здоровье стража"><i style="width:${Math.round(ses.hp / BOSS_Q * 100)}%"></i></div></div>` : ""}
+  <div class="card" id="card">${inner}</div>
+  <div id="fb"></div>`;
+  on("quit", () => { if ("speechSynthesis" in window) speechSynthesis.cancel(); screen = "home"; render(); });
+  on("fbk", () => { const t = ses.q[ses.i]; openFeedback(ses.title + (t && t.id ? " · " + ITEMS[t.id].de + " (" + t.type + ")" : "")); });
+}
+const speakBtns = de => `<div class="speak"><button class="btn" data-say="${esc(de)}">${ICON_SPEAK} Слушать</button><button class="btn" data-say="${esc(de)}" data-slow="1">${ICON_SLOW} Медленно</button></div>`;
+function wireSpeak(root = app) { root.querySelectorAll("[data-say]").forEach(b => b.onclick = () => speak(b.dataset.say, !!b.dataset.slow)); }
+
+function distractors(it, field, n = 3) {
+  const nl = nextLesson(), maxLi = Math.max(it.li, nl === -1 ? LESSONS.length : nl);
+  const same = shuffle(Object.values(ITEMS).filter(x => x.li === it.li && x.id !== it.id));
+  const other = shuffle(Object.values(ITEMS).filter(x => x.li !== it.li && x.li <= maxLi));
+  const out = [], seen = new Set([it[field]]);
+  for (const x of same.concat(other)) { if (!seen.has(x[field])) { seen.add(x[field]); out.push(x); } if (out.length >= n) break; }
+  return out;
+}
+
+function renderTask() {
+  const t = ses.q[ses.i];
+  const it = ITEMS[t.id];
+
+  if (t.type === "tip") {
+    const L = LESSONS[t.li];
+    sessionShell(`<div class="kind">Урок ${t.li + 1} · ${esc(L.de)}</div><h2>${esc(L.title)}</h2>
+      <div class="tip">${L.tip.map(p => `<p>${esc(p)}</p>`).join("")}</div>
+      <button class="btn primary big" id="ok">Понятно, в бой</button>`);
+    on("ok", next);
+    return;
+  }
+
+  if (t.type === "intro") {
+    if (!S.items[it.id]) { S.items[it.id] = { box: 0, due: dayNum(), wrong: 0 }; save(); }
+    const artName = { der: "мужской род", die: it.de === "die Eltern" ? "множественное число" : "женский род", das: "средний род" };
+    sessionShell(`<div class="kind">Новое слово</div>
+      <div class="word">${deHtml(it)}</div>
+      <div class="ru">${esc(it.ru)}</div>
+      <div class="muted">Читается: [${esc(it.say)}]</div>
+      ${it.rule ? `<div class="rule">${esc(it.rule)}</div>` : ""}
+      ${it.art ? `<div class="rule"><b class="art-${it.art}">${it.art}</b> · ${artName[it.art]}</div>` : ""}
+      ${speakBtns(it.de)}
+      <div class="muted">Послушай и повтори вслух 2–3 раза.</div>
+      <button class="btn primary big" id="ok">Дальше</button>`);
+    wireSpeak(); on("ok", next); speak(it.de);
+    return;
+  }
+
+  if (t.type === "say") {
+    sessionShell(`<div class="kind">Скажи вслух</div>
+      <div class="word mid">${deHtml(it)}</div>
+      <div class="ru">${esc(it.ru)}</div>
+      <div class="muted">Читается: [${esc(it.say)}]</div>
+      ${speakBtns(it.de)}
+      <div class="rule">Послушай, потом скажи вслух 3 раза. Старайся звучать как диктор. Никто не слышит, так что не стесняйся.</div>
+      <button class="btn primary big" id="said">Я сказал вслух 3 раза</button>
+      <button class="btn ghost" id="skip">Пропустить (без опыта)</button>`);
+    wireSpeak(); speak(it.de);
+    on("said", () => {
+      if (!ses.said.has(it.id)) { ses.said.add(it.id); addXp(5); train("speak", 3); S.daily.c.speak++; checkDaily(); save(); toast("+5 опыта · Произношение"); }
+      next();
+    });
+    on("skip", next);
+    return;
+  }
+
+  if (t.type === "choose" || t.type === "listen") {
+    const listen = t.type === "listen";
+    const opts = shuffle([it].concat(distractors(it, listen ? "de" : "ru")));
+    sessionShell(`<div class="kind">${listen ? "Послушай и выбери слово" : "Выбери перевод"}</div>
+      ${listen ? `<button class="bigspeak" data-say="${esc(it.de)}" aria-label="Послушать ещё раз">${ICON_SPEAK}</button>
+                  <button class="btn ghost" data-say="${esc(it.de)}" data-slow="1" style="align-self:center">Медленнее</button>`
+               : `<div class="word">${deHtml(it)}</div>${speakBtns(it.de)}`}
+      <div class="opts">${opts.map((o, k) => `<button class="opt" data-id="${o.id}"><kbd>${k + 1}</kbd><span>${listen ? deHtml(o) : esc(o.ru)}</span></button>`).join("")}</div>`);
+    wireSpeak(); speak(it.de);
+    app.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+      if (ses.answered) return;
+      const ok = b.dataset.id === it.id, chosen = ITEMS[b.dataset.id];
+      app.querySelectorAll(".opt").forEach(x => { if (x.dataset.id === it.id) x.classList.add("right"); x.disabled = true; });
+      if (!ok) b.classList.add("wrong");
+      answer(t, ok, ok ? "" : `Ты выбрал: ${chosen.de} = «${chosen.ru}».`);
+    });
+    return;
+  }
+
+  if (t.type === "article") {
+    sessionShell(`<div class="kind">Какой артикль?</div>
+      <div class="word">___ ${esc(it.noun)}</div>
+      <div class="ru">${esc(it.ru)}</div>
+      <div class="arts">${["der", "die", "das"].map(a => `<button class="opt" data-a="${a}">${a}</button>`).join("")}</div>`);
+    app.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+      if (ses.answered) return;
+      const ok = b.dataset.a === it.art;
+      app.querySelectorAll(".opt").forEach(x => { if (x.dataset.a === it.art) x.classList.add("right"); x.disabled = true; });
+      if (!ok) b.classList.add("wrong");
+      answer(t, ok, ok ? "" : `Род в немецком часто не совпадает с русским. Запоминай слово целиком: ${it.de}.`);
+    });
+    return;
+  }
+
+  if (t.type === "type") {
+    sessionShell(`<div class="kind">Напиши по-немецки</div>
+      <div class="word mid">${esc(it.ru)}</div>
+      ${it.art ? `<div class="muted">Не забудь артикль: der, die или das.</div>` : ""}
+      <input class="answer" id="ans" lang="de" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Пиши здесь…">
+      <div class="keys">${["ä", "ö", "ü", "ß"].map(k => `<button data-k="${k}" type="button">${k}</button>`).join("")}</div>
+      <div class="row"><button class="btn primary" id="check" style="flex:1">Проверить</button><button class="btn" id="dunno">Не помню</button></div>`);
+    const inp = document.getElementById("ans");
+    inp.focus();
+    app.querySelectorAll("[data-k]").forEach(b => b.onclick = () => { const p = inp.selectionStart ?? inp.value.length; inp.value = inp.value.slice(0, p) + b.dataset.k + inp.value.slice(p); inp.focus(); inp.setSelectionRange(p + 1, p + 1); });
+    const check = giveUp => {
+      if (ses.answered) return;
+      if (!giveUp && !inp.value.trim()) return;
+      const v = inp.value;
+      let ok = false, note = "";
+      if (giveUp) note = "Ничего страшного. Посмотри, послушай, и это слово скоро вернётся.";
+      else if (norm(v) === norm(it.de)) ok = true;
+      else if (loose(v) === loose(it.de)) { ok = true; note = "Засчитано. Но буквы ä, ö, ü, ß лучше писать точно: кнопки под полем."; }
+      else if (it.noun && norm(v) === norm(it.noun)) note = "Слово верное, но не хватает артикля.";
+      else note = `Ты написал: «${v}».`;
+      inp.disabled = true;
+      answer(t, ok, note);
+    };
+    on("check", () => check(false));
+    on("dunno", () => check(true));
+    inp.onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); check(false); } };
+    return;
+  }
+
+  if (t.type === "build") {
+    const words = it.de.split(" ");
+    let order = shuffle(words.map((w, k) => k));
+    if (order.every((v, k) => v === k) && words.length > 1) order = order.reverse();
+    const picked = [];
+    sessionShell(`<div class="kind">Собери фразу по-немецки</div>
+      <div class="word mid">${esc(it.ru)}</div>
+      <div class="built" id="built" aria-label="Твоя фраза"></div>
+      <div class="tiles" id="tiles">${order.map(k => `<button class="tile" data-k="${k}">${esc(words[k])}</button>`).join("")}</div>
+      <button class="btn primary big" id="check" disabled>Проверить</button>`);
+    const built = document.getElementById("built"), chk = document.getElementById("check");
+    const draw = () => {
+      built.innerHTML = picked.map((k, p) => `<button class="tile" data-p="${p}">${esc(words[k])}</button>`).join("");
+      app.querySelectorAll("#tiles .tile").forEach(b => b.classList.toggle("used", picked.includes(+b.dataset.k)));
+      built.querySelectorAll(".tile").forEach(b => b.onclick = () => { if (ses.answered) return; picked.splice(+b.dataset.p, 1); draw(); });
+      chk.disabled = picked.length !== words.length;
+    };
+    app.querySelectorAll("#tiles .tile").forEach(b => b.onclick = () => { if (ses.answered || picked.includes(+b.dataset.k)) return; picked.push(+b.dataset.k); draw(); });
+    chk.onclick = () => {
+      if (ses.answered) return;
+      const mine = picked.map(k => words[k]).join(" "), ok = norm(mine) === norm(it.de);
+      answer(t, ok, ok ? "" : `Ты собрал: «${mine}». В немецком глагол обычно стоит на втором месте.`);
+    };
+    return;
+  }
+}
+
+const PRAISE = ["Верно!", "Точно!", "В точку!", "Так держать!", "Отлично, {n}!", "Есть!", "Красиво, {n}!"];
+function answer(task, ok, note = "") {
+  ses.answered = true;
+  const it = ITEMS[task.id];
+  const xp0 = S.xp;
+  grade(task, ok);
+  const got = S.xp - xp0;
+  const fb = document.getElementById("fb");
+  const bossOver = ses.kind === "boss" && ses.lives <= 0;
+  fb.innerHTML = `<div class="feedback ${ok ? "ok" : "bad"}">
+    <div class="spread"><b class="t">${ok ? esc(pick(PRAISE).replace("{n}", S.name)) : ses.kind === "boss" ? "Минус жизнь!" : "Не так. Слово вернётся позже"}</b>${got > 0 ? `<span class="plus">+${got} опыта</span>` : ""}</div>
+    <div><span class="word mid" style="font-size:1.15rem">${deHtml(it)}</span> · ${esc(it.ru)}</div>
+    <div class="muted">Читается: [${esc(it.say)}]</div>
+    ${note ? `<div>${esc(note)}</div>` : ""}
+    <div class="speak"><button class="btn" data-say="${esc(it.de)}">${ICON_SPEAK} Слушать</button></div>
+    <button class="btn primary big" id="next">${bossOver ? "Итог битвы" : "Дальше"}</button>
+  </div>`;
+  wireSpeak(fb);
+  speak(it.de);
+  const nb = document.getElementById("next");
+  nb.onclick = next;
+  nb.focus({ preventScroll: true });
+  fb.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  if (ses.kind === "boss") {
+    const hp = app.querySelector(".hp i"); if (hp) hp.style.width = Math.round(ses.hp / BOSS_Q * 100) + "%";
+    const hs = app.querySelector(".hearts"); if (hs) hs.innerHTML = [0, 1, 2].map(i => heart(i < ses.lives)).join("");
+  }
+}
+
+function renderDone() {
+  const total = ses.right + ses.wrongN;
+  const pct = total ? Math.round(ses.right / total * 100) : 100;
+  const lv = level(), wins = [];
+  if (lv.L > ses.lvl0) wins.push({ t: `Новый уровень: ${lv.L}!`, s: "Так держать", c: "var(--xp)" });
+  if (S.rankMax > ses.rank0) { const R = RANKS[S.rankMax]; wins.push({ t: `Новый ранг: ${R.n}!`, s: "Ранг больше не упадёт", c: R.c }); }
+  SKILLS.forEach(s => { const l = skillLvl(s.k); if (l > ses.skills0[s.k]) wins.push({ t: `${s.n}: уровень ${l}`, s: "Навык прокачан", c: "var(--accent)" }); });
+  REWARDS.forEach(rw => { if (rw.t !== "boss" && rw.t > ses.tiers0 && rw.t <= tiersOpen()) wins.push({ t: "Награда: " + rewardName(rw), s: RARITY[rw.r].n + " · надень на базе", c: RARITY[rw.r].c }); });
+  ses.dailyNew.forEach(t => wins.push({ t: "Задание дня выполнено", s: t + " · +" + DAILY_XP + " опыта", c: "var(--ok)" }));
+  if (ses.lessonFinished) wins.push({ t: "Урок пройден! +50 опыта", s: LESSONS[ses.li].title, c: "var(--ok)" });
+
+  let head, sub;
+  if (ses.kind === "boss") {
+    head = ses.won ? `${esc(S.name)}, Страж повержен!` : "Страж оказался сильнее";
+    sub = ses.won ? "Сезон 1 пройден. Ты готов к уровню A1. Титул «Победитель Стража» уже в наградах." : "Ошибки ушли в повторение. Повтори их и попробуй снова, жизни восстановлены.";
+  } else {
+    head = `${esc(S.name)}, миссия выполнена!`;
+    sub = ses.mistakes.size ? `Слова с ошибками (${ses.mistakes.size}) вернутся завтра на повторение.` : "Без ошибок! Эти слова вернутся через несколько дней, чтобы закрепиться.";
+  }
+  const min = Math.floor(todaySec() / 60);
+  let nextBtn = "";
+  let nextFn = null;
+  if (ses.kind === "lesson" && ses.g + 1 < groups(ses.li).length) { nextBtn = `Следующая миссия`; nextFn = () => startMission(ses.li, ses.g + 1); }
+  else { const na = nextAction(); if (na && !(ses.kind === "boss" && !ses.won && na.fn === startBoss)) { nextBtn = "Дальше: " + na.label; nextFn = na.fn; } }
+  const ctx = ses.title;
+  app.innerHTML = `
+  <div class="card summary">
+    <div class="kind">${esc(ses.title)}</div>
+    <h1>${head}</h1>
+    <div class="big">+${ses.gained}</div><div class="muted">опыта · точность ${pct}% (${ses.right} из ${total})</div>
+    <p class="muted">${sub}</p>
+    ${wins.map(w => `<div class="win" style="--rc:${w.c}"><b>${esc(w.t)}</b><span class="small muted">${esc(w.s)}</span></div>`).join("")}
+    <p class="small muted">Сегодня ${min} из ${GOAL_MIN} минут${min >= GOAL_MIN ? ". Цель дня выполнена!" : ""}</p>
+    <div style="width:100%;display:flex;flex-direction:column;gap:8px">
+      <div class="small">Как тебе эта миссия?</div>
+      <div class="react" id="react">
+        <button data-v="hard">Сложно</button><button data-v="ok">Нормально</button><button data-v="fun">Круто</button>
+      </div>
+      <button class="btn ghost" id="more">Написать замечание</button>
+    </div>
+    ${nextFn ? `<button class="btn primary big" id="nextm">${esc(nextBtn)}</button>` : ""}
+    <button class="btn big" id="home">На базу</button>
+  </div>`;
+  app.querySelectorAll("#react button").forEach(b => b.onclick = () => {
+    if (b.classList.contains("on")) return;
+    app.querySelectorAll("#react button").forEach(x => x.classList.toggle("on", x === b));
+    saveFeedback({ kind: "reaction", value: b.textContent, ctx, acc: pct });
+    toast("Спасибо! Ответ сохранён.");
+  });
+  on("more", () => openFeedback(ctx));
+  on("nextm", nextFn);
+  on("home", () => { screen = "home"; render(); });
+}
+
+// ---------- Feedback ----------
+const FB_CATS = ["Непонятно", "Ошибка в игре", "Ошибка в слове", "Слишком сложно", "Слишком легко", "Скучно", "Нравится", "Идея"];
+function openFeedback(ctx) {
+  const m = document.getElementById("modal");
+  let cat = null;
+  m.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="Отзыв"><div class="panel">
+    <div class="spread"><h2>Отзыв</h2><button class="btn ghost" id="fb-x" aria-label="Закрыть">✕</button></div>
+    <p class="small muted">Пиши честно, ${esc(S.name)}. Мама и разработчик прочитают и доработают игру.</p>
+    <div class="chips" id="fb-cats">${FB_CATS.map(c => `<button data-c="${esc(c)}">${esc(c)}</button>`).join("")}</div>
+    <label class="small muted" for="fb-text">Что именно?</label>
+    <textarea id="fb-text" placeholder="Например: не понял, почему здесь die, а не der"></textarea>
+    <div class="small muted">Где ты сейчас: ${esc(ctx)}</div>
+    <button class="btn primary big" id="fb-send" disabled>Отправить</button>
+  </div></div>`;
+  const ta = document.getElementById("fb-text"), send = document.getElementById("fb-send");
+  const upd = () => send.disabled = !cat && !ta.value.trim();
+  m.querySelectorAll("#fb-cats button").forEach(b => b.onclick = () => { cat = cat === b.dataset.c ? null : b.dataset.c; m.querySelectorAll("#fb-cats button").forEach(x => x.classList.toggle("on", x.dataset.c === cat)); upd(); });
+  ta.oninput = upd;
+  ta.focus();
+  const close = () => { m.innerHTML = ""; };
+  document.getElementById("fb-x").onclick = close;
+  m.querySelector(".modal").onclick = e => { if (e.target.classList.contains("modal")) close(); };
+  send.onclick = () => {
+    saveFeedback({ kind: "comment", cat: cat || "", text: ta.value.trim().slice(0, 2000), ctx });
+    close();
+    toast(db ? "Отзыв отправлен. Спасибо!" : "Отзыв сохранён на этом устройстве. Спасибо!");
+  };
+}
+
+// ---------- Parent screen ----------
+async function renderParent() {
+  app.innerHTML = `<div class="topbar"><button class="btn ghost" id="back">← На базу</button></div><h1>Для родителя</h1><p class="muted">Загружаю…</p>`;
+  on("back", () => { screen = "home"; render(); });
+  if (!db) { app.querySelector("p").textContent = "Общий прогресс недоступен в этом окне. Откройте игру по ссылке на claude.ai."; return; }
+  let players = [], fbs = [];
+  try { players = (await db.collection("players").get()).docs.map(d => d.data()); } catch (e) {}
+  try { fbs = (await db.collection("feedback").orderBy("at", "desc").limit(100).get()).docs.map(d => d.data()); } catch (e) {}
+  if (screen !== "parent") return;
+  const today = dayNum();
+  const fmt = t => new Date(t).toLocaleString("ru-RU", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+  app.innerHTML = `
+  <div class="topbar"><button class="btn ghost" id="back">← На базу</button></div>
+  <h1>Для родителя</h1>
+  ${players.length ? "" : `<div class="panel"><p class="muted">Пока никто не занимался по этой ссылке.</p></div>`}
+  ${players.map(p => {
+    const st = Object.assign(DEF(), p.state || {});
+    const xpL = (() => { let L = 1, need = 100, rem = st.xp; while (rem >= need) { rem -= need; L++; need = 100 + (L - 1) * 40; } return L; })();
+    const days = Array.from({ length: 14 }, (_, i) => Math.round((st.days[today - 13 + i] || 0) / 60));
+    const maxM = Math.max(30, ...days);
+    const lessonsDone = LESSONS.filter((_, li) => ((st.lessons[li] && st.lessons[li].m) || 0) >= groups(li).length).length;
+    const acc = st.hist.length ? Math.round(st.hist.reduce((a, b) => a + b, 0) / st.hist.length * 100) : 0;
+    const worst = Object.keys(st.items).filter(id => ITEMS[id] && st.items[id].wrong > 0).sort((a, b) => st.items[b].wrong - st.items[a].wrong).slice(0, 10);
+    const sk = SKILLS.map(s => { const v = st.skills[s.k]; const pts = v ? v.p : 0; return s.n + ": " + SKILL_T.filter(t => pts >= t).length; }).join(" · ");
+    const week = days.slice(7).reduce((a, b) => a + b, 0);
+    return `<section class="panel">
+      <div class="spread"><h2>${esc(p.name || "Ученик")}</h2><span class="small muted">обновлено ${p.updatedAt ? fmt(p.updatedAt) : "—"}</span></div>
+      <div class="stats3">
+        <div class="stat"><b>${xpL}</b><span>уровень</span></div>
+        <div class="stat"><b>${lessonsDone}/${LESSONS.length}</b><span>уроков</span></div>
+        <div class="stat"><b>${st.hist.length >= 20 ? acc + "%" : "—"}</b><span>точность</span></div>
+      </div>
+      <div class="small muted">Минуты за 14 дней (зелёный = цель 30 минут) · за последние 7 дней: ${week} мин</div>
+      <div class="bars14">${days.map(m => `<i class="${m >= GOAL_MIN ? "goal" : ""}" style="height:${Math.round(m / maxM * 100)}%" title="${m} мин"></i>`).join("")}</div>
+      <div class="small">Ранг: ${RANKS[st.rankMax || 0].n} · Серия: ${st.streak.count} дн. · Битва: ${st.boss.won ? "победа" : st.boss.tries ? "попыток " + st.boss.tries : "ещё не открыта"}</div>
+      <div class="small">${sk}</div>
+      <div class="small"><b>Частые ошибки:</b> ${worst.length ? worst.map(id => esc(ITEMS[id].de) + " (" + st.items[id].wrong + ")").join(", ") : "пока нет"}</div>
+    </section>`;
+  }).join("")}
+  <section class="panel">
+    <h2>Отзывы (${fbs.length})</h2>
+    ${fbs.length ? fbs.map(f => `<div class="fbitem"><div class="small muted">${fmt(f.at)} · ${esc(f.who || "")} · ${esc(f.ctx || "")}</div>
+      <div>${f.kind === "reaction" ? "Оценка миссии: <b>" + esc(f.value) + "</b>" + (f.acc != null ? " · точность " + f.acc + "%" : "") : (f.cat ? "<b>" + esc(f.cat) + "</b> " : "") + esc(f.text || "")}</div></div>`).join("")
+      : `<p class="muted">Отзывов пока нет.</p>`}
+  </section>`;
+  on("back", () => { screen = "home"; render(); });
+}
+
+document.addEventListener("keydown", e => {
+  if (screen !== "session" || /INPUT|TEXTAREA/.test(e.target.tagName) || document.querySelector("#modal .modal")) return;
+  if (e.key === "Enter") { const b = document.getElementById("next") || document.getElementById("ok") || document.getElementById("said"); if (b) { e.preventDefault(); b.click(); } }
+  if (/^[1-4]$/.test(e.key) && !ses.answered) { const o = app.querySelectorAll(".opt")[+e.key - 1]; if (o) o.click(); }
+});
+
+render();
+</script>
