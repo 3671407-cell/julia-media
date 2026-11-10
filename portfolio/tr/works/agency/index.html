@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="tr" data-theme="a">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ZHAR ajansı</title>
+<meta name="description" content="İşinizi çok iyi biliyorsunuz ama satışlar gelmiyor. Uzmanları ürüne dönüştürüp sistemi kuruyoruz: huni, müşteri tabanlı bot, yapay zekâ asistanı. Proje analizi ve 24 saatte plan.">
+<link rel="stylesheet" href="../../../works/agency/zhar.css">
+<style>@font-face{font-family:Manrope;src:url(../../../fonts/Manrope.woff2) format('woff2');font-weight:200 800}@font-face{font-family:Unbounded;src:url(../../../fonts/Unbounded.ttf) format('truetype');font-weight:200 900}</style></head>
+<body>
+<!-- Версveя 4 (09.11.2026): пересборка по разбору рынка ve крveтveке Jarvis (аналveз-рынка-jarvis-09-11.md, крveтveка-ve-структура-jarvis-09-11.md) -->
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html"><span>ZHAR</span></a>
+    <nav class="nav" aria-label="Bölümler">
+      <a href="#system">Nasıl çözüyoruz</a>
+      <a href="#packs">Fiyatlar</a>
+      <a href="#cases">Çalışmalar</a>
+      <a href="#faq">Sorular</a>
+    </nav>
+    <a class="btn btn-sm" href="#quiz">24 saatte analiz</a>
+  </div>
+</header>
+
+<main>
+  <!-- 1. Первый экран: боль + результат + жveвое демо -->
+  <section class="wrap hero2">
+    <div>
+      <div class="badge reveal"><i></i>İşini bilen uzmanlar için</div>
+      <h1 class="reveal">Kötü satmıyorsunuz.<br>Sadece <em>sisteminiz</em> yok.</h1>
+      <p class="lead reveal">Uzmanlığınızı ürüne dönüştürüp bir satış sistemi kuruyoruz: huni, müşteri tabanlı bot ve yapay zekâ asistanı. İlk adım: projenizin analizi ve 24 saat içinde plan.</p>
+      <div class="hero-ctas reveal">
+        <a class="btn btn-lg" href="#quiz">Müşteriyi nerede kaybettiğimi öğren</a>
+        <a class="link2" href="#cases">Çalışmalara bak ↓</a>
+      </div>
+      <p class="cta-note reveal">Analiz ve yaklaşık maliyet, herhangi bir sözleşme ve ön ödemeden önce gelir. Telegram'da gün içinde yanıtlarız.</p>
+    </div>
+    <div class="phone reveal" aria-label="Botla örnek bir konuşma">
+      <div class="ph-top"><i></i><div><b>Huni botu</b>saniyeler içinde yanıtlar</div></div>
+      <div class="chat" id="chat">
+        <div class="msg bot">Merhaba! Ben Yulia 👋 Hediyen hazır: «15 dakikada ilk viral gönderin» 🎁</div>
+        <div class="msg btns"><span>🎁 Hediyeyi al</span></div>
+        <div class="msg me">Gönderiyi yazdım bile ✅</div>
+        <div class="msg bot">Harikasın, aferin! 🔥 Bağlantıyı gönder, bakayım. Yarın ilk takipçileri nasıl toplayacağını anlatırım.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip reveal">
+    <span><b>Canlı bot</b> Telegram'da, kendiniz deneyin</span>
+    <span><b>Web siteleri</b> üç dilde</span>
+    <span><b>Yapay zekâ asistanı</b> sitede ve botta</span>
+    <span><b>Fiyatlar sitede</b>, ödemeden önce tahmini maliyet</span>
+  </div>
+
+  <!-- 2. Боль -->
+  <section class="block wrap">
+    <span class="eyebrow reveal">Kendinizi tanıdınız mı?</span>
+    <h2 class="reveal">Her şeyi biliyor ve yapıyorsunuz ama bundan para gelmiyor</h2>
+    <div class="pains6">
+      <div class="pain6 reveal"><b>«Çok şey biliyor ve yapıyorum ama bunu nasıl paketleyip satacağımı bilmiyorum»</b><span>Deneyim ve tavsiye ile gelen müşteriler var. Ürün adı, fiyat ve anlaşılır bir teklif yok.</span></div>
+      <div class="pain6 reveal"><b>«Hedef kitlemin kim olduğunu ve ona ne yazacağımı bilmiyorum»</b><span>Her gönderi tahmine dayalı. Bazı günler erişim var, bazı günler yok ve nedeni görünmüyor.</span></div>
+      <div class="pain6 reveal"><b>«Gönderileri okuyup beğeniyorlar ama satın almaya gelmiyorlar»</b><span>Takipçi var, müşteri yok. «Takip etti» ile «satın aldı» arasında boşluk var.</span></div>
+      <div class="pain6 reveal"><b>«Bütün gün mesajlarda aynı şeyleri yanıtlıyorum»</b><span>Fiyatlar, süreler, «nasıl kayıt olunur». Geç yanıt verdim ve kişi gitti.</span></div>
+      <div class="pain6 reveal"><b>«Müşteri “düşüneceğim” dedi ve kayboldu»</b><span>İkinci temas yok, kimin hangi adımda kaldığını gösteren bir yer yok.</span></div>
+      <div class="pain6 reveal"><b>«Ürün var ama ben yanımdayken satılıyor»</b><span>Tatile çıkılamıyor. Her ay sıfırdan başlıyor.</span></div>
+    </div>
+    <div class="bridge reveal">Bu tembellik ya da yetenek meselesi değil. Gönderi ile ödeme arasında sistem eksikliği. Kurulabilir.</div>
+  </section>
+
+  <!-- 3. Nasıl çözüyoruz -->
+  <section class="block wrap" id="system">
+    <span class="eyebrow reveal">Bunu nasıl çözüyoruz</span>
+    <h2 class="reveal">Uzmanlığı satışa çeviren altı parça</h2>
+    <div class="parts">
+      <div class="part reveal"><h3>Paketleme</h3><div class="pb">«Çok şey biliyorum ama satmayı bilmiyorum»</div><p>Deneyiminizden ürünü, adı, fiyatı ve teklifi çıkarıyoruz. Sonuç: anlaşılır bir ürün sayfası.</p></div>
+      <div class="part reveal"><h3>İçerik fabrikası</h3><div class="pb">«Ne yazacağımı bilmiyorum»</div><p>Pazarda zaten işe yarayan formatlarda başlıklar, plan, metinler, karuseller ve videolar.</p></div>
+      <div class="part reveal"><h3>Huni</h3><div class="pb">«Okuyup gidiyorlar»</div><p>Gönderiden başvuruya veya ödemeye giden yol: hediye, ısındırma, teklif.</p></div>
+      <div class="part reveal"><h3>Müşteri tabanlı bot</h3><div class="pb">«Elle yanıtlıyorum ve insanları kaybediyorum»</div><p>Bot yanıtlar, başvuruları toplar, her kişiyi hatırlar ve görüşmeye kaydeder.</p></div>
+      <div class="part reveal"><h3>Yapay zekâ asistanı</h3><div class="pb">«Her gün aynı sorular»</div><p>Sizin kurallarınıza göre yanıtlar, yapay zekâ olduğunu dürüstçe söyler ve karmaşık konuları size aktarır.</p></div>
+      <div class="part reveal"><h3>Kişisel yapay zekâ ajanı ve otomatik paylaşım</h3><div class="pb">«El ve zaman yetmiyor»</div><p>Hafızası ve ekibi olan bir yardımcı, tüm sosyal ağlara programa göre paylaşım, rakamlarla sabah raporu.</p></div>
+    </div>
+  </section>
+
+  <!-- 4. Paketler -->
+  <section class="block wrap" id="packs">
+    <span class="eyebrow reveal">Fiyatlar</span>
+    <h2 class="reveal">Üç paket. Kapsam, süre ve fiyat ödemeden önce sabitlenir</h2>
+    <div class="packs2">
+      <article class="card pack reveal">
+        <span class="tag">Site ve başvurular</span>
+        <h3>Başvuru getiren sayfa</h3>
+        <p class="for">Ürün zaten varsa ama düzgün bir sayfa yoksa uygundur.</p>
+        <ul>
+          <li>Kartvizit sitesi veya mevcut sitenizin geliştirilmesi</li>
+          <li>Başvuru formu ve bağlantılarınız</li>
+          <li>Gizlilik politikası ve veri onayı</li>
+          <li>Mobil sürüm</li>
+          <li>Başvurular mesajlaşma uygulamanıza gelir</li>
+        </ul>
+        <p class="time">Süre: <b>5–7 gün</b></p>
+        <p class="price">25.000 ₽'den</p>
+        <a class="btn btn-ghost" href="#quiz" data-pack="Site ve başvurular">Bu paketi konuşalım</a>
+      </article>
+      <article class="card pack hot reveal">
+        <span class="badge-hot">Çoğu kişi için</span>
+        <span class="tag">Bot ve huni</span>
+        <h3>Takipçiler satın almaya başlar</h3>
+        <p class="for">İnsanlar okuyup beğeniyor ama satın almaya gelmiyorsa uygundur.</p>
+        <ul>
+          <li>«Site ve başvurular» paketindeki her şey</li>
+          <li>Bot: tanıştırır, soru sorar, başvuru toplar</li>
+          <li>5–7 mesajlık ısındırma hunisi</li>
+          <li>Abonelik hediyesi ve içerik planı</li>
+          <li>Toplu mesaj ve görüşme kaydı olan takipçi tabanı</li>
+          <li>Topluluk paketlemesi ve otomatik paylaşım</li>
+        </ul>
+        <p class="time">Süre: <b>2–3 hafta</b></p>
+        <p class="price">120.000 ₽'den</p>
+        <a class="btn btn-lg" href="#quiz" data-pack="Bot ve huni">Bu paketi konuşalım</a>
+      </article>
+      <article class="card pack reveal">
+        <span class="tag">Anahtar teslim sistem</span>
+        <h3>Tüm sosyal ağlarda komple sistem</h3>
+        <p class="for">Ayrı parçalar değil, hazır bir sistem gerekiyorsa uygundur.</p>
+        <ul>
+          <li>«Bot ve huni» paketindeki her şey</li>
+          <li>Satan site: yapı, quiz, metinler</li>
+          <li>Bilgi tabanınıza dayalı yapay zekâ asistanı</li>
+          <li>Beş sosyal ağın paketlenmesi ve 30 hazır gönderi</li>
+          <li>Açık erişimli platformlara otomatik paylaşım</li>
+        </ul>
+        <p class="time">Süre: <b>4–8 hafta</b></p>
+        <p class="price">270.000 ₽'den</p>
+        <a class="btn btn-ghost" href="#quiz" data-pack="Anahtar teslim sistem">Bu paketi konuşalım</a>
+      </article>
+    </div>
+    <p class="gnote reveal">«Başlayan» fiyatlar: kesin teklifi analizden sonra, ödemeden önce veriyoruz, ödeme aşamalarla. Her hizmet ayrı sipariş edilebilir. Hangi paketin gerektiğinden emin değil misiniz? <a class="link" href="#quiz">4 soruyu yanıtlayın, önerelim</a>. <a class="link" href="price.html">Tüm fiyat listesi →</a><br>Kulüp elçileri için ayrı, hazır bir teklif var: <a class="link" href="https://3671407-cell.github.io/julia-media/portfolio/works/predlozhenie.pdf" target="_blank" rel="noopener">PDF'i aç →</a></p>
+  </section>
+
+  <!-- 5. Çalışmalar: 6 на главной, остальные по кнопке -->
+  <section class="block wrap" id="cases">
+    <span class="eyebrow reveal">Neler yaptık</span>
+    <h2 class="reveal">Sattığımız her şeyi önce kendimiz için yaptık. Açın ve kendiniz deneyin</h2>
+    <div class="gal" id="all-works">
+      <article class="card gcard reveal">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/funnel/" target="_blank" rel="noopener"><img src="../портфолveо/img/senler-voronka.png" alt="Botta müşteri yolculuğu şeması: iki yol ikinci videoda birleşiyor" loading="lazy"></a>
+        <div class="gi"><div class="meta">bot · huni · Senler</div><h3>Senler'de bot hunisi</h3><p>Kişinin yolculuk şeması: karşılama, video mesaj, hediye, video, görüşmeye kayıt. CRM'li bot: takipçi tabanı, analitik, özel mesajlar ve görüşmeye kayıt, tüm müşteriler sizde kalır.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/funnel/" target="_blank" rel="noopener">Şemayı aç →</a></div>
+      </article>
+      <article class="card gcard reveal">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/amb-k7q2m9/tr/" target="_blank" rel="noopener"><img src="../портфолveо/img/amb.png" alt="Seyahat kulübü elçi sayfası: deniz, başlık ve düğmeler" loading="lazy"></a>
+        <div class="gi"><div class="meta">site · 3 dil · video blog · yapay zekâ sohbeti</div><h3>Seyahat kulübü elçi sayfası</h3><p>Üç dilde kişisel site: Rusça, İngilizce ve Türkçe. Video blog, aileye göre gezi seçimi, gezi haritası ve yapay zekâ asistanıyla sohbet.</p><a class="go" href="https://3671407-cell.github.io/julia-media/amb-k7q2m9/tr/" target="_blank" rel="noopener">Siteyi aç →</a></div>
+      </article>
+      <article class="card gcard reveal">
+        <a class="gimg" href="https://t.me/julia_travelclub_ai_bot" target="_blank" rel="noopener"><img src="../портфолveо/img/ai-assistant.png" alt="Sitedeki yapay zekâ asistanı sohbet penceresi" loading="lazy"></a>
+        <div class="gi"><div class="meta">Yapay zekâ ajanı · sitede sohbet · Telegram</div><h3>Site ve Telegram için yapay zekâ asistanı</h3><p>Onaylı kurallara göre soruları yanıtlar, gelir vaat etmez, yapay zekâ olduğunu dürüstçe söyler ve başvuruyu sahibine iletir. Aynı asistan hem sitede hem botta çalışır.</p><a class="go" href="https://t.me/julia_travelclub_ai_bot" target="_blank" rel="noopener">Telegram'da dene →</a></div>
+      </article>
+      <article class="card gcard reveal">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/karta/" target="_blank" rel="noopener"><img src="../портфолveо/img/karta.png" alt="Etkileşimli «Gezi haritası»: yedi soruluk oyun" loading="lazy"></a>
+        <div class="gi"><div class="meta">oyun · lead magnet · tasarım</div><h3>«Gezi haritası»: hediye oyun</h3><p>Yedi soruluk etkileşimli oyun. Kişi ruh halini seçer, rota posteri alır ve görsel veya PDF olarak kaydeder.</p><a class="go" href="https://3671407-cell.github.io/julia-media/karta/" target="_blank" rel="noopener">Siteyi aç →</a></div>
+      </article>
+      <article class="card gcard reveal">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/guzel/" target="_blank" rel="noopener"><img src="../портфолveо/img/guzel.png" alt="Guzel için site: başlık ve «üçü bir arada» şeması" loading="lazy"></a>
+        <div class="gi"><div class="meta">açılış sayfası · başvurular · tasarım</div><h3>Guzel için site</h3><p>Bağımsız bir ortak için sayfa: tek anlaşılır ürün, sorundan çözüme yapı, başvuru formu.</p><a class="go" href="https://3671407-cell.github.io/julia-media/guzel/" target="_blank" rel="noopener">Siteyi aç →</a></div>
+      </article>
+      <article class="card gcard reveal">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/yukassa/" target="_blank" rel="noopener"><img src="../портфолveо/img/yukassa.png" alt="Ödeme alma şeması: düğme, ürün sayfası, YooKassa, erişim, bildirim" loading="lazy"></a>
+        <div class="gi"><div class="meta">ödeme · YooKassa · bulut</div><h3>YooKassa ile ödeme alma</h3><p>Botta ödeme: onaylı ürün sayfası, YooKassa'da ödeme, ödemeden hemen sonra erişim, basitleştirilmiş vergi sistemi için fiş ve sahibine bildirim.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/yukassa/" target="_blank" rel="noopener">Şemayı aç →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/vizitka/" target="_blank" rel="noopener"><img src="../портфолveо/img/vizitka.png" alt="Yulia Zharkova'nın kartvizit sitesi: fotoğraf, ad ve «Bana yaz» düğmesi" loading="lazy"></a>
+        <div class="gi"><div class="meta">kartvizit · tasarım · animasyon</div><h3>Yulia'nın kartviziti</h3><p>Tek sayfa, tek adım: kişi ne yaptığımı görür ve hemen Telegram'dan yazar.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/vizitka/" target="_blank" rel="noopener">Siteyi aç →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/agency/" target="_blank" rel="noopener"><img src="../портфолveо/img/agency.png" alt="ZHAR ajans sitesi: «Takipçileri başvuruya çeviren botlar, huniler ve siteler» başlığı" loading="lazy"></a>
+        <div class="gi"><div class="meta">hizmet sitesi · quiz · bot demosu</div><h3>ZHAR ajans sitesi</h3><p>Hizmetler, quiz, bot demosu ve sık sorulan sorular. Her şey ücretsiz analize çıkar.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/agency/" target="_blank" rel="noopener">Siteyi aç →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/agency/nabor.html" target="_blank" rel="noopener"><img src="../портфолveо/img/nabor.png" alt="«İçerik üreticisi seti» dijital ürün sayfası: 100 başlık, 20 şablon, 30 gün" loading="lazy"></a>
+        <div class="gi"><div class="meta">ürün sayfası · satış</div><h3>İçerik üreticisi seti sayfası</h3><p>Dijital ürün sayfası: içinde ne var, kimler için ve ne kadar.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/agency/nabor.html" target="_blank" rel="noopener">Siteyi aç →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/agency/price.html" target="_blank" rel="noopener"><img src="../портфолveо/img/price.png" alt="Hizmet paketleri olan ZHAR ajansı fiyat sayfası" loading="lazy"></a>
+        <div class="gi"><div class="meta">fiyat listesi · paketler</div><h3>ZHAR fiyatları</h3><p>Üç paket ve hizmet listesi. Müşteri nereden başlayacağını kendisi seçer.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/agency/price.html" target="_blank" rel="noopener">Siteyi aç →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/strategy/" target="_blank" rel="noopener"><img src="../портфолveо/img/strategiya.png" alt="90 günlük strateji ve içerik planı sayfası" loading="lazy"></a>
+        <div class="gi"><div class="meta">strateji · içerik planı · Telegram · VK</div><h3>90 günlük tanıtım planı</h3><p>Telegram ve VKontakte için strateji ve içerik planı: başlıklar, takvim, ilk iki haftanın metinleri ve eleştirmen incelemesi.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/strategy/" target="_blank" rel="noopener">Belgeyi aç →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/predlozhenie.pdf" target="_blank" rel="noopener"><img src="../портфолveо/img/predlozhenie.png" alt="Elçiler için teklif: piyasada ve bizde ne kadar" loading="lazy"></a>
+        <div class="gi"><div class="meta">teklif · PDF · fiyat listesi</div><h3>Elçiler için teklif</h3><p>Kulüp elçileri için PDF ticari teklif: neler dahil, piyasada ve bizde ne kadar, destek nasıl hesaplanır.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/predlozhenie.pdf" target="_blank" rel="noopener">PDF'i aç →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/autoposting/" target="_blank" rel="noopener"><img src="../портфолveо/img/avtoposting.png" alt="Otomatik paylaşım şeması: program, otomatik başlatma, sosyal ağlar, sabah raporu, sistem kontrolü" loading="lazy"></a>
+        <div class="gi"><div class="meta">otomasyon · Threads · Telegram · VK</div><h3>Tüm sosyal ağlara otomatik paylaşım</h3><p>Threads, Telegram ve VKontakte'ye programa göre paylaşım, Telegram'da tüm rakamlarla sabah raporu, hiçbir şeyin durmaması için anahtar ve sistem kontrolü.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/autoposting/" target="_blank" rel="noopener">Şemayı aç →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/fabrika/" target="_blank" rel="noopener"><img src="../портфолveо/img/fabrika.png" alt="İçerik fabrikası şeması: fikirler, metinler, karuseller, videolar, açıklamalar" loading="lazy"></a>
+        <div class="gi"><div class="meta">içerik · karuseller · videolar</div><h3>İçerik fabrikası</h3><p>Tek süreç: pazar ve fikirler, eleştirmen kontrolünden geçen metinler, karuseller, yedi formatta videolar, tüm platformlar için açıklamalar.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/fabrika/" target="_blank" rel="noopener">Şemayı aç →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/german/" target="_blank" rel="noopener"><img src="../портфолveо/img/german-app.png" alt="Almanca öğrenme oyunu başlangıç ekranı: görevler, beceriler ve seviyeler" loading="lazy"></a>
+        <div class="gi"><div class="meta">uygulama · eğitim · oyun</div><h3>Almanca öğrenme uygulaması</h3><p>Sıfırdan ilk sınava oyun tarzı uygulama: 4–5 dakikalık görevler, beş beceri, deneyim ve seviyeler, hatalar geri döner, günlük hedef.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/german/" target="_blank" rel="noopener">Dene →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/jarvis/" target="_blank" rel="noopener"><img src="../портфолveо/img/jarvis.png" alt="Kişisel yapay zekâ ajanı şeması: hafıza, yardımcılar, beceriler, bilgi" loading="lazy"></a>
+        <div class="gi"><div class="meta">yapay zekâ ajanı · hafıza · beceriler</div><h3>Kişisel yapay zekâ ajanı Jarvis</h3><p>Hafızası ve yardımcı ekibi olan ajan: projeleri yürütür, pazarı analiz eder, uygulayıcılara görev verir ve sonucu kabul eder. 8 beceri ve 381 dosyalık bilgi kütüphanesi.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/jarvis/" target="_blank" rel="noopener">Yapıyı aç →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/reels-analysis/" target="_blank" rel="noopener"><img src="../портфолveо/img/analitika.png" alt="Video analizi şeması: 4.594 videodan 7 formata ve 70 senaryoya" loading="lazy"></a>
+        <div class="gi"><div class="meta">analitik · video · formatlar</div><h3>Video analitiği: 4.600 videodan 7 formata</h3><p>Seyahat hakkında yaklaşık 4.600 kısa video topladık, en iyi 1.000'ini seçtik ve ölçeklenebilir 7 format çıkardık. 70 senaryo hazır.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/reels-analysis/" target="_blank" rel="noopener">Analizi aç →</a></div>
+      </article>
+      <article class="card gcard reveal more">
+        <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/copywriter/" target="_blank" rel="noopener"><img src="../портфолveо/img/kopirajter.png" alt="Metin yazarı botu şeması: diyalog, orkestratör, üslup analisti, kontrol, hafıza" loading="lazy"></a>
+        <div class="gi"><div class="meta">Yapay zekâ ajanları · Telegram · içerik</div><h3>Metin yazarı botu: 13 ajanlık ekip</h3><p>Kişisel kanal için Telegram botu: orkestratör, üslup analisti, metin yazarı, editör, gerçek ve kural kontrolü, yazarın yanıtlarına dayalı hafıza.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/tr/works/copywriter/" target="_blank" rel="noopener">Yapıyı aç →</a></div>
+      </article>
+    </div>
+    <button class="btn btn-ghost more-btn" type="button" id="morebtn">Tüm çalışmaları göster (18)</button>
+    <p class="gnote reveal">Sayfalar Rusça, <a class="link" href="../../en/" target="_blank" rel="noopener">İngilizce</a> ve <a class="link" href="../../tr/" target="_blank" rel="noopener">Türkçe</a> dillerinde mevcuttur.</p>
+  </section>
+
+  <!-- 6. CRM простымve словамve -->
+  <section class="block wrap">
+    <div class="crm">
+      <div class="reveal">
+        <span class="eyebrow">Müşteri tabanı</span>
+        <h2>Tüm takipçileriniz ve müşterileriniz tek yerde, başkasının sosyal ağında değil</h2>
+        <p class="sub">Bot, bir veritabanıyla (CRM) birlikte çalışır. Platform kapanırsa veya erişim düşerse insanlar sizde kalır.</p>
+      </div>
+      <ul class="reveal">
+        <li><b>Kim geldi</b><span>her takipçi ve başvuru tek tabanda</span></li>
+        <li><b>Hangi adımda durdu</b><span>kimi ikna edeceğiniz, kimi bırakacağınız görünür</span></li>
+        <li><b>Kime yazılacak</b><span>doğrudan bottan özel mesajlar ve toplu mesajlar</span></li>
+        <li><b>Kim görüşmeye kayıtlı</b><span>saat takvime düşer</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7. Созвон -->
+  <section class="block wrap" id="call">
+    <div class="call reveal">
+      <div>
+        <span class="eyebrow">20 dakikalık görüşme</span>
+        <h2>Projenizi sesli konuşarak inceleriz</h2>
+        <ul>
+          <li>Projelerimde bunun nasıl çalıştığını göstereceğim</li>
+          <li>Sizinkiyle ilgili soruları yanıtlayacağım</li>
+          <li>Paket gerekip gerekmediğini ya da daha azının yetip yetmeyeceğini dürüstçe söyleyeceğim</li>
+        </ul>
+      </div>
+      <div class="side">
+        <div class="big">20 dk</div>
+        <p>Zoom ile, saati Telegram'da netleştiririz. Otomatik bağlantı ve hatırlatmalı takvim kaydını «Bot ve huni» paketindeki müşterilere kuruyoruz.</p>
+        <a class="btn btn-lg" id="callbtn" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Saat seç</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. О Юлveve -->
+  <section class="block wrap" id="about">
+    <div class="about2">
+      <div class="photo reveal"><img src="../../../works/agency/img/yulia.jpg" alt="Yulia Zharkova, ZHAR'ın kurucusu" width="508" height="1100" loading="lazy"></div>
+      <div class="reveal">
+        <span class="eyebrow">Kim yapacak</span>
+        <blockquote>«Satış sistemleri kuruyorum ve bunlar üzerinde kendim çalışıyorum. Her projeyi yönetici zinciri olmadan bizzat yürütüyorum»</blockquote>
+        <p><b>Yulia Zharkova, ZHAR'ın kurucusu.</b> Hunim, ödemeli botum, otomatik paylaşımım ve kişisel yapay zekâ ajanım Jarvis kendi hesaplarımda çalışıyor. Size sattığımı önce kendimde denedim.</p>
+        <div class="stat3">
+          <div><b>18</b><span>çalışma açıp deneyebilirsiniz</span></div>
+          <div><b>3</b><span>dil sayfalarda</span></div>
+          <div><b>24 sa</b><span>projenizin analizine kadar</span></div>
+        </div>
+        <div class="about-links" style="margin-top:22px">
+          <a class="link" href="https://www.threads.com/@zharkova_biz" target="_blank" rel="noopener">Threads →</a>
+          <a class="link" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Telegram →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Nasıl çalışıyoruz ve условveя -->
+  <section class="block wrap">
+    <span class="eyebrow reveal">Nasıl çalışıyoruz</span>
+    <h2 class="reveal">Dört adım. Bir öncekini kabul edince sonrakini ödersiniz</h2>
+    <div class="steps">
+      <div class="card step reveal"><h3>Analiz</h3><p>Ürüne ve sosyal ağlara bakıyoruz, 24 saat sonra plan gönderiyoruz</p></div>
+      <div class="card step reveal"><h3>Teklif</h3><p>Şema, fiyat ve süreler ödemeden önce sabitlenir</p></div>
+      <div class="card step reveal"><h3>Başlatma</h3><p>Kuruyoruz, test ediyoruz, her aşamayı gösteriyoruz</p></div>
+      <div class="card step reveal"><h3>Büyüme</h3><p>Rakamlara bakıp başvuru getireni güçlendiriyoruz</p></div>
+    </div>
+    <div class="guar">
+      <div class="card reveal"><h3>Şahıs şirketiyle sözleşme</h3><p>Resmi, fiyat ve süreler sözleşmede</p></div>
+      <div class="card reveal"><h3>Aşamalı ödeme</h3><p>Her aşamayı kendiniz kabul edersiniz</p></div>
+      <div class="card reveal"><h3>Hepsi sizin</h3><p>Bot, erişimler, metinler ve site size aittir</p></div>
+      <div class="card reveal"><h3>Destek</h3><p>Lansmandan sonra 2 hafta ücretsiz düzeltiyoruz</p></div>
+    </div>
+    <div class="fit-grid reveal">
+      <div class="card yes"><h3>Uygunuz, eğer</h3><ul><li>bir ürün veya hizmetiniz ve en azından küçük bir kitleniz varsa</li><li>başvuruların ve satışların sizsiz gelmesini istiyorsanız</li><li>sorulara yanıt vermeye ve erişim vermeye hazırsanız</li></ul></div>
+      <div class="card no"><h3>Uygun değiliz, eğer</h3><ul><li>gelir garantili «bir haftada bir milyon» gerekiyorsa</li><li>henüz hiç ürün yoksa: önce onu tasarlamak gerekir</li></ul></div>
+    </div>
+    <div class="first reveal">
+      <div>
+        <h3>Özel fiyatla ilk projeler</h3>
+        <p>Birkaç projeyi normalden ucuza alıyoruz. Karşılığında sonucu dürüstçe paylaşırsınız ve yorumunuz burada yer alır. Koşulları yazılı sabitleriz.</p>
+      </div>
+      <a class="btn btn-lg" href="#quiz" data-pack="Первые проекты">İlkler arasında olmak istiyorum</a>
+    </div>
+  </section>
+
+  <!-- 10. FAQ: возраженveя первымve -->
+  <section class="block wrap" id="faq">
+    <span class="eyebrow reveal">Sorular</span>
+    <h2 class="reveal">Sormak istediğiniz sorular</h2>
+    <div class="faq reveal">
+      <details><summary>Kitlem küçük. Bu bana uygun mu?</summary><p>Evet. Sistem tam da gelen her kişi kaybolmasın diye var. Takipçi sayısı büyümeden önce başlamak daha iyi: huni ve bot büyümeye hazır olur.</p></details>
+      <details><summary>Teknikten anlamıyorum</summary><p>Teknik şartnameye gerek yok. Analizde sorular sorar ve şartnameyi biz yazarız. Sizden: ürünü anlatmak, soruları yanıtlamak ve erişim vermek.</p></details>
+      <details><summary>Peki insanlar satın almazsa?</summary><p>Gelir garantisi vermiyoruz, kimse dürüstçe veremez. Sistemi kuruyoruz, her adımda rakamları gösteriyoruz (kaç kişi geldi, kaçı başvuruya ulaştı) ve işe yarayanı güçlendiriyoruz.</p></details>
+      <details><summary>Bu, 0 ₽'lik bot yapıcıdan neden daha iyi?</summary><p>Yapıcı bir araç verir, biz sonuç veririz: ürün, huni metinleri, hediye, ısındırma, kurulu müşteri tabanı ve görüşmeye kayıt. Haftalarınızı kurulum ve hatalara harcamazsınız.</p></details>
+      <details><summary>Yeni açıldıysanız size neden güvenelim?</summary><p>Kendiniz kontrol edebilirsiniz: çalışmalarımızı açın, canlı botu deneyin ve nasıl kurulduğuna bakın. Fiyat ve kapsam ödemeden önce sabitlenir, aşamalı ödersiniz. Sözleşme şahıs şirketiyle yapılır.</p></details>
+      <details><summary>Ne kadar sürer?</summary><p>Site ve başvurular: 5–7 gün. Bot ve huni: 2–3 hafta. Anahtar teslim sistem: 4–8 hafta.</p></details>
+      <details><summary>Botta müşteri tabanı (CRM) nedir?</summary><p>Botun içindeki takipçi ve müşteri tabanınızdır. Kimin geldiğini ve hangi adımda olduğunu görür, kitleyi analiz eder, insanlara özel mesaj yazar ve toplu mesaj gönderirsiniz. Müşteri görüşmeye kaydedilebilir ve saat takvime düşer. Tüm iletişim bilgileri sizde kalır. Özellikler, botun çalıştığı hizmetin tarifesine bağlıdır; analizde uygununu seçeriz.</p></details>
+      <details><summary>Yapay zekâ asistanı basitçe nedir?</summary><p>Soruları kendi kelimeleriyle anlayan ve bilgi tabanınıza göre yanıtlayan bir yardımcıdır: fiyatlar, hizmetler, kurallar. Yapay zekâ olduğunu dürüstçe söyler, zor soruları size aktarır.</p></details>
+      <details><summary>Telegram engellenirse ne olur?</summary><p>Müşteri iletişim bilgileri sizde saklanır, bot başka bir platforma taşınabilir. Yedek kanalı önceden planlarız.</p></details>
+      <details><summary>Bir şey bozulursa?</summary><p>Lansmandan sonra 2 hafta ücretsiz düzeltiyoruz. Sonrasında destek ayda 10.000 ₽'den, isteğe bağlı.</p></details>
+    </div>
+  </section>
+
+  <!-- 11. Форма заявкve ve фveнальный прveзыв -->
+  <section class="block wrap" id="quiz">
+    <div class="final reveal">
+      <span class="eyebrow">24 saatte analiz</span>
+      <h2>Müşteriyi nerede kaybettiğinizi gösterelim</h2>
+      <p class="sub">4 kısa soruyu yanıtlayın. Projenizin analizini, ilk adımların planını ve yaklaşık maliyeti göndeririz. Ön ödeme ve yükümlülük yok.</p>
+    </div>
+    <div class="quiz reveal" style="margin-left:auto;margin-right:auto">
+      <div class="progress"><i id="qbar"></i></div>
+      <div class="q-step" data-step="1">
+        <div class="q-label">Adım 1 / 4</div>
+        <div class="q-title">Ne iş yapıyorsunuz?</div>
+        <div class="opts" data-key="Нveша">
+          <button class="opt" type="button">Uzman / mentor</button><button class="opt" type="button">Online okul</button><button class="opt" type="button">Psikolog / koç</button><button class="opt" type="button">Güzellik / wellness</button><button class="opt" type="button">Hizmetler</button><button class="opt" type="button">Diğer</button>
+        </div>
+      </div>
+      <div class="q-step" data-step="2" hidden>
+        <div class="q-label">Adım 2 / 4</div>
+        <div class="q-title">En çok neyi canınızı sıkıyor?</div>
+        <div class="opts" data-key="Что болveт">
+          <button class="opt" type="button">Ürünü nasıl paketleyeceğimi bilmiyorum</button><button class="opt" type="button">Gönderiler var, satış yok</button><button class="opt" type="button">Mesajlara elle yanıt veriyorum</button><button class="opt" type="button">Müşteriler «düşüneceğim»den sonra kayboluyor</button><button class="opt" type="button">İçeriğe vakit yok</button><button class="opt" type="button">Bilmiyorum, tavsiye lazım</button>
+        </div>
+      </div>
+      <div class="q-step" data-step="3" hidden>
+        <div class="q-label">Adım 3 / 4</div>
+        <div class="q-title">Ürününüz ve kitleniz var mı?</div>
+        <div class="opts" data-key="Продукт ve аудveторveя">
+          <button class="opt" type="button">Ürün var, kitle yok</button><button class="opt" type="button">Kitle 1.000'e kadar</button><button class="opt" type="button">Kitle 1.000'den fazla</button><button class="opt" type="button">Ürün geliştiriliyor</button>
+        </div>
+      </div>
+      <div class="q-step" data-step="4" hidden>
+        <div class="q-label">Adım 4 / 4</div>
+        <div class="q-title">Analizi nereye gönderelim?</div>
+        <input class="field" id="qcontact" type="text" placeholder="Telegram'ınız veya telefonunuz" autocomplete="tel">
+        <input class="field" id="qlink" type="text" placeholder="Hesabınızın veya sitenizin bağlantısı (isteğe bağlı)" style="margin-top:10px">
+        <label class="consent"><input type="checkbox" id="qconsent"> <span>Kişisel verilerin işlenmesine <a class="link" href="consent.html" target="_blank">onay veriyorum</a> ve kabul ediyorum: <a class="link" href="privacy.html" target="_blank">gizlilik politikasını</a></span></label>
+        <button class="btn btn-lg" type="button" id="qsend">24 saatte analizi al</button>
+      </div>
+      <div class="q-step q-done" data-step="5" hidden>
+        <div class="q-title">Başvuru hazır</div>
+        <p>Başvuru metni hazır olarak Telegram'ı açtık. <b>«Gönder»e basın</b>, gün içinde yanıtlarız. Telegram açılmadıysa metin kopyalandı: aşağıdaki düğmeyle sohbete yapıştırın.</p>
+        <p style="margin-top:12px">Daha hızlı mı istiyorsunuz? Görüşme için saat seçin: <a class="link" href="#call">Zoom'da 20 dakika</a>.</p>
+        <div class="hero-ctas" style="justify-content:flex-start"><a class="btn btn-lg" id="qtg" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Telegram'ı aç</a></div>
+      </div>
+      <div class="q-nav"><button class="link" type="button" id="qback" style="background:none;border:0;cursor:pointer" hidden>← Geri</button><span></span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div>© 2026 ZHAR · Sosyal ağlardan satış sistemleri</div>
+      <div>Şahıs şirketi Zhuravleva Anzhela Viktorovna · VKN 615109220341 · OGRNIP 321774600807541</div>
+      <div>İletişim: Telegram — <a class="link" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Yulia Zharkova</a></div>
+    </div>
+    <div class="f-links">
+      <a href="price.html">Fiyatlar</a>
+      <a href="#cases">Çalışmalar</a>
+      <a href="rekvizity.html">Bilgiler</a>
+      <a href="oferta.html">Teklif şartları</a>
+      <a href="privacy.html">Gizlilik politikası</a>
+      <a href="consent.html">Veri işleme onayı</a>
+      <a href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Telegram: Yulia Zharkova</a>
+    </div>
+  </div>
+</footer>
+
+<a class="btn btn-lg float" href="#quiz">24 saatte analiz</a>
+
+<script>
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  try { localStorage.setItem("zhar-theme", "a"); } catch (e) {}
+
+  /* Появленveе прve скролле */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  setTimeout(() => document.querySelectorAll(".reveal").forEach(el => el.classList.add("in")), 2000);
+
+  /* Все работы по кнопке */
+  (() => {
+    const gal = document.getElementById("all-works"), btn = document.getElementById("morebtn");
+    btn.addEventListener("click", () => {
+      const open = gal.classList.toggle("open");
+      btn.textContent = open ? "Daralt" : "Tüm çalışmaları göster (18)";
+      if (open) gal.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+    });
+  })();
+
+  /* Жveвая перепveска в демо */
+  (() => {
+    const chat = document.getElementById("chat");
+    const msgs = [...chat.querySelectorAll(".msg")];
+    if (reduceMotion) { msgs.forEach(m => m.classList.add("on")); return; }
+    const typing = document.createElement("div");
+    typing.className = "typing"; typing.innerHTML = "<i></i><i></i><i></i>"; typing.hidden = true;
+    chat.appendChild(typing);
+    let i = 0;
+    function next() {
+      if (i >= msgs.length) { setTimeout(() => { msgs.forEach(m => m.classList.remove("on")); i = 0; next(); }, 4000); return; }
+      const m = msgs[i], isBot = m.classList.contains("bot");
+      if (isBot) {
+        chat.insertBefore(typing, m); typing.hidden = false;
+        setTimeout(() => { typing.hidden = true; m.classList.add("on"); i++; setTimeout(next, 900); }, 1100);
+      } else { m.classList.add("on"); i++; setTimeout(next, 900); }
+    }
+    setTimeout(next, 600);
+  })();
+
+  /* Квveз: заявка открывает Telegram с готовым текстом ve копveруется в буфер */
+  const answers = {};
+  let step = 1;
+  const steps = [...document.querySelectorAll(".q-step")];
+  const bar = document.getElementById("qbar"), back = document.getElementById("qback");
+  function show(n) {
+    step = n;
+    steps.forEach(s => s.hidden = +s.dataset.step !== n);
+    bar.style.width = Math.min(n, 4) * 25 + "%";
+    back.hidden = n === 1 || n === 5;
+  }
+  document.querySelectorAll(".opts").forEach(group => {
+    group.querySelectorAll(".opt").forEach(o => o.addEventListener("click", () => {
+      group.querySelectorAll(".opt").forEach(x => x.setAttribute("aria-pressed", "false"));
+      o.setAttribute("aria-pressed", "true");
+      answers[group.dataset.key] = o.textContent;
+      setTimeout(() => show(step + 1), 220);
+    }));
+  });
+  document.querySelectorAll("[data-pack]").forEach(b => b.addEventListener("click", () => { answers["İlgilendiğim paket"] = b.dataset.pack; }));
+  back.addEventListener("click", () => show(Math.max(1, step - 1)));
+  document.getElementById("qsend").addEventListener("click", () => {
+    const contact = document.getElementById("qcontact"), consent = document.getElementById("qconsent"), link = document.getElementById("qlink");
+    if (!contact.value.trim()) { contact.focus(); contact.placeholder = "Telegram'ınızı veya telefonunuzu bırakın"; return; }
+    if (!consent.checked) { consent.focus(); consent.parentElement.style.color = "var(--acc)"; return; }
+    const text = "24 saatte analiz başvurusu\n" + Object.entries(answers).map(([k, v]) => k + ": " + v).join("\n") + (link.value.trim() ? "\nBağlantı:" + link.value.trim() : "") + "\nİletişim:" + contact.value.trim();
+    const url = "https://t.me/IuliiaZharkova?text=" + encodeURIComponent(text);
+    document.getElementById("qtg").href = url;
+    try { navigator.clipboard.writeText(text); } catch (e) {}
+    show(5);
+    window.open(url, "_blank", "noopener");
+  });
+
+  /* Частveцы-созвездveе на фоне */
+  (() => {
+    const cvs = document.getElementById("particles");
+    const ctx = cvs.getContext("2d");
+    const colors = ["255,79,216", "138,92,255", "52,214,255"];
+    let w, h, dpr, pts = [];
+    const mouse = { x: -9999, y: -9999 };
+
+    function resize() {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      w = innerWidth; h = innerHeight;
+      cvs.width = w * dpr; cvs.height = h * dpr;
+      cvs.style.width = w + "px"; cvs.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.round(Math.min(90, (w * h) / 16000));
+      pts = Array.from({ length: n }, () => ({
+        x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.6 + 0.5, c: colors[(Math.random() * 3) | 0]
+      }));
+    }
+
+    function frame() {
+      ctx.clearRect(0, 0, w, h);
+      for (const p of pts) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        const dx = p.x - mouse.x, dy = p.y - mouse.y, d = Math.hypot(dx, dy);
+        if (d < 120) { p.x += dx / d * 1.2; p.y += dy / d * 1.2; }
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.c},.8)`; ctx.fill();
+      }
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const a = pts[i], b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < 130) {
+            ctx.strokeStyle = `rgba(${a.c},${(1 - d / 130) * 0.22})`;
+            ctx.lineWidth = 0.6;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+      if (!reduceMotion) requestAnimationFrame(frame);
+    }
+
+    addEventListener("resize", resize);
+    addEventListener("pointermove", e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    addEventListener("pointerleave", () => { mouse.x = mouse.y = -9999; });
+    resize(); frame();
+  })();
+</script>
+<script src="../../../site.js"></script></body>
+</html>
