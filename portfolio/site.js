@@ -65,6 +65,19 @@
   const isPortfolioHome = /\/portfolio\/(en\/|tr\/)?(index\.html)?$/.test(path);
   if (isPortfolioHome) { const st2 = document.createElement("style"); st2.textContent = "#top,.hero{scroll-margin-top:70px}body.zs-pad{padding-top:62px}"; document.head.appendChild(st2); }
 
+  /* кнопка «наверх» */
+  (() => {
+    const label = { ru: "Наверх", en: "Back to top", tr: "Yukarı çık" }[lang];
+    const b = document.createElement("button"); b.type = "button"; b.className = "zs-up"; b.setAttribute("aria-label", label); b.title = label;
+    b.innerHTML = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16V4M4.5 9.5 10 4l5.5 5.5"/></svg>';
+    const u = document.createElement("style");
+    u.textContent = ".zs-up{position:fixed;right:18px;bottom:" + (onAgency ? "96px" : "22px") + ";z-index:2147482000;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,134,217,.55);background:rgba(10,8,16,.82);color:#ffd2f1;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 10px 30px -10px rgba(230,79,196,.6);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility .25s}.zs-up.on{opacity:1;visibility:visible;transform:none}.zs-up:hover{background:linear-gradient(100deg,#e64fc4,#ff86d9);color:#fff}.zs-up:focus-visible{outline:2px solid #ff86d9;outline-offset:3px}@media(max-width:640px){.zs-up{right:12px;width:42px;height:42px}}";
+    document.head.appendChild(u); document.body.appendChild(b);
+    const upd = () => b.classList.toggle("on", (window.scrollY || document.documentElement.scrollTop) > 500);
+    addEventListener("scroll", upd, { passive: true }); upd();
+    b.addEventListener("click", () => { const r = matchMedia("(prefers-reduced-motion: reduce)").matches; window.scrollTo({ top: 0, behavior: r ? "auto" : "smooth" }); });
+  })();
+
   /* созвездие */
   const dust = document.getElementById("dust"); if (dust) dust.style.display = "none";
   if (!document.getElementById("particles")) {
