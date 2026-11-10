@@ -38,7 +38,7 @@
   a.back,.lg,a[data-site="agency"]{display:none!important}
   .top .zs-lang{margin-left:auto;margin-right:14px}
   @media(max-width:1000px){.zs-nav{display:none}}
-  @media(max-width:640px){.zs-back{padding:7px 10px;font-size:12px}.zs-btn{display:none}.zs-top{height:56px}body.zs-pad{padding-top:56px}.zs-lang a{padding:5px 8px}}
+  @media(max-width:640px){.zs-top{height:56px;gap:8px;padding:0 12px}.zs-logo{font-size:16px;letter-spacing:.1em}.zs-back{margin-left:0;padding:6px 9px;font-size:11px}.zs-btn{display:none}body.zs-pad{padding-top:56px}.zs-lang{gap:3px}.zs-lang a{padding:5px 7px;font-size:11px}.zs-r{gap:0}}@media(max-width:380px){.zs-back{display:none}}
   `;
   const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
