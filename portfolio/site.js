@@ -60,7 +60,7 @@
   /* убрать старые кнопки возврата */
   document.querySelectorAll("a").forEach(a => { if (/^←/.test(a.textContent.trim()) && /^(\.\.\/)+$/.test(a.getAttribute("href") || "") && !a.classList.contains("zs-pill")) a.remove(); });
   /* на страницах с собственной шапкой (портфолио) прячем её: остаётся общая */
-  document.querySelectorAll("body > header:not(.zs-top)").forEach(h => { if (h.querySelector("nav#menu, nav .logo, .logo")) h.style.display = "none"; });
+  document.querySelectorAll("body > header:not(.zs-top):not(.top)").forEach(h => { if (h.querySelector("nav#menu, nav .logo, .logo")) h.style.display = "none"; });
   const isPortfolioHome = /\/portfolio\/(en\/|tr\/)?(index\.html)?$/.test(path);
   if (isPortfolioHome) { const st2 = document.createElement("style"); st2.textContent = "#top,.hero{scroll-margin-top:70px}body.zs-pad{padding-top:62px}"; document.head.appendChild(st2); }
 
