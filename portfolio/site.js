@@ -34,6 +34,7 @@
   .zs-pill{position:fixed;left:14px;z-index:2147483000;padding:10px 16px;border-radius:999px;font:600 13.5px/1 system-ui,sans-serif;text-decoration:none;color:#fff;box-shadow:0 10px 30px -10px rgba(230,79,196,.65)}
   .zs-pill.site{bottom:62px;background:linear-gradient(100deg,#e64fc4,#8b5cf6)}
   .zs-pill.all{bottom:14px;background:#1a1426;border:1px solid rgba(255,255,255,.18);box-shadow:none}
+  html{overflow-x:hidden}
   body.zs-pad{padding-top:62px}
   a.back,.lg,a[data-site="agency"]{display:none!important}
   .top .zs-lang{margin-left:auto;margin-right:14px}
