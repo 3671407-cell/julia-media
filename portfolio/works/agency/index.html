@@ -1,21 +1,22 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="a">
 <head>
 <meta name="robots" content="noindex,nofollow">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f4f1ec">
 <title>Агентство ZHAR</title>
-<meta name="description" content="Юлия Жаркова, хозяйка агентства ZHAR. Упаковываю экспертов в продукт и собираю систему продаж: воронка, бот с базой клиентов, ИИ-ассистент. Разбор проекта и план за 24 часа.">
-<link rel="stylesheet" href="agency6.css">
-<script>document.documentElement.classList.add("js")</script>
-<style>@font-face{font-family:Manrope;src:url(../../fonts/Manrope.woff2) format('woff2');font-weight:200 800}</style></head>
+<meta name="description" content="Вы отлично знаете своё дело, а продажи не идут. Упаковываем экспертов в продукт и собираем систему: воронка, бот с базой клиентов, ИИ-ассистент. Разбор проекта и план за 24 часа.">
+<link rel="stylesheet" href="zhar.css">
+<style>@font-face{font-family:Manrope;src:url(../../fonts/Manrope.woff2) format('woff2');font-weight:200 800}@font-face{font-family:Unbounded;src:url(../../fonts/Unbounded.ttf) format('truetype');font-weight:200 900}</style></head>
 <body>
-<!-- Версия 6 (09.11.2026): по референсу Юлии (Санторини): лазурь и белое, рукописный Bad Script, без рамок. -->
+<!-- Версия 4 (09.11.2026): пересборка по разбору рынка и критике Jarvis (анализ-рынка-jarvis-09-11.md, критика-и-структура-jarvis-09-11.md) -->
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
 
 <header class="top">
   <div class="wrap">
-    <a class="logo" href="index.html">ZHAR</a>
+    <a class="logo" href="index.html"><span>ZHAR</span></a>
     <nav class="nav" aria-label="Разделы">
       <a href="#system">Как решаем</a>
       <a href="#packs">Цены</a>
@@ -27,93 +28,71 @@
 </header>
 
 <main>
-  <!-- 1. Первый экран: Юлия, боль, живой бот -->
-  <section class="wrap hero">
-    <div class="hcopy">
-      <div class="who"><img src="img/yulia.jpg" alt="" width="34" height="34"><span><b>Юлия Жаркова</b>, хозяйка агентства ZHAR</span></div>
-      <h1 aria-label="Вы не плохо продаёте. У вас нет системы.">
-        <span class="l1" aria-hidden="true"><span class="w" style="--i:0"><span>Вы</span></span> <span class="w" style="--i:1"><span>не</span></span> <span class="w" style="--i:2"><span>плохо</span></span> <span class="w" style="--i:3"><span>продаёте.</span></span></span>
-        <span class="l2" aria-hidden="true"><span class="w" style="--i:5"><span>У&nbsp;вас</span></span> <span class="w" style="--i:6"><span>нет</span></span> <span class="w" style="--i:7"><span>системы.</span></span></span>
-      </h1>
-      <p class="lead">Хватит вести блог ради лайков. Я упаковываю вас в продукт и собираю систему, которая приводит клиентов: воронка, бот с базой и ИИ-ассистент. Всё делаю лично. Первый шаг: разбор вашего проекта и план за 24 часа.</p>
-      <div class="ctas">
+  <!-- 1. Первый экран: боль + результат + живое демо -->
+  <section class="wrap hero2">
+    <div>
+      <div class="badge reveal"><i></i>Для экспертов, которые умеют своё дело</div>
+      <h1 class="reveal">Вы не плохо продаёте. У вас нет&nbsp;<em>системы</em></h1>
+      <p class="lead reveal">Упаковываем вашу экспертность в продукт и собираем систему продаж: воронка, бот с базой клиентов и ИИ-ассистент. Первый шаг: разбор вашего проекта и план за 24 часа.</p>
+      <div class="hero-ctas reveal">
         <a class="btn btn-lg" href="#quiz">Узнать, где я теряю клиентов</a>
-        <a class="link2" href="#cases">Посмотреть работы</a>
+        <a class="link2" href="#cases">Посмотреть работы ↓</a>
       </div>
-      <p class="note">Разбор и примерная стоимость приходят до любого договора и предоплаты. Отвечу в Telegram в течение дня.</p>
+      <p class="cta-note reveal">Разбор и примерная стоимость приходят до любого договора и предоплаты. Ответим в Telegram в течение дня.</p>
     </div>
-    <div class="hphoto">
-      <img src="img/yulia-santorini.jpg" alt="Юлия Жаркова на Санторини. Надпись: не откладывайте жизнь на потом" width="640" height="640">
-      <div class="chatcard" aria-label="Пример диалога с ботом воронки">
-        <div class="ct"><i></i>Бот воронки, пример</div>
-        <div class="chat" id="chat">
-          <div class="msg bot">Привет! Я Юлия 👋 Держи подарок: «Первый вирусный пост за 15 минут» 🎁</div>
-          <div class="msg me">Уже написала пост ✅</div>
-          <div class="msg bot">Ты молодец! 🔥 Пришли ссылку, посмотрю. Завтра расскажу про первых подписчиков.</div>
-        </div>
+    <div class="phone reveal" aria-label="Пример диалога с ботом">
+      <div class="ph-top"><i></i><div><b>Бот воронки</b>отвечает за секунды</div></div>
+      <div class="chat" id="chat">
+        <div class="msg bot">Привет! Я Юлия 👋 Держи подарок: «Первый вирусный пост за 15 минут» 🎁</div>
+        <div class="msg btns"><span>🎁 Забрать подарок</span></div>
+        <div class="msg me">Уже написала пост ✅</div>
+        <div class="msg bot">Вот это да, ты молодец! 🔥 Пришли ссылку — посмотрю. Завтра расскажу, как набрать первых подписчиков.</div>
       </div>
     </div>
   </section>
+
+  <div class="strip reveal">
+    <span><b>Живой бот</b> в Telegram, пройдите сами</span>
+    <span><b>Сайты</b> на трёх языках</span>
+    <span><b>ИИ-помощник</b> на сайте и в боте</span>
+    <span><b>Цены на сайте</b>, смета до оплаты</span>
+  </div>
 
   <!-- 2. Боль -->
-  <section class="blk wrap">
-    <div class="kick rv">Узнаёте себя?</div>
-    <h2 class="rv wide">Вы мастер своего дела. А в кошельке тишина</h2>
-    <div class="pains">
-      <div class="pain"><b>«Я много знаю и умею, а как это упаковать и продать, не понимаю»</b><span>Есть опыт и клиенты по рекомендации. Нет названия продукта, цены и понятного предложения.</span></div>
-      <div class="pain"><b>«Я не знаю, кто моя аудитория и что ей писать»</b><span>Каждый пост наугад. В одни дни охваты есть, в другие нет, и причину не видно.</span></div>
-      <div class="pain"><b>«Посты читают и лайкают, а покупать не приходят»</b><span>Подписчики есть, клиентов нет. Между «подписан» и «купил» пустота.</span></div>
-      <div class="pain"><b>«Целый день отвечаю в личке одно и то же»</b><span>Цены, сроки, «как записаться». Ответила поздно, и человек ушёл.</span></div>
-      <div class="pain"><b>«Клиент сказал “подумаю” и пропал»</b><span>Нет второго касания и места, где видно, кто остановился на каком шаге.</span></div>
-      <div class="pain"><b>«Продукт есть, но продаётся, только когда я рядом»</b><span>Нельзя взять отпуск. Каждый месяц начинается с нуля.</span></div>
+  <section class="block wrap">
+    <span class="eyebrow reveal">Узнаёте себя?</span>
+    <h2 class="reveal">Вы всё знаете и умеете, а денег с этого нет</h2>
+    <div class="pains6">
+      <div class="pain6 reveal"><b>«Я много знаю и умею, а как это упаковать и продать, не понимаю»</b><span>Есть опыт и клиенты по рекомендации. Нет названия продукта, цены и понятного предложения.</span></div>
+      <div class="pain6 reveal"><b>«Я не знаю, кто моя аудитория и что ей писать»</b><span>Каждый пост наугад. В одни дни охваты есть, в другие нет, и причину не видно.</span></div>
+      <div class="pain6 reveal"><b>«Посты читают и лайкают, а покупать не приходят»</b><span>Подписчики есть, клиентов нет. Между «подписан» и «купил» пустота.</span></div>
+      <div class="pain6 reveal"><b>«Целый день отвечаю в личке одно и то же»</b><span>Цены, сроки, «как записаться». Ответила поздно, и человек ушёл.</span></div>
+      <div class="pain6 reveal"><b>«Клиент сказал “подумаю” и пропал»</b><span>Нет второго касания и места, где видно, кто остановился на каком шаге.</span></div>
+      <div class="pain6 reveal"><b>«Продукт есть, но продаётся, только когда я рядом»</b><span>Нельзя взять отпуск. Каждый месяц начинается с нуля.</span></div>
     </div>
-    <div class="bridge rv">Вы не ленивая и не бездарная. У вас просто нет системы между постом и оплатой. Соберём её.</div>
+    <div class="bridge reveal">Это не про лень и не про талант. Это про отсутствие системы между постом и оплатой. Её можно собрать.</div>
   </section>
 
-  <!-- 3. Система: плитки разного размера -->
-  <section class="blk wrap" id="system">
-    <div class="kick rv">Как я это решаю</div>
-    <h2 class="rv wide">Шесть деталей. Одна система, которая продаёт</h2>
-    <div class="bento">
-      <div class="tile t-a rv"><h3>Упаковка</h3><div class="pb">«Знаю много, а продать не умею»</div><p>Из вашего опыта выделяю продукт, название, цену и предложение. На выходе понятная страница продукта.</p></div>
-      <div class="tile t-b rv" style="--d:.08s"><h3>Фабрика контента</h3><div class="pb">«Не знаю, что писать»</div><p>Рубрики, план, тексты, карусели и ролики по форматам, которые уже работают на рынке.</p></div>
-      <div class="tile t-c rv"><h3>Воронка</h3><div class="pb">«Читают и уходят»</div><p>Путь от поста до заявки или оплаты.</p>
-        <div class="flow"><i></i><u></u><i></i><u></u><i></i><u></u><i></i></div>
-        <div class="flowl"><span>пост</span><span>бот</span><span>подарок</span><span>заявка</span></div></div>
-      <div class="tile t-d rv" style="--d:.08s"><h3>Бот с базой клиентов</h3><div class="pb">«Отвечаю руками и теряю людей»</div><p>Помнит каждого и записывает на созвон.</p>
-        <div class="crmrows"><div>Подписчик<em>новый</em></div><div>Подписчик<em class="w3">получил подарок</em></div><div>Подписчик<em class="w2">записан на созвон</em></div></div></div>
-      <div class="tile t-e rv" style="--d:.16s"><h3>ИИ-ассистент</h3><div class="pb">«Одни и те же вопросы каждый день»</div><p>Отвечает по вашим правилам, честно говорит, что он ИИ, и передаёт сложное вам.</p></div>
-      <div class="tile t-f rv">
-        <div><h3>Личный ИИ-агент и автопостинг</h3><div class="pb">«Не хватает рук и времени»</div><p>Помощник с памятью и командой, выкладка во все соцсети по расписанию и утренний отчёт с цифрами. Такой работает у меня: Jarvis.</p></div>
-        <div class="jar"><div><b>8</b>файлов памяти</div><div><b>3</b>помощника</div><div><b>381</b>файл знаний</div></div>
-      </div>
+  <!-- 3. Как решаем -->
+  <section class="block wrap" id="system">
+    <span class="eyebrow reveal">Как мы это решаем</span>
+    <h2 class="reveal">Шесть частей, которые превращают экспертность в продажи</h2>
+    <div class="parts">
+      <div class="part reveal"><h3>Упаковка</h3><div class="pb">«Знаю много, а продать не умею»</div><p>Из вашего опыта выделяем продукт, название, цену и предложение. На выходе понятная страница продукта.</p></div>
+      <div class="part reveal"><h3>Фабрика контента</h3><div class="pb">«Не знаю, что писать»</div><p>Рубрики, план, тексты, карусели и ролики по форматам, которые уже работают на рынке.</p></div>
+      <div class="part reveal"><h3>Воронка</h3><div class="pb">«Читают и уходят»</div><p>Путь от поста до заявки или оплаты: подарок, прогрев, предложение.</p></div>
+      <div class="part reveal"><h3>Бот с базой клиентов</h3><div class="pb">«Отвечаю руками и теряю людей»</div><p>Бот отвечает, собирает заявки, помнит каждого человека и записывает на созвон.</p></div>
+      <div class="part reveal"><h3>ИИ-ассистент</h3><div class="pb">«Одни и те же вопросы каждый день»</div><p>Отвечает по вашим правилам, честно говорит, что он ИИ, и передаёт сложное вам.</p></div>
+      <div class="part reveal"><h3>Личный ИИ-агент и автопостинг</h3><div class="pb">«Не хватает рук и времени»</div><p>Помощник с памятью и командой, выкладка во все соцсети по расписанию, утренний отчёт с цифрами.</p></div>
     </div>
   </section>
 
-  <!-- 4. Кто делает: Юлия -->
-  <section class="blk wrap" id="about">
-    <div class="mani">
-      <div class="ph rv"><img src="img/yulia.jpg" alt="Юлия Жаркова за работой над агентством ZHAR" width="508" height="1100" loading="lazy"></div>
-      <div>
-        <div class="kick rv">Кто будет делать ваш проект</div>
-        <blockquote class="rv">Я строю системы продаж и сама на них работаю. Каждый проект веду лично, без цепочки менеджеров.</blockquote>
-        <p class="rv"><b>Юлия Жаркова, хозяйка агентства ZHAR.</b> Моя воронка, бот с оплатой, автопостинг и личный ИИ-агент работают на моих аккаунтах. То, что продаю вам, я сначала проверила на себе.</p>
-        <div class="stats rv">
-          <div><b data-count="18">18</b><span>работ можно открыть и пройти</span></div>
-          <div><b data-count="3">3</b><span>языка на страницах</span></div>
-          <div><b data-count="24">24</b><span>часа до разбора вашего проекта</span></div>
-        </div>
-        <div class="links rv"><a class="ln" href="https://www.threads.com/@zharkova_biz" target="_blank" rel="noopener">Threads</a><a class="ln" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Telegram</a></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. Цены -->
-  <section class="blk wrap" id="packs">
-    <div class="kick rv">Цены</div>
-    <h2 class="rv wide">Цены без тумана. Состав, срок и цена до оплаты</h2>
-    <div class="packs">
-      <article class="pack rv">
+  <!-- 4. Пакеты -->
+  <section class="block wrap" id="packs">
+    <span class="eyebrow reveal">Цены</span>
+    <h2 class="reveal">Три пакета. Состав, срок и цена фиксируются до оплаты</h2>
+    <div class="packs2">
+      <article class="card pack reveal">
         <span class="tag">Сайт и заявки</span>
         <h3>Страница, которая приводит заявки</h3>
         <p class="for">Подходит, если продукт уже есть, а нормальной страницы нет.</p>
@@ -128,8 +107,8 @@
         <p class="price">от 25 000 ₽</p>
         <a class="btn btn-ghost" href="#quiz" data-pack="Сайт и заявки">Обсудить этот пакет</a>
       </article>
-      <article class="pack hot rv" style="--d:.08s">
-        <span class="hotbadge">Для большинства</span>
+      <article class="card pack hot reveal">
+        <span class="badge-hot">Для большинства</span>
         <span class="tag">Бот и воронка</span>
         <h3>Подписчики начинают покупать</h3>
         <p class="for">Подходит, если читают и лайкают, а покупать не приходят.</p>
@@ -145,7 +124,7 @@
         <p class="price">от 120 000 ₽</p>
         <a class="btn btn-lg" href="#quiz" data-pack="Бот и воронка">Обсудить этот пакет</a>
       </article>
-      <article class="pack rv" style="--d:.16s">
+      <article class="card pack reveal">
         <span class="tag">Система под ключ</span>
         <h3>Вся система во всех соцсетях</h3>
         <p class="for">Подходит, если нужна готовая система, а не набор отдельных частей.</p>
@@ -161,114 +140,114 @@
         <a class="btn btn-ghost" href="#quiz" data-pack="Система под ключ">Обсудить этот пакет</a>
       </article>
     </div>
-    <p class="gnote rv">Цены «от»: точную смету называю после разбора и до оплаты, оплата по этапам. Каждую услугу можно заказать отдельно. Не уверены, какой пакет нужен? <a class="lnk" href="#quiz">Ответьте на 4 вопроса, подскажу</a>. <a class="lnk" href="price.html">Полный прайс</a><br>Для амбассадоров клуба есть отдельное готовое предложение: <a class="lnk" href="https://3671407-cell.github.io/julia-media/portfolio/works/predlozhenie.pdf" target="_blank" rel="noopener">смотреть PDF</a></p>
+    <p class="gnote reveal">Цены «от»: точную смету называем после разбора и до оплаты, оплата по этапам. Каждую услугу можно заказать отдельно. Не уверены, какой пакет нужен? <a class="link" href="#quiz">Ответьте на 4 вопроса, подскажем</a>. <a class="link" href="price.html">Полный прайс →</a><br>Для амбассадоров клуба есть отдельное готовое предложение: <a class="link" href="https://3671407-cell.github.io/julia-media/portfolio/works/predlozhenie.pdf" target="_blank" rel="noopener">смотреть PDF →</a></p>
   </section>
 
-  <!-- 6. Работы -->
-  <section class="blk wrap" id="cases">
-    <div class="kick rv">Что я построила</div>
-    <h2 class="rv wide">Я не рассказываю, я показываю. Откройте и пройдите сами</h2>
+  <!-- 5. Работы: 6 на главной, остальные по кнопке -->
+  <section class="block wrap" id="cases">
+    <span class="eyebrow reveal">Что мы построили</span>
+    <h2 class="reveal">Всё, что продаём, мы сначала сделали для себя. Откройте и пройдите сами</h2>
     <div class="gal" id="all-works">
-      <article class="gcard rv">
+      <article class="card gcard reveal">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/funnel/" target="_blank" rel="noopener"><img src="../../img/senler-voronka.png" alt="Схема пути клиента в боте: два пути сходятся на втором видео" loading="lazy"></a>
         <div class="gi"><div class="meta">бот · воронка · Senler</div><h3>Воронка бота в Senler</h3><p>Схема пути человека: приветствие, кружок, подарок, видео, запись на разговор. Бот с CRM: база подписчиков, аналитика, личные сообщения и запись на созвон, все клиенты остаются у вас.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/funnel/" target="_blank" rel="noopener">Открыть схему →</a></div>
       </article>
-      <article class="gcard rv">
+      <article class="card gcard reveal">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/amb-k7q2m9/" target="_blank" rel="noopener"><img src="../../img/amb.png" alt="Страница амбассадора клуба путешествий: море, заголовок и кнопки" loading="lazy"></a>
         <div class="gi"><div class="meta">сайт · 3 языка · видеоблог · ИИ-чат</div><h3>Страница амбассадора клуба путешествий</h3><p>Личный сайт на трёх языках: русском, английском и турецком. Видеоблог, подбор поездки под семью, карта поездки и чат с ИИ-помощником.</p><a class="go" href="https://3671407-cell.github.io/julia-media/amb-k7q2m9/" target="_blank" rel="noopener">Открыть сайт →</a></div>
       </article>
-      <article class="gcard rv">
+      <article class="card gcard reveal">
         <a class="gimg" href="https://t.me/julia_travelclub_ai_bot" target="_blank" rel="noopener"><img src="../../img/ai-assistant.png" alt="Окно чата ИИ-помощника на сайте" loading="lazy"></a>
         <div class="gi"><div class="meta">ИИ-агент · чат на сайте · Telegram</div><h3>ИИ-помощник для сайта и Telegram</h3><p>Отвечает на вопросы по утверждённым правилам, не обещает доход, честно говорит, что он ИИ, и передаёт заявку владельцу. Один и тот же помощник работает на сайте и в боте.</p><a class="go" href="https://t.me/julia_travelclub_ai_bot" target="_blank" rel="noopener">Попробовать в Telegram →</a></div>
       </article>
-      <article class="gcard rv">
+      <article class="card gcard reveal">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/karta/" target="_blank" rel="noopener"><img src="../../img/karta.png" alt="Интерактивная «Карта поездки»: игра из семи вопросов" loading="lazy"></a>
         <div class="gi"><div class="meta">игра · лидмагнит · дизайн</div><h3>«Карта поездки»: игра-подарок</h3><p>Интерактивная игра из семи вопросов. Человек выбирает настроение, получает постер маршрута и сохраняет его картинкой или в PDF.</p><a class="go" href="https://3671407-cell.github.io/julia-media/karta/" target="_blank" rel="noopener">Открыть сайт →</a></div>
       </article>
-      <article class="gcard rv">
+      <article class="card gcard reveal">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/guzel/" target="_blank" rel="noopener"><img src="../../img/guzel.png" alt="Сайт для Гузель: заголовок и схема «три в одном»" loading="lazy"></a>
         <div class="gi"><div class="meta">лендинг · заявки · дизайн</div><h3>Сайт для Гузель</h3><p>Страница независимого партнёра: один понятный продукт, структура от боли к решению, форма заявки.</p><a class="go" href="https://3671407-cell.github.io/julia-media/guzel/" target="_blank" rel="noopener">Открыть сайт →</a></div>
       </article>
-      <article class="gcard rv">
+      <article class="card gcard reveal">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/yukassa/" target="_blank" rel="noopener"><img src="../../img/yukassa.png" alt="Схема приёма оплаты: кнопка, страница продукта, ЮKassa, доступ, уведомление" loading="lazy"></a>
         <div class="gi"><div class="meta">оплата · ЮKassa · облако</div><h3>Приём оплаты через ЮKassa</h3><p>Оплата в боте: страница продукта с согласием, платёж в ЮKassa, доступ сразу после оплаты, чек для УСН и уведомление владельцу.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/yukassa/" target="_blank" rel="noopener">Открыть схему →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/vizitka/" target="_blank" rel="noopener"><img src="../../img/vizitka.png" alt="Сайт-визитка Юлии Жарковой: фото, имя и кнопка «Написать мне»" loading="lazy"></a>
         <div class="gi"><div class="meta">визитка · дизайн · анимация</div><h3>Визитка Юлии</h3><p>Одна страница, один шаг: человек видит, чем я занимаюсь, и сразу пишет в Telegram.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/vizitka/" target="_blank" rel="noopener">Открыть сайт →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/" target="_blank" rel="noopener"><img src="../../img/agency.png" alt="Сайт агентства ZHAR: заголовок «Боты, воронки и сайты, которые превращают подписчиков в заявки»" loading="lazy"></a>
         <div class="gi"><div class="meta">сайт услуг · квиз · демо бота</div><h3>Сайт агентства ZHAR</h3><p>Услуги, квиз, демо бота и частые вопросы. Всё ведёт к бесплатному разбору.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/" target="_blank" rel="noopener">Открыть сайт →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/nabor.html" target="_blank" rel="noopener"><img src="../../img/nabor.png" alt="Страница цифрового продукта «Набор контент-мейкера»: 100 заголовков, 20 шаблонов, 30 дней" loading="lazy"></a>
         <div class="gi"><div class="meta">страница продукта · продажи</div><h3>Страница набора контент-мейкера</h3><p>Страница цифрового продукта: что внутри, для кого и сколько стоит.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/nabor.html" target="_blank" rel="noopener">Открыть сайт →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/price.html" target="_blank" rel="noopener"><img src="../../img/price.png" alt="Страница цен агентства ZHAR с пакетами услуг" loading="lazy"></a>
         <div class="gi"><div class="meta">прайс · пакеты</div><h3>Цены ZHAR</h3><p>Три пакета и список услуг. Клиент сам выбирает, с чего начать.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/agency/price.html" target="_blank" rel="noopener">Открыть сайт →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/strategy/" target="_blank" rel="noopener"><img src="../../img/strategiya.png" alt="Страница со стратегией и контент-планом на 90 дней" loading="lazy"></a>
         <div class="gi"><div class="meta">стратегия · контент-план · Telegram · ВК</div><h3>План продвижения на 90 дней</h3><p>Стратегия и контент-план для Telegram и ВКонтакте: рубрики, календарь, тексты первых двух недель и проверка критиком.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/strategy/" target="_blank" rel="noopener">Открыть документ →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/predlozhenie.pdf" target="_blank" rel="noopener"><img src="../../img/predlozhenie.png" alt="Предложение для амбассадоров: сколько это стоит на рынке и у нас" loading="lazy"></a>
         <div class="gi"><div class="meta">предложение · PDF · прайс</div><h3>Предложение для амбассадоров</h3><p>Коммерческое предложение для амбассадоров клуба в PDF: что входит, сколько стоит на рынке и сколько у нас, как считается поддержка.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/predlozhenie.pdf" target="_blank" rel="noopener">Открыть PDF →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/autoposting/" target="_blank" rel="noopener"><img src="../../img/avtoposting.png" alt="Схема автопостинга: расписание, автозапуск, соцсети, утренний отчёт, проверка систем" loading="lazy"></a>
         <div class="gi"><div class="meta">автоматизация · Threads · Telegram · ВК</div><h3>Автопостинг во все соцсети</h3><p>Выкладка в Threads, Telegram и ВКонтакте по расписанию, утренний отчёт со всеми цифрами в Telegram, проверка ключей и систем, чтобы ничего не останавливалось.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/autoposting/" target="_blank" rel="noopener">Открыть схему →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/fabrika/" target="_blank" rel="noopener"><img src="../../img/fabrika.png" alt="Схема фабрики контента: идеи, тексты, карусели, ролики, подписи" loading="lazy"></a>
         <div class="gi"><div class="meta">контент · карусели · ролики</div><h3>Фабрика контента</h3><p>Единый процесс: рынок и идеи, тексты с проверкой критиком, карусели, ролики в семи форматах, подписи для всех площадок.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/fabrika/" target="_blank" rel="noopener">Открыть схему →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/german/" target="_blank" rel="noopener"><img src="../../img/german-app.png" alt="Стартовый экран игры для изучения немецкого: миссии, навыки и уровни" loading="lazy"></a>
         <div class="gi"><div class="meta">приложение · обучение · игра</div><h3>Приложение для изучения немецкого</h3><p>Игровое приложение с нуля до первого экзамена: миссии по 4–5 минут, пять навыков, опыт и уровни, ошибки возвращаются, цель дня.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/german/" target="_blank" rel="noopener">Попробовать →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/jarvis/" target="_blank" rel="noopener"><img src="../../img/jarvis.png" alt="Схема личного ИИ-агента: память, помощники, навыки, знания" loading="lazy"></a>
         <div class="gi"><div class="meta">ИИ-агент · память · навыки</div><h3>Личный ИИ-агент Jarvis</h3><p>Агент с памятью и командой помощников: ведёт проекты, анализирует рынок, ставит задачи исполнителям и принимает результат. 8 навыков и библиотека из 381 файла знаний.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/jarvis/" target="_blank" rel="noopener">Открыть структуру →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/reels-analysis/" target="_blank" rel="noopener"><img src="../../img/analitika.png" alt="Схема анализа роликов: от 4 594 видео к 7 форматам и 70 сценариям" loading="lazy"></a>
         <div class="gi"><div class="meta">аналитика · видео · форматы</div><h3>Аналитика роликов: от 4 600 видео к 7 форматам</h3><p>Собрали около 4 600 коротких видео про путешествия, отобрали 1 000 лучших и вывели 7 форматов, которые можно масштабировать. Готовы 70 сценариев.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/reels-analysis/" target="_blank" rel="noopener">Открыть анализ →</a></div>
       </article>
-      <article class="gcard rv more">
+      <article class="card gcard reveal more">
         <a class="gimg" href="https://3671407-cell.github.io/julia-media/portfolio/works/copywriter/" target="_blank" rel="noopener"><img src="../../img/kopirajter.png" alt="Схема бота-копирайтера: диалог, оркестратор, аналитик стиля, проверка, память" loading="lazy"></a>
         <div class="gi"><div class="meta">ИИ-агенты · Telegram · контент</div><h3>Бот-копирайтер: команда из 13 агентов</h3><p>Telegram-бот для личного канала: оркестратор, аналитик стиля, копирайтер, редактор, проверка фактов и правил, память на ответах автора.</p><a class="go" href="https://3671407-cell.github.io/julia-media/portfolio/works/copywriter/" target="_blank" rel="noopener">Открыть структуру →</a></div>
       </article>
     </div>
-    <button class="btn btn-ghost morebtn" type="button" id="morebtn">Показать все работы (18)</button>
-    <p class="gnote rv" style="text-align:center">Страницы доступны на русском, <a class="lnk" href="../../en/" target="_blank" rel="noopener">английском</a> и <a class="lnk" href="../../tr/" target="_blank" rel="noopener">турецком</a> языках.</p>
+    <button class="btn btn-ghost more-btn" type="button" id="morebtn">Показать все работы (18)</button>
+    <p class="gnote reveal">Страницы доступны на русском, <a class="link" href="../../en/" target="_blank" rel="noopener">английском</a> и <a class="link" href="../../tr/" target="_blank" rel="noopener">турецком</a> языках.</p>
   </section>
 
-  <!-- 7. База клиентов -->
-  <section class="blk wrap">
+  <!-- 6. CRM простыми словами -->
+  <section class="block wrap">
     <div class="crm">
-      <div>
-        <div class="kick rv">База клиентов</div>
-        <h2 class="rv">Ваши клиенты принадлежат вам, а не чужой соцсети</h2>
-        <p class="sub rv">Бот работает вместе с базой клиентов (CRM). Если площадку закроют или упадёт охват, люди остаются у вас.</p>
+      <div class="reveal">
+        <span class="eyebrow">База клиентов</span>
+        <h2>Все ваши подписчики и клиенты в одном месте, а не в чужой соцсети</h2>
+        <p class="sub">Бот работает вместе с базой (CRM). Если площадку закроют или упадёт охват, люди остаются у вас.</p>
       </div>
-      <ul>
-        <li class="rv">Кто пришёл<span>каждый подписчик и заявка в одной базе</span></li>
-        <li class="rv">На каком шаге остановился<span>видно, кого дожать, а кого оставить</span></li>
-        <li class="rv">Кому написать<span>личные сообщения и рассылки прямо из бота</span></li>
-        <li class="rv">Кто записан на созвон<span>время попадает в календарь</span></li>
+      <ul class="reveal">
+        <li><b>Кто пришёл</b><span>каждый подписчик и заявка в одной базе</span></li>
+        <li><b>На каком шаге остановился</b><span>видно, кого дожать, а кого оставить</span></li>
+        <li><b>Кому написать</b><span>личные сообщения и рассылки прямо из бота</span></li>
+        <li><b>Кто записан на созвон</b><span>время попадает в календарь</span></li>
       </ul>
     </div>
   </section>
 
-  <!-- 8. Созвон -->
-  <section class="blk wrap" id="call" style="padding-top:40px">
-    <div class="call rv">
+  <!-- 7. Созвон -->
+  <section class="block wrap" id="call">
+    <div class="call reveal">
       <div>
-        <div class="kick">Разговор на 20 минут</div>
-        <h2>20 минут. Скажу честно, чего вам не хватает</h2>
+        <span class="eyebrow">Разговор на 20 минут</span>
+        <h2>Разберём ваш проект голосом</h2>
         <ul>
           <li>Покажу, как это работает на моих проектах</li>
           <li>Отвечу на вопросы по вашему</li>
@@ -277,67 +256,88 @@
       </div>
       <div class="side">
         <div class="big">20 мин</div>
-        <p>по Zoom, время согласуем в Telegram. Запись по календарю с автоматической ссылкой и напоминанием подключаю клиентам в пакете «Бот и воронка».</p>
-        <a class="btn btn-lg" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Выбрать время</a>
+        <p>по Zoom, время согласуем в Telegram. Запись по календарю с автоматической ссылкой и напоминанием подключаем клиентам в пакете «Бот и воронка».</p>
+        <a class="btn btn-lg" id="callbtn" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Выбрать время</a>
       </div>
     </div>
   </section>
 
-  <!-- 9. Как работаем -->
-  <section class="blk wrap">
-    <div class="kick rv">Как работаем</div>
-    <h2 class="rv wide">Четыре шага. Не понравился этап, следующий не оплачиваете</h2>
-    <div class="steps" id="steps">
-      <div class="fillbar"></div>
-      <div class="step rv"><div class="dot">1</div><h3>Разбор</h3><p>Смотрю продукт и соцсети, через 24 часа присылаю план</p></div>
-      <div class="step rv" style="--d:.12s"><div class="dot">2</div><h3>Смета</h3><p>Схема, цена и сроки фиксируются до оплаты</p></div>
-      <div class="step rv" style="--d:.24s"><div class="dot">3</div><h3>Запуск</h3><p>Собираю, тестирую, показываю каждый этап</p></div>
-      <div class="step rv" style="--d:.36s"><div class="dot">4</div><h3>Рост</h3><p>Смотрим цифры и усиливаем то, что приносит заявки</p></div>
+  <!-- 8. О Юлии -->
+  <section class="block wrap" id="about">
+    <div class="about2">
+      <div class="photo reveal"><img src="img/yulia.jpg" alt="Юлия Жаркова, основатель ZHAR" width="508" height="1100" loading="lazy"></div>
+      <div class="reveal">
+        <span class="eyebrow">Кто будет делать</span>
+        <blockquote>«Я строю системы продаж и сама на них работаю. Каждый проект веду лично, без цепочки менеджеров»</blockquote>
+        <p><b>Юлия Жаркова, основатель ZHAR.</b> Мои воронка, бот с оплатой, автопостинг и личный ИИ-агент Jarvis работают на моих аккаунтах. То, что продаю вам, я сначала проверила на себе.</p>
+        <div class="stat3">
+          <div><b>18</b><span>работ можно открыть и пройти</span></div>
+          <div><b>3</b><span>языка на страницах</span></div>
+          <div><b>24 ч</b><span>до разбора вашего проекта</span></div>
+        </div>
+        <div class="about-links" style="margin-top:22px">
+          <a class="link" href="https://www.threads.com/@zharkova_biz" target="_blank" rel="noopener">Threads →</a>
+          <a class="link" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Telegram →</a>
+        </div>
+      </div>
     </div>
-    <div class="terms">
-      <div class="rv"><h3>Договор с ИП</h3><p>Официально, цена и сроки в договоре</p></div>
-      <div class="rv"><h3>Оплата по этапам</h3><p>Каждый этап принимаете сами</p></div>
-      <div class="rv"><h3>Всё ваше</h3><p>Бот, доступы, тексты и сайт принадлежат вам</p></div>
-      <div class="rv"><h3>Поддержка</h3><p>2 недели после запуска исправляю бесплатно</p></div>
+  </section>
+
+  <!-- 9. Как работаем и условия -->
+  <section class="block wrap">
+    <span class="eyebrow reveal">Как работаем</span>
+    <h2 class="reveal">Четыре шага. Платите за следующий, когда приняли предыдущий</h2>
+    <div class="steps">
+      <div class="card step reveal"><h3>Разбор</h3><p>Смотрим продукт и соцсети, через 24 часа присылаем план</p></div>
+      <div class="card step reveal"><h3>Смета</h3><p>Схема, цена и сроки фиксируются до оплаты</p></div>
+      <div class="card step reveal"><h3>Запуск</h3><p>Собираем, тестируем, показываем каждый этап</p></div>
+      <div class="card step reveal"><h3>Рост</h3><p>Смотрим цифры и усиливаем то, что приносит заявки</p></div>
     </div>
-    <div class="fit">
-      <div class="yes rv"><h3>Подхожу, если</h3><ul><li>у вас есть продукт или услуга и хоть немного аудитории</li><li>вы хотите, чтобы заявки и продажи шли без вас</li><li>вы готовы отвечать на вопросы и дать доступы</li></ul></div>
-      <div class="no rv"><h3>Не подхожу, если</h3><ul><li>нужен «миллион за неделю» с гарантией дохода</li><li>продукта пока нет совсем: сначала его надо придумать</li></ul></div>
+    <div class="guar">
+      <div class="card reveal"><h3>Договор с ИП</h3><p>Официально, цена и сроки в договоре</p></div>
+      <div class="card reveal"><h3>Оплата по этапам</h3><p>Каждый этап принимаете сами</p></div>
+      <div class="card reveal"><h3>Всё ваше</h3><p>Бот, доступы, тексты и сайт принадлежат вам</p></div>
+      <div class="card reveal"><h3>Поддержка</h3><p>2 недели после запуска исправляем бесплатно</p></div>
     </div>
-    <div class="first rv">
+    <div class="fit-grid reveal">
+      <div class="card yes"><h3>Подходим, если</h3><ul><li>у вас есть продукт или услуга и хоть немного аудитории</li><li>хотите, чтобы заявки и продажи шли без вас</li><li>готовы отвечать на вопросы и дать доступы</li></ul></div>
+      <div class="card no"><h3>Не подходим, если</h3><ul><li>нужен «миллион за неделю» с гарантией дохода</li><li>продукта пока нет совсем: сначала его надо придумать</li></ul></div>
+    </div>
+    <div class="first reveal">
       <div>
         <h3>Первые проекты по специальной цене</h3>
-        <p>Беру несколько проектов дешевле обычного. Взамен вы честно расскажете о результате, и ваш отзыв появится здесь. Условия фиксируем письменно.</p>
+        <p>Берём несколько проектов дешевле обычного. Взамен вы честно расскажете о результате, и ваш отзыв появится здесь. Условия фиксируем письменно.</p>
       </div>
       <a class="btn btn-lg" href="#quiz" data-pack="Первые проекты">Хочу в число первых</a>
     </div>
   </section>
 
-  <!-- 10. Вопросы -->
-  <section class="blk wrap" id="faq">
-    <div class="kick rv">Вопросы</div>
-    <h2 class="rv wide">Спрашивайте. Отвечаю без воды</h2>
-    <div class="faq rv">
+  <!-- 10. FAQ: возражения первыми -->
+  <section class="block wrap" id="faq">
+    <span class="eyebrow reveal">Вопросы</span>
+    <h2 class="reveal">Вопросы, которые вы хотели задать</h2>
+    <div class="faq reveal">
       <details><summary>У меня маленькая аудитория. Мне это подойдёт?</summary><p>Да. Система нужна как раз затем, чтобы каждый пришедший человек не терялся. Лучше начать до того, как подписчиков станет много: воронка и бот будут готовы к росту.</p></details>
-      <details><summary>Я не разбираюсь в технике</summary><p>Техническое задание не нужно. На разборе я задам вопросы и сама соберу задание. От вас: рассказать о продукте, ответить на вопросы и дать доступы.</p></details>
-      <details><summary>А если люди не купят?</summary><p>Гарантий дохода не даю, и никто честно дать не может. Я строю систему, показываю цифры на каждом шаге (сколько пришло, сколько дошло до заявки) и усиливаю то, что работает.</p></details>
-      <details><summary>Чем это лучше конструктора бота за 0 ₽?</summary><p>Конструктор даёт инструмент, а я даю результат: продукт, тексты воронки, подарок, прогрев, настроенную базу клиентов и запись на созвон. Вы не тратите недели на настройку и ошибки.</p></details>
-      <details><summary>Почему вам можно доверять, если вы только открылись?</summary><p>Вы можете проверить сами: открыть мои работы, пройти живого бота и посмотреть, как он устроен. Цена и состав фиксируются до оплаты, платите по этапам. Договор оформляется с ИП.</p></details>
+      <details><summary>Я не разбираюсь в технике</summary><p>Техническое задание не нужно. На разборе мы зададим вопросы и сами соберём задание. От вас: рассказать о продукте, ответить на вопросы и дать доступы.</p></details>
+      <details><summary>А если люди не купят?</summary><p>Гарантий дохода не даём, и никто честно дать не может. Мы строим систему, показываем цифры на каждом шаге (сколько пришло, сколько дошло до заявки) и усиливаем то, что работает.</p></details>
+      <details><summary>Чем это лучше конструктора бота за 0 ₽?</summary><p>Конструктор даёт инструмент, а мы даём результат: продукт, тексты воронки, подарок, прогрев, настроенную базу клиентов и запись на созвон. Вы не тратите недели на настройку и ошибки.</p></details>
+      <details><summary>Почему вам можно доверять, если вы только открылись?</summary><p>Вы можете проверить сами: открыть наши работы, пройти живого бота и посмотреть, как он устроен. Цена и состав фиксируются до оплаты, платите по этапам. Договор оформляется с ИП.</p></details>
       <details><summary>Сколько времени займёт?</summary><p>Сайт и заявки: 5–7 дней. Бот и воронка: 2–3 недели. Система под ключ: 4–8 недель.</p></details>
-      <details><summary>Что такое база клиентов (CRM) в боте?</summary><p>Это ваша база подписчиков и клиентов внутри бота. Вы видите, кто пришёл и на каком шаге, анализируете аудиторию, пишете людям в личные сообщения и отправляете рассылки. Клиента можно записать на созвон, и время попадает в календарь. Все контакты остаются у вас. Набор функций зависит от тарифа сервиса, на котором работает бот, я подберу подходящий на разборе.</p></details>
+      <details><summary>Что такое база клиентов (CRM) в боте?</summary><p>Это ваша база подписчиков и клиентов внутри бота. Вы видите, кто пришёл и на каком шаге, анализируете аудиторию, пишете людям в личные сообщения и отправляете рассылки. Клиента можно записать на созвон, и время попадает в календарь. Все контакты остаются у вас. Набор функций зависит от тарифа сервиса, на котором работает бот, мы подберём подходящий на разборе.</p></details>
       <details><summary>Что такое ИИ-ассистент простыми словами?</summary><p>Это помощник, который понимает вопросы своими словами и отвечает по вашей базе знаний: ценам, услугам, правилам. Он честно говорит, что он ИИ, а сложные вопросы передаёт вам.</p></details>
-      <details><summary>Что будет, если Telegram заблокируют?</summary><p>Контакты клиентов хранятся у вас, а бота можно перенести на другую площадку. Запасной канал продумываю заранее.</p></details>
-      <details><summary>Что если что-то сломается?</summary><p>2 недели после запуска исправляю бесплатно. Дальше поддержка от 10 000 ₽ в месяц, по желанию.</p></details>
+      <details><summary>Что будет, если Telegram заблокируют?</summary><p>Контакты клиентов хранятся у вас, а бота можно перенести на другую площадку. Запасной канал продумываем заранее.</p></details>
+      <details><summary>Что если что-то сломается?</summary><p>2 недели после запуска исправляем бесплатно. Дальше поддержка от 10 000 ₽ в месяц, по желанию.</p></details>
     </div>
   </section>
 
-  <!-- 11. Форма -->
-  <section class="blk wrap" id="quiz" style="padding-top:40px">
-    <div class="final rv">
-      <h2>Покажу, где вы теряете клиентов</h2>
-      <p class="sub">Ответьте на 4 коротких вопроса. Пришлю разбор вашего проекта, план первых шагов и примерную стоимость. Без предоплаты и без обязательств.</p>
+  <!-- 11. Форма заявки и финальный призыв -->
+  <section class="block wrap" id="quiz">
+    <div class="final reveal">
+      <span class="eyebrow">Разбор за 24 часа</span>
+      <h2>Покажем, где вы теряете клиентов</h2>
+      <p class="sub">Ответьте на 4 коротких вопроса. Пришлём разбор вашего проекта, план первых шагов и примерную стоимость. Без предоплаты и без обязательств.</p>
     </div>
-    <div class="quiz rv">
+    <div class="quiz reveal" style="margin-left:auto;margin-right:auto">
       <div class="progress"><i id="qbar"></i></div>
       <div class="q-step" data-step="1">
         <div class="q-label">Шаг 1 из 4</div>
@@ -365,16 +365,16 @@
         <div class="q-title">Куда прислать разбор?</div>
         <input class="field" id="qcontact" type="text" placeholder="Ваш Telegram или телефон" autocomplete="tel">
         <input class="field" id="qlink" type="text" placeholder="Ссылка на ваш аккаунт или сайт (по желанию)" style="margin-top:10px">
-        <label class="consent"><input type="checkbox" id="qconsent"> <span>Даю <a class="lnk" href="consent.html" target="_blank">согласие на обработку персональных данных</a> и принимаю <a class="lnk" href="privacy.html" target="_blank">политику конфиденциальности</a></span></label>
+        <label class="consent"><input type="checkbox" id="qconsent"> <span>Даю <a class="link" href="consent.html" target="_blank">согласие на обработку персональных данных</a> и принимаю <a class="link" href="privacy.html" target="_blank">политику конфиденциальности</a></span></label>
         <button class="btn btn-lg" type="button" id="qsend">Получить разбор за 24 часа</button>
       </div>
       <div class="q-step q-done" data-step="5" hidden>
         <div class="q-title">Заявка готова</div>
-        <p>Я открыла Telegram с готовым текстом заявки. <b>Нажмите «Отправить»</b>, и я отвечу в течение дня. Если Telegram не открылся, текст скопирован: вставьте его в чат по кнопке ниже.</p>
-        <p style="margin-top:12px">Хотите быстрее? Выберите время для разговора: <a class="lnk" href="#call">20 минут по Zoom</a>.</p>
-        <div style="margin-top:22px"><a class="btn btn-lg" id="qtg" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Открыть Telegram</a></div>
+        <p>Мы открыли Telegram с готовым текстом заявки. <b>Нажмите «Отправить»</b>, и мы ответим в течение дня. Если Telegram не открылся, текст скопирован: вставьте его в чат по кнопке ниже.</p>
+        <p style="margin-top:12px">Хотите быстрее? Выберите время для разговора: <a class="link" href="#call">20 минут по Zoom</a>.</p>
+        <div class="hero-ctas" style="justify-content:flex-start"><a class="btn btn-lg" id="qtg" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Открыть Telegram</a></div>
       </div>
-      <div class="q-nav"><button class="lnk" type="button" id="qback" style="background:none;border:0;border-bottom:1px solid rgba(92,200,255,.4);cursor:pointer" hidden>← Назад</button></div>
+      <div class="q-nav"><button class="link" type="button" id="qback" style="background:none;border:0;cursor:pointer" hidden>← Назад</button><span></span></div>
     </div>
   </section>
 </main>
@@ -384,7 +384,7 @@
     <div>
       <div>© 2026 ZHAR · Системы продаж из соцсетей</div>
       <div>ИП Журавлева Анжела Викторовна · ИНН 615109220341 · ОГРНИП 321774600807541</div>
-      <div>Связь: Telegram — <a href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener" style="color:var(--ice)">Юлия Жаркова</a></div>
+      <div>Связь: Telegram — <a class="link" href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Юлия Жаркова</a></div>
     </div>
     <div class="f-links">
       <a href="price.html">Цены</a>
@@ -393,6 +393,7 @@
       <a href="oferta.html">Оферта</a>
       <a href="privacy.html">Политика конфиденциальности</a>
       <a href="consent.html">Согласие на обработку данных</a>
+      <a href="https://t.me/IuliiaZharkova" target="_blank" rel="noopener">Telegram: Юлия Жаркова</a>
     </div>
   </div>
 </footer>
@@ -400,65 +401,117 @@
 <a class="btn btn-lg float" href="#quiz">Разбор за 24 часа</a>
 
 <script>
-(() => {
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  try { localStorage.setItem("zhar-theme", "a"); } catch (e) {}
 
-  /* появление блоков */
+  /* Появление при скролле */
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
-  $$(".rv, #steps").forEach(el => io.observe(el));
-  setTimeout(() => $$(".rv").forEach(el => el.classList.add("in")), 2500);
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  setTimeout(() => document.querySelectorAll(".reveal").forEach(el => el.classList.add("in")), 2000);
 
-  /* строки болей загораются, когда проходят середину экрана */
-  const pio = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("lit", e.isIntersecting)), { rootMargin: "-38% 0px -38% 0px" });
-  $$(".pain").forEach(el => pio.observe(el));
-
-  /* счётчики */
-  const cio = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return; cio.unobserve(e.target);
-    const to = +e.target.dataset.count; if (reduce) return;
-    const t0 = performance.now(), dur = 1300;
-    (function tick(t) { const p = Math.min(1, (t - t0) / dur); e.target.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); })(t0);
-  }), { threshold: .6 });
-  $$("[data-count]").forEach(el => cio.observe(el));
-
-  /* все работы */
-  const gal = $("#all-works"), mb = $("#morebtn");
-  mb.addEventListener("click", () => { const open = gal.classList.toggle("open"); mb.textContent = open ? "Свернуть" : "Показать все работы (18)"; if (open) $$(".rv", gal).forEach(el => el.classList.add("in")); });
-
-  /* диалог бота в первом экране */
+  /* Все работы по кнопке */
   (() => {
-    const chat = $("#chat"), msgs = $$(".msg", chat);
-    if (reduce) { msgs.forEach(m => m.classList.add("on")); return; }
-    const typing = document.createElement("div"); typing.className = "typing"; typing.innerHTML = "<i></i><i></i><i></i>"; typing.hidden = true; chat.appendChild(typing);
-    let i = 0;
-    function next() {
-      if (i >= msgs.length) { setTimeout(() => { msgs.forEach(m => m.classList.remove("on")); i = 0; next(); }, 5000); return; }
-      const m = msgs[i];
-      if (m.classList.contains("bot")) { chat.insertBefore(typing, m); typing.hidden = false; setTimeout(() => { typing.hidden = true; m.classList.add("on"); i++; setTimeout(next, 1100); }, 1200); }
-      else { m.classList.add("on"); i++; setTimeout(next, 1000); }
-    }
-    setTimeout(next, 2200);
+    const gal = document.getElementById("all-works"), btn = document.getElementById("morebtn");
+    btn.addEventListener("click", () => {
+      const open = gal.classList.toggle("open");
+      btn.textContent = open ? "Свернуть" : "Показать все работы (18)";
+      if (open) gal.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+    });
   })();
 
-  /* форма: открывает Telegram с готовым текстом и копирует его */
-  const answers = {}; let step = 1;
-  const steps = $$(".q-step"), bar = $("#qbar"), back = $("#qback");
-  function show(n) { step = n; steps.forEach(s => s.hidden = +s.dataset.step !== n); bar.style.width = Math.min(n, 4) * 25 + "%"; back.hidden = n === 1 || n === 5; }
-  $$(".opts").forEach(g => $$(".opt", g).forEach(o => o.addEventListener("click", () => { $$(".opt", g).forEach(x => x.setAttribute("aria-pressed", "false")); o.setAttribute("aria-pressed", "true"); answers[g.dataset.key] = o.textContent; setTimeout(() => show(step + 1), 220); })));
-  $$("[data-pack]").forEach(b => b.addEventListener("click", () => { answers["Интересует пакет"] = b.dataset.pack; }));
-  back.addEventListener("click", () => show(Math.max(1, step - 1)));
-  $("#qsend").addEventListener("click", () => {
-    const c = $("#qcontact"), k = $("#qconsent"), l = $("#qlink");
-    if (!c.value.trim()) { c.focus(); c.placeholder = "Оставьте Telegram или телефон"; return; }
-    if (!k.checked) { k.focus(); k.parentElement.style.color = "var(--red)"; return; }
-    const text = "Заявка на разбор за 24 часа\n" + Object.entries(answers).map(([a, b]) => a + ": " + b).join("\n") + (l.value.trim() ? "\nСсылка: " + l.value.trim() : "") + "\nКонтакт: " + c.value.trim();
-    const url = "https://t.me/IuliiaZharkova?text=" + encodeURIComponent(text);
-    $("#qtg").href = url;
-    try { navigator.clipboard.writeText(text); } catch (e) {}
-    show(5); window.open(url, "_blank", "noopener");
+  /* Живая переписка в демо */
+  (() => {
+    const chat = document.getElementById("chat");
+    const msgs = [...chat.querySelectorAll(".msg")];
+    if (reduceMotion) { msgs.forEach(m => m.classList.add("on")); return; }
+    const typing = document.createElement("div");
+    typing.className = "typing"; typing.innerHTML = "<i></i><i></i><i></i>"; typing.hidden = true;
+    chat.appendChild(typing);
+    let i = 0;
+    function next() {
+      if (i >= msgs.length) { setTimeout(() => { msgs.forEach(m => m.classList.remove("on")); i = 0; next(); }, 4000); return; }
+      const m = msgs[i], isBot = m.classList.contains("bot");
+      if (isBot) {
+        chat.insertBefore(typing, m); typing.hidden = false;
+        setTimeout(() => { typing.hidden = true; m.classList.add("on"); i++; setTimeout(next, 900); }, 1100);
+      } else { m.classList.add("on"); i++; setTimeout(next, 900); }
+    }
+    setTimeout(next, 600);
+  })();
+
+  /* Квиз: заявка открывает Telegram с готовым текстом и копируется в буфер */
+  const answers = {};
+  let step = 1;
+  const steps = [...document.querySelectorAll(".q-step")];
+  const bar = document.getElementById("qbar"), back = document.getElementById("qback");
+  function show(n) {
+    step = n;
+    steps.forEach(s => s.hidden = +s.dataset.step !== n);
+    bar.style.width = Math.min(n, 4) * 25 + "%";
+    back.hidden = n === 1 || n === 5;
+  }
+  document.querySelectorAll(".opts").forEach(group => {
+    group.querySelectorAll(".opt").forEach(o => o.addEventListener("click", () => {
+      group.querySelectorAll(".opt").forEach(x => x.setAttribute("aria-pressed", "false"));
+      o.setAttribute("aria-pressed", "true");
+      answers[group.dataset.key] = o.textContent;
+      setTimeout(() => show(step + 1), 220);
+    }));
   });
-})();
+  document.querySelectorAll("[data-pack]").forEach(b => b.addEventListener("click", () => { answers["Интересует пакет"] = b.dataset.pack; }));
+  back.addEventListener("click", () => show(Math.max(1, step - 1)));
+  document.getElementById("qsend").addEventListener("click", () => {
+    const contact = document.getElementById("qcontact"), consent = document.getElementById("qconsent"), link = document.getElementById("qlink");
+    if (!contact.value.trim()) { contact.focus(); contact.placeholder = "Оставьте Telegram или телефон"; return; }
+    if (!consent.checked) { consent.focus(); consent.parentElement.style.color = "var(--acc)"; return; }
+    const text = "Заявка на разбор за 24 часа\n" + Object.entries(answers).map(([k, v]) => k + ": " + v).join("\n") + (link.value.trim() ? "\nСсылка: " + link.value.trim() : "") + "\nКонтакт: " + contact.value.trim();
+    const url = "https://t.me/IuliiaZharkova?text=" + encodeURIComponent(text);
+    document.getElementById("qtg").href = url;
+    try { navigator.clipboard.writeText(text); } catch (e) {}
+    show(5);
+    window.open(url, "_blank", "noopener");
+  });
+
+  /* Звёзды: мерцают, дрейфуют, уходят от курсора и сдвигаются вслед за ним (глубина) */
+  (() => {
+    const cvs = document.getElementById("particles"), ctx = cvs.getContext("2d");
+    let w, h, st = [], mx = -999, my = -999, tx = 0, ty = 0, ox = 0, oy = 0;
+    const cols = ["255,255,255", "255,134,217", "190,150,255", "230,79,196"];
+    function resize() {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      w = innerWidth; h = innerHeight; cvs.width = w * dpr; cvs.height = h * dpr;
+      cvs.style.width = w + "px"; cvs.style.height = h + "px"; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.round(Math.min(170, (w * h) / 9000));
+      st = Array.from({ length: n }, () => { const z = Math.random(); return { x: Math.random() * w, y: Math.random() * h, z, r: .5 + z * 1.7, vx: (Math.random() - .5) * .08, vy: (Math.random() - .5) * .08, dx: 0, dy: 0, ph: Math.random() * 6.28, sp: .6 + Math.random() * 1.6, c: cols[(Math.random() * cols.length) | 0] }; });
+    }
+    function star(x, y, r, a, c) {
+      ctx.globalAlpha = a; ctx.fillStyle = `rgb(${c})`;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
+      if (r > 1.5) { ctx.strokeStyle = `rgb(${c})`; ctx.lineWidth = .6; ctx.globalAlpha = a * .55; ctx.beginPath(); ctx.moveTo(x - r * 3.2, y); ctx.lineTo(x + r * 3.2, y); ctx.moveTo(x, y - r * 3.2); ctx.lineTo(x, y + r * 3.2); ctx.stroke(); }
+    }
+    addEventListener("pointermove", e => { mx = e.clientX; my = e.clientY; tx = (e.clientX / w - .5); ty = (e.clientY / h - .5); }, { passive: true });
+    addEventListener("pointerleave", () => { mx = my = -999; });
+    addEventListener("resize", resize); resize();
+    if (reduceMotion) { ctx.clearRect(0, 0, w, h); st.forEach(s => star(s.x, s.y, s.r, .6, s.c)); return; }
+    function frame(t) {
+      ctx.clearRect(0, 0, w, h);
+      ox += (tx - ox) * .05; oy += (ty - oy) * .05;
+      for (const s of st) {
+        s.x += s.vx; s.y += s.vy;
+        if (s.x < -10) s.x = w + 10; if (s.x > w + 10) s.x = -10; if (s.y < -10) s.y = h + 10; if (s.y > h + 10) s.y = -10;
+        const px = s.x - ox * 70 * s.z, py = s.y - oy * 70 * s.z;
+        const ddx = px - mx, ddy = py - my, d = Math.hypot(ddx, ddy), R = 150;
+        let fx = 0, fy = 0, glow = 0;
+        if (d < R) { const k = (1 - d / R); fx = ddx / (d || 1) * k * 38 * (.4 + s.z); fy = ddy / (d || 1) * k * 38 * (.4 + s.z); glow = k; }
+        s.dx += (fx - s.dx) * .12; s.dy += (fy - s.dy) * .12;
+        const tw = .55 + .45 * Math.sin(t / 1000 * s.sp + s.ph);
+        star(px + s.dx, py + s.dy, s.r * (1 + glow * .9), Math.min(1, (.3 + s.z * .55) * tw + glow * .5), s.c);
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
 </script>
-<a href="../../" style="position:fixed;left:14px;bottom:14px;z-index:999;padding:9px 15px;border-radius:999px;background:#12284a;color:#fff;font:600 13px system-ui,sans-serif;text-decoration:none;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)">← Портфолио</a></body>
+<a href="../../" style="position:fixed;left:14px;bottom:14px;z-index:999;padding:9px 15px;border-radius:999px;background:#e64fc4;color:#fff;font:600 13px system-ui,sans-serif;text-decoration:none">← Портфолио</a></body>
 </html>
