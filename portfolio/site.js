@@ -65,7 +65,8 @@
   if (isPortfolioHome) { const st2 = document.createElement("style"); st2.textContent = "#top,.hero{scroll-margin-top:70px}body.zs-pad{padding-top:62px}"; document.head.appendChild(st2); }
 
   /* созвездие */
-  if (!document.getElementById("particles") && !document.getElementById("dust")) {
+  const dust = document.getElementById("dust"); if (dust) dust.style.display = "none";
+  if (!document.getElementById("particles")) {
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const cvs = document.createElement("canvas"); cvs.id = "particles"; cvs.setAttribute("aria-hidden", "true");
     cvs.style.cssText = "position:fixed;inset:0;z-index:-1;pointer-events:none";
