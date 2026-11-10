@@ -23,6 +23,7 @@
   .zs-top{position:fixed;top:0;left:0;right:0;z-index:2147483000;height:62px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 max(16px,calc((100vw - 1060px)/2));background:rgba(10,8,16,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.09);font:400 14.5px/1 Manrope,system-ui,sans-serif;color:#f6f3f9}
   .zs-top a{color:inherit;text-decoration:none}
   .zs-logo{font:500 21px/1 Unbounded,Manrope,sans-serif;letter-spacing:.22em;background:linear-gradient(100deg,#e64fc4,#ff86d9);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+  .zs-back{margin-right:auto;margin-left:6px;padding:8px 14px;border-radius:999px;border:1px solid rgba(230,79,196,.55);color:#ffd2f1!important;font-size:13px;font-weight:600;white-space:nowrap}.zs-back:hover{background:rgba(230,79,196,.18)}
   .zs-nav{display:flex;gap:26px;color:#bdb5cc}.zs-nav a:hover{color:#fff}
   .zs-r{display:flex;align-items:center;gap:14px}
   .zs-lang{display:flex;gap:4px}
@@ -36,8 +37,8 @@
   body.zs-pad{padding-top:62px}
   a.back,.lg,a[data-site="agency"]{display:none!important}
   .top .zs-lang{margin-left:auto;margin-right:14px}
-  @media(max-width:900px){.zs-nav{display:none}}
-  @media(max-width:640px){.zs-btn{display:none}.zs-top{height:56px}body.zs-pad{padding-top:56px}.zs-lang a{padding:5px 8px}}
+  @media(max-width:1000px){.zs-nav{display:none}}
+  @media(max-width:640px){.zs-back{padding:7px 10px;font-size:12px}.zs-btn{display:none}.zs-top{height:56px}body.zs-pad{padding-top:56px}.zs-lang a{padding:5px 8px}}
   `;
   const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
@@ -51,21 +52,19 @@
     /* ссылка «Работы» ведёт в портфолио выбранного языка */
     existing.querySelectorAll('.nav a').forEach(a => { if (/portfolio\.html$|^\.\.\/\.\.\/$/.test(a.getAttribute("href") || "")) a.href = LB; });
   } else {
-    const h = document.createElement("header"); h.className = "zs-top";
-    h.innerHTML = `<a class="zs-logo" href="${A}">ZHAR</a><nav class="zs-nav" aria-label="Menu"><a href="${A}#packs">${T.services}</a><a href="${LB}">${T.work}</a><a href="${A}price.html">${T.prices}</a><a href="${A}#faq">${T.faq}</a></nav><div class="zs-r">${sw()}<a class="zs-btn" href="${A}#quiz">${T.btn}</a></div>`;
+    const h = document.createElement("div"); h.className = "zs-top"; h.setAttribute("role", "banner");
+    h.innerHTML = `<a class="zs-logo" href="${A}">ZHAR</a>${onAgency ? "" : `<a class="zs-back" href="${A}">${T.site}</a>`}<nav class="zs-nav" aria-label="Menu"><a href="${A}#packs">${T.services}</a><a href="${LB}">${T.work}</a><a href="${A}price.html">${T.prices}</a><a href="${A}#faq">${T.faq}</a></nav><div class="zs-r">${sw()}<a class="zs-btn" href="${A}#quiz">${T.btn}</a></div>`;
     document.body.prepend(h); document.body.classList.add("zs-pad");
   }
   /* убрать старые кнопки возврата */
   document.querySelectorAll("a").forEach(a => { if (/^←/.test(a.textContent.trim()) && /^(\.\.\/)+$/.test(a.getAttribute("href") || "") && !a.classList.contains("zs-pill")) a.remove(); });
-  /* кнопки возврата */
+  /* на страницах с собственной шапкой (портфолио) прячем её: остаётся общая */
+  document.querySelectorAll("body > header:not(.zs-top)").forEach(h => { if (h.querySelector("nav#menu, nav .logo, .logo")) h.style.display = "none"; });
   const isPortfolioHome = /\/portfolio\/(en\/|tr\/)?(index\.html)?$/.test(path);
-  if (!isHome) {
-    if (!onAgency && !isPortfolioHome) { const a = document.createElement("a"); a.className = "zs-pill site"; a.href = A; a.textContent = T.site; document.body.appendChild(a); }
-    if (!isPortfolioHome) { const b = document.createElement("a"); b.className = "zs-pill all"; b.href = LB; b.textContent = T.all; document.body.appendChild(b); }
-  }
+  if (isPortfolioHome) { const st2 = document.createElement("style"); st2.textContent = "#top,.hero{scroll-margin-top:70px}body.zs-pad{padding-top:62px}"; document.head.appendChild(st2); }
 
   /* созвездие */
-  if (!document.getElementById("particles")) {
+  if (!document.getElementById("particles") && !document.getElementById("dust")) {
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const cvs = document.createElement("canvas"); cvs.id = "particles"; cvs.setAttribute("aria-hidden", "true");
     cvs.style.cssText = "position:fixed;inset:0;z-index:-1;pointer-events:none";
