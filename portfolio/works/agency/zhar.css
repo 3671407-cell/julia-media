@@ -322,7 +322,7 @@ body { font-size: 17px; }
 h1, h2 { font-weight: 500; }
 h3 { font-weight: 500; }
 .hero2 { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; padding: 84px 24px 56px; }
-.hero2 h1 { margin: 0; max-width: 22ch; text-wrap: wrap; font-size: clamp(30px, 5vw, 56px); font-weight: 500; text-align: left; }
+.hero2 h1 { margin: 0; max-width: 20ch; text-wrap: balance; font-size: clamp(30px, 5vw, 56px); font-weight: 500; text-align: left; }
 .hero2 .lead { margin: 24px 0 0; max-width: 560px; text-align: left; }
 .hero2 .hero-ctas { justify-content: flex-start; }
 .hero2 .cta-note { text-align: left; }
