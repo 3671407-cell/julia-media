@@ -29,7 +29,7 @@
   .zs-lang{display:flex;gap:4px}
   .zs-lang a{padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);font-size:12.5px;color:#bdb5cc}
   .zs-lang a[aria-current="true"]{background:linear-gradient(100deg,#e64fc4,#ff86d9);border-color:transparent;color:#fff;font-weight:600}
-  .zs-lang a:hover{color:#fff}
+  .zs-lang a:hover{color:#fff}.zs-lang a.zs-off{opacity:.35;pointer-events:none}
   .zs-btn{padding:11px 18px;border-radius:999px;background:linear-gradient(100deg,#e64fc4,#ff86d9);color:#fff!important;font-weight:600;font-size:13.5px}
   .zs-pill{position:fixed;left:14px;z-index:2147483000;padding:10px 16px;border-radius:999px;font:600 13.5px/1 system-ui,sans-serif;text-decoration:none;color:#fff;box-shadow:0 10px 30px -10px rgba(230,79,196,.65)}
   .zs-pill.site{bottom:62px;background:linear-gradient(100deg,#e64fc4,#8b5cf6)}
@@ -42,7 +42,8 @@
   `;
   const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
-  const sw = () => `<div class="zs-lang" role="group" aria-label="Language">` + ["ru", "en", "tr"].map(l => `<a href="${urlFor(l)}" hreflang="${l}"${l === lang ? ' aria-current="true"' : ""}>${l.toUpperCase()}</a>`).join("") + `</div>`;
+  const RU_ONLY = /\/works\/german\//.test(path);
+  const sw = () => `<div class="zs-lang" role="group" aria-label="Language">` + ["ru", "en", "tr"].map(l => (RU_ONLY && l !== "ru") ? `<a class="zs-off" title="Russian only" aria-disabled="true">${l.toUpperCase()}</a>` : `<a href="${urlFor(l)}" hreflang="${l}"${l === lang ? ' aria-current="true"' : ""}>${l.toUpperCase()}</a>`).join("") + `</div>`;
 
   const existing = document.querySelector("header.top .wrap");
   if (existing) {
