@@ -1,0 +1,398 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "ZHAR" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+      - navigation "Разделы" [ref=e5]:
+        - link "Как решаем" [ref=e6] [cursor=pointer]:
+          - /url: "#system"
+        - link "Цены" [ref=e7] [cursor=pointer]:
+          - /url: "#packs"
+        - link "Работы" [ref=e8] [cursor=pointer]:
+          - /url: "#cases"
+        - link "Вопросы" [ref=e9] [cursor=pointer]:
+          - /url: "#faq"
+      - group "Language" [ref=e10]:
+        - link "RU" [ref=e11] [cursor=pointer]:
+          - /url: http://localhost:8766/portfolio/works/agency/
+        - link "EN" [ref=e12] [cursor=pointer]:
+          - /url: http://localhost:8766/portfolio/en/works/agency/
+        - link "TR" [ref=e13] [cursor=pointer]:
+          - /url: http://localhost:8766/portfolio/tr/works/agency/
+      - link "Разбор за 24 часа" [ref=e14] [cursor=pointer]:
+        - /url: "#quiz"
+  - main [ref=e15]:
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e18]: Для экспертов и тех, кто продаёт услуги и продукты
+        - heading [level=1] [ref=e20]:
+          - text: Вы неплохо продаёте, но у вас нет
+          - emphasis [ref=e21]: системы
+        - paragraph [ref=e22]: "Упаковываем вашу экспертность, услуги и продукты в понятное предложение и собираем систему продаж: воронка, бот с базой клиентов и ИИ-ассистент. Первый шаг: разбор вашего проекта и план за 24 часа."
+        - generic [ref=e23]:
+          - link "Узнать, где я теряю клиентов" [ref=e24] [cursor=pointer]:
+            - /url: "#quiz"
+          - link "Посмотреть работы ↓" [ref=e25] [cursor=pointer]:
+            - /url: "#cases"
+        - paragraph [ref=e26]: Разбор и примерная стоимость приходят до любого договора и предоплаты. Ответим в Telegram в течение дня.
+      - generic "Пример диалога с ботом" [ref=e27]:
+        - generic [ref=e30]:
+          - generic [ref=e31]: Бот воронки
+          - text: отвечает за секунды
+        - generic [ref=e32]:
+          - generic [ref=e37]: "Привет! Я Юлия 👋 Держи подарок: «Первый вирусный пост за 15 минут» 🎁"
+          - generic [ref=e38]: 🎁 Забрать подарок
+          - generic [ref=e40]: Уже написала пост ✅
+          - generic [ref=e41]: Вот это да, ты молодец! 🔥 Пришли ссылку — посмотрю. Завтра расскажу, как набрать первых подписчиков.
+    - generic [ref=e42]:
+      - generic [ref=e43]: Живой бот в Telegram, пройдите сами
+      - generic [ref=e44]: Сайты на трёх языках
+      - generic [ref=e45]: ИИ-помощник на сайте и в боте
+      - generic [ref=e46]: Цены на сайте, смета до оплаты
+    - generic [ref=e47]:
+      - generic [ref=e48]: Узнаёте себя?
+      - heading "Экспертность и услуги есть, а заявок и денег нет" [level=2] [ref=e49]
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]: «Я много знаю и умею, услуга хорошая, а как это упаковать и продать, не понимаю»
+          - generic [ref=e53]: Есть опыт и клиенты по рекомендации. Нет названия продукта, цены и понятного предложения.
+        - generic [ref=e54]:
+          - generic [ref=e55]: «Я не знаю, кто моя аудитория и что ей писать»
+          - generic [ref=e56]: Каждый пост наугад. В одни дни охваты есть, в другие нет, и причину не видно.
+        - generic [ref=e57]:
+          - generic [ref=e58]: «Посты читают и лайкают, а покупать не приходят»
+          - generic [ref=e59]: Подписчики есть, клиентов нет. Между «подписан» и «купил» пустота.
+        - generic [ref=e60]:
+          - generic [ref=e61]: «Целый день отвечаю в личке одно и то же»
+          - generic [ref=e62]: Цены, сроки, «как записаться». Ответила поздно, и человек ушёл.
+        - generic [ref=e63]:
+          - generic [ref=e64]: «Клиент сказал “подумаю” и пропал»
+          - generic [ref=e65]: Нет второго касания и места, где видно, кто остановился на каком шаге.
+        - generic [ref=e66]:
+          - generic [ref=e67]: «Продукт есть, но продаётся, только когда я рядом»
+          - generic [ref=e68]: Нельзя взять отпуск. Каждый месяц начинается с нуля.
+      - generic [ref=e69]: Это не про лень и не про талант. Это про отсутствие системы между постом и оплатой. Её можно собрать.
+    - generic [ref=e70]:
+      - generic [ref=e71]: Как мы это решаем
+      - heading "Шесть частей, которые превращают экспертность, услуги и продукты в продажи" [level=2] [ref=e72]
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - heading "Упаковка" [level=3] [ref=e75]
+          - generic [ref=e76]: «Знаю много, услуга есть, а продать не получается»
+          - paragraph [ref=e77]: Из вашего опыта и услуг выделяем продукт, название, цену и предложение. На выходе понятная страница продукта.
+        - generic [ref=e78]:
+          - heading "Фабрика контента" [level=3] [ref=e79]
+          - generic [ref=e80]: «Не знаю, что писать»
+          - paragraph [ref=e81]: Рубрики, план, тексты, карусели и ролики по форматам, которые уже работают на рынке.
+        - generic [ref=e82]:
+          - heading "Воронка" [level=3] [ref=e83]
+          - generic [ref=e84]: «Читают и уходят»
+          - paragraph [ref=e85]: "Путь от поста до заявки или оплаты: подарок, прогрев, предложение."
+        - generic [ref=e86]:
+          - heading "Бот с базой клиентов" [level=3] [ref=e87]
+          - generic [ref=e88]: «Отвечаю руками и теряю людей»
+          - paragraph [ref=e89]: Бот отвечает, собирает заявки, помнит каждого человека и записывает на созвон.
+        - generic [ref=e90]:
+          - heading "ИИ-ассистент" [level=3] [ref=e91]
+          - generic [ref=e92]: «Одни и те же вопросы каждый день»
+          - paragraph [ref=e93]: Отвечает по вашим правилам, честно говорит, что он ИИ, и передаёт сложное вам.
+        - generic [ref=e94]:
+          - heading "Личный ИИ-агент и автопостинг" [level=3] [ref=e95]
+          - generic [ref=e96]: «Не хватает рук и времени»
+          - paragraph [ref=e97]: Помощник с памятью и командой, выкладка во все соцсети по расписанию, утренний отчёт с цифрами.
+    - generic [ref=e98]:
+      - generic [ref=e99]: Цены
+      - heading "Три пакета. Состав, срок и цена фиксируются до оплаты" [level=2] [ref=e100]
+      - generic [ref=e101]:
+        - article [ref=e102]:
+          - generic [ref=e103]: Сайт и заявки
+          - heading "Страница, которая приводит заявки" [level=3] [ref=e104]
+          - paragraph [ref=e105]: Подходит, если продукт уже есть, а нормальной страницы нет.
+          - list [ref=e106]:
+            - listitem [ref=e107]: Сайт-визитка или доработка вашего
+            - listitem [ref=e108]: Форма заявки и ваши ссылки
+            - listitem [ref=e109]: Политика и согласие на данные
+            - listitem [ref=e110]: Версия для телефона
+            - listitem [ref=e111]: Заявки приходят вам в мессенджер
+          - paragraph [ref=e112]: "Срок: 5–7 дней"
+          - paragraph [ref=e113]: от 25 000 ₽
+          - link "Обсудить этот пакет" [ref=e114] [cursor=pointer]:
+            - /url: "#quiz"
+        - article [ref=e115]:
+          - generic [ref=e116]: Для большинства
+          - generic [ref=e117]: Бот и воронка
+          - heading "Подписчики начинают покупать" [level=3] [ref=e118]
+          - paragraph [ref=e119]: Подходит, если читают и лайкают, а покупать не приходят.
+          - list [ref=e120]:
+            - listitem [ref=e121]: Всё из пакета «Сайт и заявки»
+            - listitem [ref=e122]: "Бот: знакомит, задаёт вопросы, собирает заявки"
+            - listitem [ref=e123]: Воронка прогрева из 5–7 сообщений
+            - listitem [ref=e124]: Подарок за подписку и контент-план
+            - listitem [ref=e125]: База подписчиков с рассылками и записью на созвон
+            - listitem [ref=e126]: Упаковка сообщества и автопостинг
+          - paragraph [ref=e127]: "Срок: 2–3 недели"
+          - paragraph [ref=e128]: от 120 000 ₽
+          - link "Обсудить этот пакет" [ref=e129] [cursor=pointer]:
+            - /url: "#quiz"
+        - article [ref=e130]:
+          - generic [ref=e131]: Система под ключ
+          - heading "Вся система во всех соцсетях" [level=3] [ref=e132]
+          - paragraph [ref=e133]: Подходит, если нужна готовая система, а не набор отдельных частей.
+          - list [ref=e134]:
+            - listitem [ref=e135]: Всё из пакета «Бот и воронка»
+            - listitem [ref=e136]: "Продающий сайт: структура, квиз, тексты"
+            - listitem [ref=e137]: ИИ-ассистент по вашей базе знаний
+            - listitem [ref=e138]: Упаковка пяти соцсетей и 30 готовых постов
+            - listitem [ref=e139]: Автопостинг в площадки с открытым доступом
+          - paragraph [ref=e140]: "Срок: 4–8 недель"
+          - paragraph [ref=e141]: от 270 000 ₽
+          - link "Обсудить этот пакет" [ref=e142] [cursor=pointer]:
+            - /url: "#quiz"
+      - paragraph [ref=e143]:
+        - text: "Цены «от»: точную смету называем после разбора и до оплаты, оплата по этапам. Каждую услугу можно заказать отдельно. Не уверены, какой пакет нужен?"
+        - link "Ответьте на 4 вопроса, подскажем" [ref=e144] [cursor=pointer]:
+          - /url: "#quiz"
+        - text: .
+        - link "Полный прайс →" [ref=e145] [cursor=pointer]:
+          - /url: price.html
+        - text: "Для амбассадоров клуба есть отдельное готовое предложение:"
+        - link "смотреть PDF →" [ref=e146] [cursor=pointer]:
+          - /url: https://3671407-cell.github.io/julia-media/portfolio/works/predlozhenie.pdf
+    - generic [ref=e147]:
+      - generic [ref=e148]: Что мы построили
+      - heading "Всё, что продаём, мы сначала сделали для себя. Откройте и пройдите сами" [level=2] [ref=e149]
+      - generic [ref=e150]:
+        - article [ref=e151]:
+          - link [ref=e152] [cursor=pointer]:
+            - /url: https://3671407-cell.github.io/julia-media/portfolio/works/funnel/
+            - 'img "Схема пути клиента в боте: два пути сходятся на втором видео" [ref=e153]'
+          - generic [ref=e154]:
+            - generic [ref=e155]: бот · воронка · Senler
+            - heading "Воронка бота в Senler" [level=3] [ref=e156]
+            - paragraph [ref=e157]: "Схема пути человека: приветствие, кружок, подарок, видео, запись на разговор. Бот с CRM: база подписчиков, аналитика, личные сообщения и запись на созвон, все клиенты остаются у вас."
+            - link "Открыть схему →" [ref=e158] [cursor=pointer]:
+              - /url: https://3671407-cell.github.io/julia-media/portfolio/works/funnel/
+        - article [ref=e159]:
+          - link [ref=e160] [cursor=pointer]:
+            - /url: https://3671407-cell.github.io/julia-media/portfolio/works/social-funnels/
+            - 'img "Таблица воронок из соцсетей в бота: площадки, крючки, ссылки и риски" [ref=e161]'
+          - generic [ref=e162]:
+            - generic [ref=e163]: воронка · соцсети · сторис · CRM
+            - heading "Карта воронок из соцсетей" [level=3] [ref=e164]
+            - paragraph [ref=e165]: "Как вести клиента из 12 площадок в бота и CRM: где можно ссылку, где нельзя, воронки из постов и сторис. Схема подходит под любой проект."
+            - link "Открыть кейс →" [ref=e166] [cursor=pointer]:
+              - /url: https://3671407-cell.github.io/julia-media/portfolio/works/social-funnels/
+        - article [ref=e167]:
+          - link [ref=e168] [cursor=pointer]:
+            - /url: https://3671407-cell.github.io/julia-media/amb-k7q2m9/
+            - 'img "Страница амбассадора клуба путешествий: море, заголовок и кнопки" [ref=e169]'
+          - generic [ref=e170]:
+            - generic [ref=e171]: сайт · 3 языка · видеоблог · ИИ-чат
+            - heading "Страница амбассадора клуба путешествий" [level=3] [ref=e172]
+            - paragraph [ref=e173]: "Личный сайт на трёх языках: русском, английском и турецком. Видеоблог, подбор поездки под семью, карта поездки и чат с ИИ-помощником."
+            - link "Открыть сайт →" [ref=e174] [cursor=pointer]:
+              - /url: https://3671407-cell.github.io/julia-media/amb-k7q2m9/
+        - article [ref=e175]:
+          - link [ref=e176] [cursor=pointer]:
+            - /url: https://t.me/julia_travelclub_ai_bot
+            - img "Окно чата ИИ-помощника на сайте" [ref=e177]
+          - generic [ref=e178]:
+            - generic [ref=e179]: ИИ-агент · чат на сайте · Telegram
+            - heading "ИИ-помощник для сайта и Telegram" [level=3] [ref=e180]
+            - paragraph [ref=e181]: Отвечает на вопросы по утверждённым правилам, не обещает доход, честно говорит, что он ИИ, и передаёт заявку владельцу. Один и тот же помощник работает на сайте и в боте.
+            - link "Попробовать в Telegram →" [ref=e182] [cursor=pointer]:
+              - /url: https://t.me/julia_travelclub_ai_bot
+        - article [ref=e183]:
+          - link [ref=e184] [cursor=pointer]:
+            - /url: https://3671407-cell.github.io/julia-media/karta/
+            - 'img "Интерактивная «Карта поездки»: игра из семи вопросов" [ref=e185]'
+          - generic [ref=e186]:
+            - generic [ref=e187]: игра · лидмагнит · дизайн
+            - 'heading "«Карта поездки»: игра-подарок" [level=3] [ref=e188]'
+            - paragraph [ref=e189]: Интерактивная игра из семи вопросов. Человек выбирает настроение, получает постер маршрута и сохраняет его картинкой или в PDF.
+            - link "Открыть сайт →" [ref=e190] [cursor=pointer]:
+              - /url: https://3671407-cell.github.io/julia-media/karta/
+        - article [ref=e191]:
+          - link [ref=e192] [cursor=pointer]:
+            - /url: https://3671407-cell.github.io/julia-media/guzel/
+            - 'img "Сайт для Гузель: заголовок и схема «три в одном»" [ref=e193]'
+          - generic [ref=e194]:
+            - generic [ref=e195]: лендинг · заявки · дизайн
+            - heading "Сайт для Гузель" [level=3] [ref=e196]
+            - paragraph [ref=e197]: "Страница независимого партнёра: один понятный продукт, структура от боли к решению, форма заявки."
+            - link "Открыть сайт →" [ref=e198] [cursor=pointer]:
+              - /url: https://3671407-cell.github.io/julia-media/guzel/
+      - button "Показать все работы (19)" [ref=e199] [cursor=pointer]
+      - paragraph [ref=e200]:
+        - text: Страницы доступны на русском,
+        - link "английском" [ref=e201] [cursor=pointer]:
+          - /url: https://3671407-cell.github.io/julia-media/portfolio/en/
+        - text: и
+        - link "турецком" [ref=e202] [cursor=pointer]:
+          - /url: https://3671407-cell.github.io/julia-media/portfolio/tr/
+        - text: языках.
+    - generic [ref=e204]:
+      - generic [ref=e205]:
+        - generic [ref=e206]: База клиентов
+        - heading "Все ваши подписчики и клиенты в одном месте, а не в чужой соцсети" [level=2] [ref=e207]
+        - paragraph [ref=e208]: Бот работает вместе с базой (CRM). Если площадку закроют или упадёт охват, люди остаются у вас.
+      - list [ref=e209]:
+        - listitem [ref=e210]:
+          - text: Кто пришёл
+          - generic [ref=e211]: каждый подписчик и заявка в одной базе
+        - listitem [ref=e212]:
+          - text: На каком шаге остановился
+          - generic [ref=e213]: видно, кого дожать, а кого оставить
+        - listitem [ref=e214]:
+          - text: Кому написать
+          - generic [ref=e215]: личные сообщения и рассылки прямо из бота
+        - listitem [ref=e216]:
+          - text: Кто записан на созвон
+          - generic [ref=e217]: время попадает в календарь
+    - generic [ref=e219]:
+      - generic [ref=e220]:
+        - generic [ref=e221]: Разговор на 20 минут
+        - heading "Разберём ваш проект голосом" [level=2] [ref=e222]
+        - list [ref=e223]:
+          - listitem [ref=e224]: ✓ Покажу, как это работает на моих проектах
+          - listitem [ref=e225]: ✓ Отвечу на вопросы по вашему
+          - listitem [ref=e226]: ✓ Скажу честно, нужен ли вам пакет или хватит меньшего
+      - generic [ref=e227]:
+        - generic [ref=e228]: 20 мин
+        - paragraph [ref=e229]: по Zoom, время согласуем в Telegram. Запись по календарю с автоматической ссылкой и напоминанием подключаем клиентам в пакете «Бот и воронка».
+        - link "Выбрать время" [ref=e230] [cursor=pointer]:
+          - /url: https://t.me/IuliiaZharkova
+    - generic [ref=e232]:
+      - img "Юлия Жаркова, основатель ZHAR" [ref=e234]
+      - generic [ref=e235]:
+        - generic [ref=e236]: Кто будет делать
+        - blockquote [ref=e237]: «Я строю системы продаж и сама на них работаю. Каждый проект веду лично, без цепочки менеджеров»
+        - paragraph [ref=e238]: Юлия Жаркова, основатель ZHAR. Мои воронка, бот с оплатой, автопостинг и личный ИИ-агент Jarvis работают на моих аккаунтах. То, что продаю вам, я сначала проверила на себе.
+        - generic [ref=e239]:
+          - generic [ref=e240]:
+            - generic [ref=e241]: "19"
+            - text: работ можно открыть и пройти
+          - generic [ref=e242]:
+            - generic [ref=e243]: "3"
+            - text: языка на страницах
+          - generic [ref=e244]:
+            - generic [ref=e245]: 24 ч
+            - text: до разбора вашего проекта
+        - generic [ref=e246]:
+          - link "Threads* →" [ref=e247] [cursor=pointer]:
+            - /url: https://www.threads.com/@zharkova_biz
+          - link "Telegram →" [ref=e248] [cursor=pointer]:
+            - /url: https://t.me/IuliiaZharkova
+    - generic [ref=e249]:
+      - generic [ref=e250]: Как работаем
+      - heading "Четыре шага. Платите за следующий, когда приняли предыдущий" [level=2] [ref=e251]
+      - generic [ref=e252]:
+        - generic [ref=e253]:
+          - heading "Разбор" [level=3] [ref=e254]
+          - paragraph [ref=e255]: Смотрим продукт и соцсети, через 24 часа присылаем план
+        - generic [ref=e256]:
+          - heading "Смета" [level=3] [ref=e257]
+          - paragraph [ref=e258]: Схема, цена и сроки фиксируются до оплаты
+        - generic [ref=e259]:
+          - heading "Запуск" [level=3] [ref=e260]
+          - paragraph [ref=e261]: Собираем, тестируем, показываем каждый этап
+        - generic [ref=e262]:
+          - heading "Рост" [level=3] [ref=e263]
+          - paragraph [ref=e264]: Смотрим цифры и усиливаем то, что приносит заявки
+      - generic [ref=e265]:
+        - generic [ref=e266]:
+          - heading "Договор с ИП" [level=3] [ref=e267]
+          - paragraph [ref=e268]: Официально, цена и сроки в договоре
+        - generic [ref=e269]:
+          - heading "Оплата по этапам" [level=3] [ref=e270]
+          - paragraph [ref=e271]: Каждый этап принимаете сами
+        - generic [ref=e272]:
+          - heading "Всё ваше" [level=3] [ref=e273]
+          - paragraph [ref=e274]: Бот, доступы, тексты и сайт принадлежат вам
+        - generic [ref=e275]:
+          - heading "Поддержка" [level=3] [ref=e276]
+          - paragraph [ref=e277]: 2 недели после запуска исправляем бесплатно
+      - generic [ref=e278]:
+        - generic [ref=e279]:
+          - heading "Подходим, если" [level=3] [ref=e280]
+          - list [ref=e281]:
+            - listitem [ref=e282]: ✓ у вас есть продукт или услуга и хоть немного аудитории
+            - listitem [ref=e283]: ✓ хотите, чтобы заявки и продажи шли без вас
+            - listitem [ref=e284]: ✓ готовы отвечать на вопросы и дать доступы
+        - generic [ref=e285]:
+          - heading "Не подходим, если" [level=3] [ref=e286]
+          - list [ref=e287]:
+            - listitem [ref=e288]: — нужен «миллион за неделю» с гарантией дохода
+            - listitem [ref=e289]: "— продукта пока нет совсем: сначала его надо придумать"
+      - generic [ref=e290]:
+        - generic [ref=e291]:
+          - heading "Первые проекты по специальной цене" [level=3] [ref=e292]
+          - paragraph [ref=e293]: Берём несколько проектов дешевле обычного. Взамен вы честно расскажете о результате, и ваш отзыв появится здесь. Условия фиксируем письменно.
+        - link "Хочу в число первых" [ref=e294] [cursor=pointer]:
+          - /url: "#quiz"
+    - generic [ref=e295]:
+      - generic [ref=e296]: Вопросы
+      - heading "Вопросы, которые вы хотели задать" [level=2] [ref=e297]
+      - generic [ref=e298]:
+        - group [ref=e299]:
+          - generic "У меня маленькая аудитория. Мне это подойдёт? +" [ref=e300] [cursor=pointer]
+        - group [ref=e301]:
+          - generic "Я не разбираюсь в технике +" [ref=e302] [cursor=pointer]
+        - group [ref=e303]:
+          - generic "А если люди не купят? +" [ref=e304] [cursor=pointer]
+        - group [ref=e305]:
+          - generic "Чем это лучше конструктора бота за 0 ₽? +" [ref=e306] [cursor=pointer]
+        - group [ref=e307]:
+          - generic "Почему вам можно доверять, если вы только открылись? +" [ref=e308] [cursor=pointer]
+        - group [ref=e309]:
+          - generic "Сколько времени займёт? +" [ref=e310] [cursor=pointer]
+        - group [ref=e311]:
+          - generic "Что такое база клиентов (CRM) в боте? +" [ref=e312] [cursor=pointer]
+        - group [ref=e313]:
+          - generic "Что такое ИИ-ассистент простыми словами? +" [ref=e314] [cursor=pointer]
+        - group [ref=e315]:
+          - generic "Что будет, если Telegram заблокируют? +" [ref=e316] [cursor=pointer]
+        - group [ref=e317]:
+          - generic "Что если что-то сломается? +" [ref=e318] [cursor=pointer]
+    - generic [ref=e319]:
+      - generic [ref=e320]:
+        - generic [ref=e321]: Разбор за 24 часа
+        - heading "Покажем, где вы теряете клиентов" [level=2] [ref=e322]
+        - paragraph [ref=e323]: Ответьте на 4 коротких вопроса. Пришлём разбор вашего проекта, план первых шагов и примерную стоимость. Без предоплаты и без обязательств.
+      - generic [ref=e327]:
+        - generic [ref=e328]: Шаг 1 из 4
+        - generic [ref=e329]: Чем вы занимаетесь?
+        - generic [ref=e330]:
+          - button "Эксперт / наставник" [ref=e331] [cursor=pointer]
+          - button "Онлайн-школа" [ref=e332] [cursor=pointer]
+          - button "Психолог / коуч" [ref=e333] [cursor=pointer]
+          - button "Бьюти / wellness" [ref=e334] [cursor=pointer]
+          - button "Услуги" [ref=e335] [cursor=pointer]
+          - button "Другое" [ref=e336] [cursor=pointer]
+  - contentinfo [ref=e337]:
+    - generic [ref=e338]:
+      - generic [ref=e339]:
+        - generic [ref=e340]: © 2026 ZHAR · Системы продаж из соцсетей
+        - generic [ref=e341]: ИП Журавлева Анжела Викторовна · ИНН 615109220341 · ОГРНИП 321774600807541
+        - generic [ref=e342]:
+          - text: "Связь: Telegram —"
+          - link "Юлия Жаркова" [ref=e343] [cursor=pointer]:
+            - /url: https://t.me/IuliiaZharkova
+      - generic [ref=e344]:
+        - link "Цены" [ref=e345] [cursor=pointer]:
+          - /url: price.html
+        - link "Работы" [ref=e346] [cursor=pointer]:
+          - /url: "#cases"
+        - link "Реквизиты" [ref=e347] [cursor=pointer]:
+          - /url: rekvizity.html
+        - link "Оферта" [ref=e348] [cursor=pointer]:
+          - /url: oferta.html
+        - link "Политика конфиденциальности" [ref=e349] [cursor=pointer]:
+          - /url: privacy.html
+        - link "Согласие на обработку данных" [ref=e350] [cursor=pointer]:
+          - /url: consent.html
+        - 'link "Telegram: Юлия Жаркова" [ref=e351] [cursor=pointer]':
+          - /url: https://t.me/IuliiaZharkova
+  - link "Разбор за 24 часа" [ref=e352] [cursor=pointer]:
+    - /url: "#quiz"
+  - paragraph [ref=e353]: "* Принадлежит компании Meta, признанной экстремистской организацией и запрещённой на территории Российской Федерации."
