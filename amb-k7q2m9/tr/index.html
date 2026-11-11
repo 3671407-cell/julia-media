@@ -450,7 +450,7 @@ footer .lg p{font-size:14px;line-height:1.6;opacity:.9;margin-bottom:10px}
   <p class="lead rv d2" style="color:#fff;text-shadow:0 2px 16px rgba(0,60,80,.5)">Yirmi dakika. Nereye gitmeyi hayal ettiğinizi anlatırsınız, ben de kulübün size uyup uymadığını gösteririm.</p></div>
   <div class="rv d1"><form id="form" autocomplete="on">
    <input name="name" placeholder="Adınız" required autocomplete="given-name">
-   <select name="way" aria-label="Size nasıl ulaşalım"><option>Telegram</option><option>WhatsApp</option><option>VKontakte</option><option>Telefon</option></select>
+   <select name="way" aria-label="Size nasıl ulaşalım"><option>Telegram</option><option>WhatsApp*</option><option>VKontakte</option><option>Telefon</option></select>
    <input name="contact" placeholder="@kullanıcı adınız veya numaranız" required>
    <input name="time" placeholder="Görüşme için uygun zaman">
    <label class="agree"><input type="checkbox" required><span>Benimle iletişime geçilmesi için verilerimin işlenmesine onay veriyorum. <a href="../privacy.html" target="_blank">Kişisel verilerin işlenmesi politikası</a></span></label>
@@ -505,4 +505,4 @@ function cv(){vm.classList.remove('open');vp.pause();vp.removeAttribute('src');v
 function setTracks(v){vp.querySelectorAll('track').forEach(function(t){t.remove()});var L=document.documentElement.lang;[['en','English'],['tr','Türkçe']].forEach(function(x){var t=document.createElement('track');t.kind='subtitles';t.src=v.replace('video/','video/subs/').replace('.mp4','.'+x[0]+'.vtt');t.srclang=x[0];t.label=x[1];if(x[0]===L)t.default=true;vp.appendChild(t)})}
 document.querySelectorAll('.vc').forEach(b=>b.addEventListener('click',()=>{setTracks(b.dataset.v);vp.src=b.dataset.v;vm.classList.add('open');document.body.style.overflow='hidden';vp.play().catch(()=>{})}));
 document.getElementById('vclose').onclick=cv;vm.addEventListener('click',e=>{if(e.target===vm)cv()});
-</script><script src="../chat.js"></script></body></html>
+</script><script src="../chat.js"></script><p class="ext-note" style="max-width:1100px;margin:36px auto 0;padding:0 16px 24px;font:300 13px/1.5 system-ui,sans-serif;color:#9a95ad;opacity:.9">* Rusya Federasyonu'nda aşırıcı örgüt olarak tanınan ve faaliyeti yasaklanan Meta şirketine aittir.</p></body></html>
