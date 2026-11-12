@@ -22,12 +22,18 @@ def vk(method, **p):
 
 
 def llm(system, messages):
-    body = {"model": MODEL, "max_tokens": 1500, "messages": [{"role": "system", "content": system}] + messages}
+    body = {"model": MODEL, "max_tokens": 3000, "messages": [{"role": "system", "content": system}] + messages}
     req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions", data=json.dumps(body).encode(),
                                  headers={"Authorization": "Bearer " + os.environ["OPENROUTER_API_KEY"], "Content-Type": "application/json"})
-    t = json.load(urllib.request.urlopen(req, timeout=120))["choices"][0]["message"]["content"]
+    t = json.load(urllib.request.urlopen(req, timeout=120))["choices"][0]["message"]["content"] or ""
     m = re.search(r"\{.*\}", t, re.S)
-    return json.loads(m.group(0))
+    try:
+        return json.loads(m.group(0))
+    except Exception:
+        # модель ответила не в JSON или ответ обрезан: достаём текст ответа, лишнего не отправляем
+        r = re.search(r'"reply"\s*:\s*"((?:[^"\\]|\\.)*)', t, re.S)
+        txt = json.loads('"' + r.group(1) + '"') if r else t.strip()
+        return {"reply": txt[:3500], "handoff": True, "reason": "ответ модели не разобран, проверить диалог"}
 
 
 def tg(text):
@@ -40,6 +46,12 @@ def tg(text):
 
 
 def system_prompt():
+    # Промпт ИИ-амбассадора версии 5 лежит только в защищённом секрете (репозиторий публичный).
+    if os.environ.get("AMB_PROMPT_B64"):
+        return base64.b64decode(os.environ["AMB_PROMPT_B64"]).decode() + (
+            '\n\nФОРМАТ ОТВЕТА: только JSON без пояснений: {"reply": "текст ответа человеку", '
+            '"handoff": true или false, "reason": "кратко по-русски, зачем Юлии, или пусто"}. '
+            'handoff = true, если человек готов к созвону, просит живого человека, жалуется, спрашивает про возврат или доход.')
     facts = base64.b64decode(os.environ["FACTS_B64"]).decode()
     return open(os.path.join(HERE, "vk-assistant-prompt.md"), encoding="utf-8").read().replace("{facts}", facts)
 
