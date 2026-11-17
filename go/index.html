@@ -49,7 +49,7 @@ video{display:block;width:100%;background:#000}
 <script>
 (function(){
   // Адрес счётчика событий (Cloudflare Worker). Пока пусто: события никуда не уходят.
-  var EP = "";
+  var EP = "https://funnel-events.3671407.workers.dev";
   // Номер WhatsApp в формате 79991234567: пока не задан, кнопка скрыта.
   var WA = "79853671407";
   var q = new URLSearchParams(location.search);
@@ -72,7 +72,8 @@ video{display:block;width:100%;background:#000}
   if (!T[L]) L = "ru";
   var sent = {};
   function ev(n){ if (sent[n] && /^(page_open|play|video_)/.test(n)) return; sent[n] = 1;
-    var d = JSON.stringify({e:n, s:S, l:L, t:Date.now(), p:location.pathname});
+    var V0=""; try{V0=localStorage.getItem("tv")||""; if(!V0){V0=Math.random().toString(36).slice(2,12); localStorage.setItem("tv",V0);}}catch(e){}
+    var d = JSON.stringify({e:n, x:"", s:S, v:V0||"anon", l:L, t:Date.now(), p:location.pathname});
     try { if (EP && navigator.sendBeacon) navigator.sendBeacon(EP, d); } catch(e){}
     try { window.__events = (window.__events || []).concat([n]); } catch(e){} }
   function $(i){ return document.getElementById(i); }
