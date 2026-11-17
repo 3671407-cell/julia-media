@@ -21,6 +21,7 @@
   function kind(a) {
     var h = a.getAttribute("href") || "";
     if (/mwrlifekz\.com\/.*\/join/i.test(h)) return "registration";
+    if (/t\.me\/\+BB9LpEVA0HEyNzAy/.test(h)) return "marathon_channel";
     if (/mwrlife\./i.test(h)) return "company_site";
     if (/t\.me\/IuliiaZharkova/i.test(h)) return "julia_telegram";
     if (/t\.me\/Travel_threads_bot/i.test(h)) return "bot";
@@ -34,6 +35,7 @@
     if (/(en|tr)\/index\.html|index\.html/.test(h)) return "language";
     return "link_other";
   }
+  window.trk = function (n, x) { ev(n, x, true); }; // для событий внутри страниц (игра в подарке)
   ev("page_open", "", true);
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest("a,button"); if (!a) return;
