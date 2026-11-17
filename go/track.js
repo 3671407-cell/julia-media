@@ -2,7 +2,7 @@
    Личных данных нет: только случайный номер посетителя в браузере и метка источника из адреса (?s=thr, tt, yt...).
    Пока адрес счётчика EP пустой, события никуда не отправляются. */
 (function () {
-  var EP = ""; // адрес счётчика (Cloudflare Worker), заполняется после подключения
+  var EP = "https://funnel-events.3671407.workers.dev"; // счётчик событий (Cloudflare Worker)
   var q = new URLSearchParams(location.search);
   function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; }
   function ss(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) {} return null; }
