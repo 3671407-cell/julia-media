@@ -49,6 +49,7 @@
     [].forEach.call(document.querySelectorAll("section[id]"), function (s) { io.observe(s); });
   }
   [].forEach.call(document.querySelectorAll("video"), function (v, i) {
+    if (v.loop || v.autoplay) return; // фоновое видео не считаем просмотром
     var n = ((v.currentSrc || v.getAttribute("src") || (v.querySelector("source") || {}).src || "video" + i).split("/").pop() || "video").replace(/\.\w+$/, "").slice(0, 24);
     var m = { 25: 0, 50: 0, 75: 0 };
     v.addEventListener("play", function () { ev("video_play", n, true); });
