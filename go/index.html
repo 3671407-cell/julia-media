@@ -56,7 +56,7 @@ video{display:block;width:100%;background:#000}
   var S = (q.get("s") || "").replace(/[^a-z0-9_]/gi, "").slice(0, 20);
   var T = {
     ru: {t1:"Как устроен клуб путешествий: короткий показ", t2:"Видео на несколько минут: что в клубе и как это работает. Смотрите, когда вам удобно.",
-         t3:"Показ начнётся через несколько секунд. Можно смотреть в любое время.", skip:"Смотреть сейчас",
+         t3:"", skip:"Смотреть сейчас",
          tg:"Открыть бота в Телеграме и получить подарок", vk:"Написать во ВКонтакте", ju:"Написать Юлии в Телеграме", wa:"Написать в WhatsApp",
          hint:"Выберите удобный мессенджер: везде отвечает Юлия.", sub:""},
     en: {t1:"How the travel club works: a short walkthrough", t2:"A few minutes of video: what the club offers and how it works. Watch whenever it suits you.",
@@ -91,10 +91,9 @@ video{display:block;width:100%;background:#000}
   [].forEach.call(document.querySelectorAll(".lg button"), function(b){ b.onclick = function(){ setL(b.dataset.l); ev("lang_" + b.dataset.l); }; });
   setL(L);
   ev("page_open");
-  var left = 8, shown = false;
-  function show(){ if (shown) return; shown = true; clearInterval(iv); $("timer").classList.add("hid"); $("skip").classList.add("hid"); $("pl").classList.remove("hid"); ev("player_shown"); }
-  $("cnt").textContent = "0:0" + left; ev("timer_start");
-  var iv = setInterval(function(){ left--; if (left <= 0) { show(); } else { $("cnt").textContent = "0:0" + left; } }, 1000);
+  var shown = false, iv = null;
+  function show(){ if (shown) return; shown = true; $("timer").classList.add("hid"); $("skip").classList.add("hid"); $("pl").classList.remove("hid"); ev("player_shown"); }
+  ev("timer_start"); show(); // видео сразу, без ожидания: каждая секунда ожидания теряет людей
   $("skip").onclick = function(){ ev("skip_timer"); show(); };
   var v = $("v"), marks = {25:0, 50:0, 75:0};
   v.addEventListener("play", function(){ ev("play"); });
