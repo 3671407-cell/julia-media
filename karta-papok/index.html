@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Карта папок Юлии</title>
+<style>
+:root{--bg:#07060d;--tx:#f1eefc;--mu:#a79fc4;--c1:#ff7ac8;--c2:#a98bff;--c3:#6fd3ff;--card:#14121f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font-family:Manrope,system-ui,sans-serif;font-weight:300;line-height:1.5}
+h1{font-weight:300;font-size:30px;margin:28px 16px 4px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3));-webkit-background-clip:text;color:transparent}
+p.s{margin:0 16px 20px;color:var(--mu)}
+h2{font-weight:300;font-size:22px;margin:34px 16px 12px;color:var(--c3)}
+.wrap{max-width:1200px;margin:auto}
+#spider{width:100%;height:auto;display:block}
+.ask{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin:0 16px}
+.ask div{background:var(--card);border-radius:10px;padding:12px 14px;border-left:3px solid var(--c1)}
+.ask b{font-weight:400;display:block;color:var(--c1)}
+.ask span{color:var(--tx)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;margin:0 16px 40px}
+.card{background:var(--card);border-radius:12px;padding:14px 16px}
+.card h3{margin:0 0 4px;font-weight:400;font-size:16px;color:var(--c2)}
+.card small{color:var(--mu);display:block;margin-bottom:6px}
+.card ul{margin:6px 0 0;padding-left:18px;color:#d8d2ee;font-size:14px}
+</style></head><body><div class="wrap">
+<h1>Карта папок Юлии</h1>
+<p class="s">Кто за что отвечает. Сначала паук, потом таблица: что мне нужно, куда идти.</p>
+
+<svg id="spider" viewBox="-100 0 1400 1000" xmlns="http://www.w3.org/2000/svg"></svg>
+
+<h2>Что мне нужно, куда идти</h2>
+<div class="ask" id="ask"></div>
+
+<h2>Все папки подробно</h2>
+<div class="grid" id="grid"></div>
+</div>
+<script>
+const G=[
+{n:"Сторис и ролики",c:"#ff7ac8",items:[
+ ["Сторис ВК Travel (со ссылками)","15-travel-страницы и 17-контент-по-соцсетям, папка 03-вк-travel-группа"],
+ ["Сторис Facebook","06-автоматизация, постмайпост, fb_сторис.py"],
+ ["Ролики, точные копии оригиналов","06-автоматизация, монтаж"],
+ ["Банк роликов: что выложено, что в работе","06-автоматизация, банк-рилсов"]]},
+{n:"Контент по соцсетям",c:"#a98bff",items:[
+ ["Карта всех соцсетей","17-контент-по-соцсетям, файл 00-СТАРТ"],
+ ["Threads","04-threads-продвижение (план, ответы на комментарии)"],
+ ["Telegram, ВК, YouTube, TikTok, Instagram, Facebook","17-контент-по-соцсетям, по папке на сеть"],
+ ["Выкладка и график всех каналов","06-автоматизация, постмайпост и контент-завод"]]},
+{n:"Бот и рассылки",c:"#6fd3ff",items:[
+ ["Бот Сендлер, тексты воронки","02-чат-бот-и-воронка"],
+ ["Рассылки на марафон, статистика воронки","10-воронки-из-соцсетей"],
+ ["Страница клуба и лендинг","11-страница-амбассадора"]]},
+{n:"Клиенты",c:"#ffd36f",items:[
+ ["Каждый клиент в своей папке","Контент-отдел, клиенты (рядом с этой папкой)"],
+ ["Шаблон нового клиента","Контент-отдел, шаблон"]]},
+{n:"Помощники и знания",c:"#7dffb0",items:[
+ ["Джарвис, память о тебе, роли помощников","Jarvis (рядом с этой папкой)"],
+ ["Обучение, лекции, конспекты","Jarvis, knowledge"],
+ ["ИИ агенты: копирайтер личного канала","ИИ агенты"],
+ ["Библиотека готовых промптов","Библиотека промптов"]]},
+{n:"Проверки и отчёты",c:"#ff9b6f",items:[
+ ["Доброе утро: проверка всех систем","06-автоматизация, утренний-отчёт"],
+ ["Статистика роликов и сторис","06-автоматизация, статистика и контент-завод"],
+ ["Монитор ниши, где обсуждают путешествия","13-монитор-ниши"]]},
+{n:"Рекрутинг и агентство",c:"#c58bff",items:[
+ ["ВК рекрутинг, Команда без выгорания","12-вк-рекрутинг"],
+ ["Сайт агентства, визитка, портфолио","01-сайты"],
+ ["Юридические документы","08-юр-документы"],
+ ["Мини-продукты: подарок, набор, курс","05-мини-продукты"]]},
+{n:"Главные файлы и личное",c:"#9fb0ff",items:[
+ ["Главная инструкция для Сони","CLAUDE.md"],
+ ["План всей работы","PLAN.md"],
+ ["Твои фото для картинок","18-база-фото-юлии и Фото контента"]
+]}
+];
+// spider
+const svg=document.getElementById('spider'),cx=600,cy=500,R=290;
+let s=`<defs><radialGradient id="g"><stop offset="0" stop-color="#ff7ac8"/><stop offset="1" stop-color="#7a5cff"/></radialGradient></defs>`;
+G.forEach((g,i)=>{
+ const a=-Math.PI/2+i*2*Math.PI/G.length, x=cx+R*Math.cos(a), y=cy+R*Math.sin(a);
+ s+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${g.c}" stroke-opacity=".6" stroke-width="2"/>`;
+ s+=`<circle cx="${x}" cy="${y}" r="56" fill="#14121f" stroke="${g.c}" stroke-width="2"/>`;
+ const w=g.n.split(' ');s+=`<text x="${x}" y="${y+4}" fill="${g.c}" font-size="12" text-anchor="middle">${g.n.length>14?w.slice(0,Math.ceil(w.length/2)).join(' '):g.n}</text>`;
+ if(g.n.length>14)s+=`<text x="${x}" y="${y+20}" fill="${g.c}" font-size="13" text-anchor="middle">${w.slice(Math.ceil(w.length/2)).join(' ')}</text>`;
+ const out=1.0, tx=cx+(R+75)*Math.cos(a), ty=cy+(R+75)*Math.sin(a), anch=Math.cos(a)>0.3?'start':Math.cos(a)<-0.3?'end':'middle';
+ g.items.forEach((it,k)=>{
+   const bx=cx+(R+60)*Math.cos(a), by=cy+(R+60)*Math.sin(a)+ (Math.sin(a)>0.3?1:-1)*0 ;
+   const yy=(Math.sin(a)>0.3? y+78 : y-76-(g.items.length-1-k)*0) + (Math.sin(a)>0.3? k*17 : k*17-(g.items.length*17)+0);
+   const xx=Math.abs(Math.cos(a))>0.3? x+(Math.cos(a)>0?72:-72): x;
+   const yb=Math.abs(Math.cos(a))>0.3? y-24+k*17 : yy;
+   s+=`<text x="${xx}" y="${yb}" fill="#d8d2ee" font-size="12" text-anchor="${anch}">${it[0]}</text>`;
+ });
+});
+s+=`<circle cx="${cx}" cy="${cy}" r="70" fill="url(#g)"/><text x="${cx}" y="${cy-4}" fill="#fff" font-size="18" text-anchor="middle">Юлия</text><text x="${cx}" y="${cy+16}" fill="#fff" font-size="13" text-anchor="middle">Соня и Джарвис</text>`;
+svg.innerHTML=s;
+// ask
+const ask=document.getElementById('ask');
+G.forEach(g=>g.items.forEach(it=>{ask.insertAdjacentHTML('beforeend',`<div style="border-left-color:${g.c}"><b style="color:${g.c}">${it[0]}</b><span>${it[1]}</span></div>`)}));
+// grid
+const D=[
+["01-сайты","Сайты","Визитка, сайт агентства, цены, портфолио. Пока не в работе."],
+["02-чат-бот-и-воронка","Бот Сендлер","Тексты воронки, схема бота на трёх языках, ответы Compliance."],
+["04-threads-продвижение","Threads","План веток, хуки, 50 залетевших постов рынка, ответы на комментарии. Выкладка идёт через Постмайпост."],
+["05-мини-продукты","Мини-продукты","Подарок, набор за 490, курс. На паузе."],
+["06-автоматизация","Главный цех","Здесь живёт вся техника: ролики, выкладка, статистика, отчёты, скрипты. Внутри подпапки ниже."],
+["  банк-рилсов и монтаж","Ролики","Оригиналы, готовые, на одобрение, в работе, правила точной копии, критик."],
+["  постмайпост","Выкладка","Скрипты, которые ставят ролики, сторис и Threads в график всех каналов."],
+["  контент-завод и статистика","График и цифры","Страница графика по дням и статистика каждого ролика. Слово контент план открывает её."],
+["  утренний-отчёт","Доброе утро","Проверка всех систем, остатки денег, запас постов."],
+["  резерв","Копия","Резервная копия для переезда на другую нейросеть."],
+["08-юр-документы","Юристы","Политика, согласие, оферта на ИП."],
+["10-воронки-из-соцсетей","Воронка","Рассылки на марафон, таблица воронки, счётчик событий, меню колеса."],
+["10-telegram-вк-стратегия","Telegram и ВК","Стратегия на 90 дней, посты по неделям."],
+["11-страница-амбассадора","Лендинг клуба","Страница на трёх языках, промпт ИИ амбассадора, видео."],
+["12-вк-рекрутинг","Рекрутинг","Сообщество Команда без выгорания, план постов и сторис."],
+["13-монитор-ниши","Монитор","Каждое утро список мест, где обсуждают путешествия."],
+["15-travel-страницы","Travel ВК","Сторис и посты ВК группы и личной страницы, портреты, карточки."],
+["17-контент-по-соцсетям","Карта соцсетей","По папке на каждую сеть, внутри ссылки на настоящие файлы. Главный вход в контент."],
+["18-база-фото-юлии","Твои фото","Исходники лица для картинок, промпт образа."],
+["Библиотека промптов","Промпты","Рабочие промпты по темам."],
+["ИИ агенты","Копирайтер","Бот личного канала и факты о тебе в папке data."],
+["Контент-отдел","Клиенты","Рядом с этой папкой. Шаблон, клиенты Каждый клиент в своей папке, 29 навыков."],
+["Jarvis","Помощники","Рядом с этой папкой. Память о тебе, роли, знания и лекции."],
+["CLAUDE.md и PLAN.md","Главные файлы","Правила работы и план. Я читаю их первыми."]];
+const grid=document.getElementById('grid');
+D.forEach(d=>{grid.insertAdjacentHTML('beforeend',`<div class="card"><h3>${d[0].trim()}</h3><small>${d[1]}</small><div style="font-size:14px;color:#d8d2ee">${d[2]}</div></div>`)});
+</script></body></html>
